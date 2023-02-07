@@ -70,3 +70,6 @@ return React.createElement(
 )
 `````
 
+## Quiz
+- With react, we write Declarative js code: we define the "goal" (i.e. what should be shown on the screen) and let React figure out how to get there.
+- "Components" are really just a way of thinking about user interfaces. React embraces that concept and gives you tools to build components that you can then combine.
