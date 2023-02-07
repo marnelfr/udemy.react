@@ -82,3 +82,6 @@ Next, only the last value of the state value is returned by react when rendering
 
 State can be updated for whatever reason we may have: upon user events, or because of a timer expired (with setTimeout()) for example.
 
+While updating the state that depends on the previous state, we should always refer to that previous state in order to make sure
+that we're operating on the latest state snapshot.
+
