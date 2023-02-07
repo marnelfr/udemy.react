@@ -53,3 +53,20 @@ The simple rule which react apply is that
 Adding component can also be in order to avoid code repetition even CSS code. 
 That's where ``Card.js`` component comes in.
 
+JSX under the hood:
+`````javascript
+import Expenses from './Expenses.js'
+
+return (
+    <div>
+        <Expenses items={expenses} />
+    </div>
+)
+// stand for:
+return React.createElement(
+    'div',
+    {},
+    React.createElement(Expenses, {items: expenses})
+)
+`````
+
