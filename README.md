@@ -44,17 +44,17 @@ The simple rule which react apply is that
 - Lower case elements are built in html elements
 - Elements which name start by a capital letter are custom elements
 
-`````javascript
+````javascript
     const month = props.date.toLocaleString('en-US', {month: 'long'})
     const day = props.date.toLocaleString('en-US', {day: '2-digit'})
     const year = props.date.getFullYear()
-`````
+````
 
 Adding component can also be in order to avoid code repetition even CSS code. 
 That's where ``Card.js`` component comes in.
 
 JSX under the hood:
-`````javascript
+````javascript
 import Expenses from './Expenses.js'
 
 return (
@@ -68,7 +68,7 @@ return React.createElement(
     {},
     React.createElement(Expenses, {items: expenses})
 )
-`````
+````
 
 ## Quiz
 - With react, we write Declarative js code: we define the "goal" (i.e. what should be shown on the screen) and let React figure out how to get there.
@@ -76,5 +76,9 @@ return React.createElement(
 
 ## React State
 React evaluate every single component and then render them in the DOM as the app is initially rendered, and it doesn't do that again.
-It only reevaluates and rerender a given component when its state changes.
+It only reevaluates and rerender a given component when its state changes.\
+The initial value gives to ``useState()`` is only considered when the state is registered. 
+Next, only the last value of the state value is returned by react when rendering the component instance.
+
+State can be updated for whatever reason we may have: upon user events, or because of a timer expired (with setTimeout()) for example.
 
