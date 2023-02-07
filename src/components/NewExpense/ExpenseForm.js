@@ -24,6 +24,10 @@ const ExpenseForm = () => {
       title, amount, date: new Date(date)
     }
     console.log(expenseData);
+
+    setTitle('')
+    setDate('')
+    setAmount('')
   }
 
   return (
