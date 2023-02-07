@@ -49,3 +49,7 @@ The simple rule which react apply is that
     const day = props.date.toLocaleString('en-US', {day: '2-digit'})
     const year = props.date.getFullYear()
 `````
+
+Adding component can also be in order to avoid code repetition even CSS code. 
+That's where ``Card.js`` component comes in.
+
