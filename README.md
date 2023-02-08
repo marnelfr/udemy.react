@@ -85,3 +85,7 @@ State can be updated for whatever reason we may have: upon user events, or becau
 While updating the state that depends on the previous state, we should always refer to that previous state in order to make sure
 that we're operating on the latest state snapshot.
 
+### Lifting state up
+It's about moving data from a child component to some parent component to either use it there or to pass it down to some other child component.\
+In JavaScript, functions are just objects (i.e. regular values) and hence we can pass them as values via props to a component. 
+If that component then calls that function, it executes - and that's how we can trigger a function defined in a parent component from inside a child component.
