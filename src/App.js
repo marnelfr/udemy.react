@@ -7,13 +7,23 @@ import Modal from "./components/Section8/Modal/Modal";
 const App = () => {
   const [showModal, setShowModal] = useState(false)
   const [error, setError] = useState('')
+
   const closeModalHandler = () => {
     setShowModal(false)
   }
 
+  const formErrorHandler = message => {
+    setError(message)
+    setShowModal(true)
+  }
+
+  const newUserHandler = data => {
+
+  }
+
   return (
     <div>
-      <Form/>
+      <Form onFormError={formErrorHandler} onNewUser={newUserHandler}/>
       <section id={styles.card}>
         <ul className={styles['user-list']}>
           <li className={styles['user-item']}>

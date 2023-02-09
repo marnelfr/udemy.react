@@ -2,8 +2,7 @@ import React from "react";
 import styles from './Modal.module.css'
 
 const Modal = ({message, onClose}) => {
-  const clickHandler = (event) => {
-    event.preventDefault()
+  const clickHandler = () => {
     onClose()
   }
 
