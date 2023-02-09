@@ -98,3 +98,40 @@ If that component then calls that function, it executes - and that's how we can 
 const num = '-1992' //works for positive num as well
 console.log(+num) //print 1992 as digit, not string
 ````
+
+## [Styled-component](https://styled-components.com/)
+Very useful to avoid that styles apply to a given component affect others.
+````javascript
+const FormControl = styled.div`
+  margin: 0.5rem 0;
+  
+  & label {
+    display: block;
+    color: ${props => props.invalid ? 'red' : 'black'}
+  }
+  
+  & input {
+    display: block;
+    width: 100%;
+    border: 1px solid ${props => props.invalid ? 'red' : '#ccc'};
+    background-color: ${props => props.invalid ? '#f3b3b3' : 'transparent'}
+  }
+  
+  & input:focus {
+    background: #fad0ec;
+    border-color: #8b005d;
+  }
+`
+
+const CourseInput = props => {
+  return (
+    <FormControl invalid={!isValid}>
+      <label>Course Goal</label>
+      <input type="text" value={enteredValue} onChange={goalInputChangeHandler} />
+    </FormControl>
+  );
+};
+
+export default CourseInput;
+
+````
