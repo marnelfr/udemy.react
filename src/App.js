@@ -1,13 +1,17 @@
 import styles from './App.module.css'
 import Form from "./components/Section8/Form/Form";
 import CourseGoalItem from "./components/CourseGoals/CourseGoalItem/CourseGoalItem";
-import React from "react";
+import React, {useState} from "react";
 import Modal from "./components/Section8/Modal/Modal";
 
 const App = () => {
+  const [showModal, setShowModal] = useState(false)
+  const [error, setError] = useState('')
+  const closeModalHandler = () => {
+    setShowModal(false)
+  }
 
   return (
-    /**/
     <div>
       <Form/>
       <section id={styles.card}>
@@ -17,7 +21,7 @@ const App = () => {
           </li>
         </ul>
       </section>
-      <Modal />
+      {showModal && <Modal message={error} onClose={closeModalHandler} />}
     </div>
   )
 }

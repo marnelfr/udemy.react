@@ -1,7 +1,12 @@
 import React from "react";
 import styles from './Modal.module.css'
 
-const Modal = () => {
+const Modal = ({message, onClose}) => {
+  const clickHandler = (event) => {
+    event.preventDefault()
+    onClose()
+  }
+
   return (
     <div className={styles.modal}>
       <div className={styles.content}>
@@ -9,10 +14,10 @@ const Modal = () => {
           title
         </div>
         <div className={styles.body}>
-          The content of the modal
+          {message}
         </div>
         <div className={styles.footer}>
-          <button>Ok</button>
+          <button onClick={clickHandler}>Ok</button>
         </div>
       </div>
     </div>
