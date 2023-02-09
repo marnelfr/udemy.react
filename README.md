@@ -133,5 +133,25 @@ const CourseInput = props => {
 };
 
 export default CourseInput;
-
 ````
+
+## [CSS Modules](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/)
+Instead of using **styled-components**, we can use **CSS ModuleS** directly available in our 
+React projects.\
+To use it, we simply need to name our css files with the extension ``module.css``.
+So ```button.css``` becomes ```button.module.css```and then import it in our component file
+`````javascript
+import styles from './Button.module.css'
+
+const Button = props => {
+  return (
+    <button type={props.type} className={styles.button} onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
+};
+
+export default Button;
+`````
+```styles``` here is an object containing our css classes and then can be used as bellow.\
+
