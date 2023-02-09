@@ -89,3 +89,7 @@ that we're operating on the latest state snapshot.
 It's about moving data from a child component to some parent component to either use it there or to pass it down to some other child component.\
 In JavaScript, functions are just objects (i.e. regular values) and hence we can pass them as values via props to a component. 
 If that component then calls that function, it executes - and that's how we can trigger a function defined in a parent component from inside a child component.
+
+### For loop
+- We use for..of to loop over an array's elements
+- We use for..in to loop over an object's elements
