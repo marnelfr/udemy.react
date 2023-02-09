@@ -157,3 +157,12 @@ export default Button;
 `````
 ```styles``` here is an object containing our css classes and then can be used as bellow.\
 
+## Debugging React Apps 
+In the dev tools of Chrome browser, we have the Source tab that contain most of the time our
+written code under the ```Users/username/.../project-dir``` directory. We can then add some breakpoint 
+there to try to understand our bug using actions such as:
+- Step into next function call: jump to the next function call even if it's a function call by the current one, even if it's in another file.
+- Step over next function call: jump to the next line in the same file
+- Resume script execution
+
+We can also install the react debug tools in chrome, very useful
