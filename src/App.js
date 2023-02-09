@@ -1,57 +1,36 @@
-import React, { useState } from 'react';
-
-import CourseGoalList from './components/CourseGoals/CourseGoalList/CourseGoalList';
-import CourseInput from './components/CourseGoals/CourseInput/CourseInput';
-import './App.css';
+import styles from './App.module.css'
+import Form from "./components/Section8/Form/Form";
+import CourseGoalItem from "./components/CourseGoals/CourseGoalItem/CourseGoalItem";
+import React from "react";
 
 const App = () => {
-  const [courseGoals, setCourseGoals] = useState([
-    { text: 'Do all exercises!', id: 'g1' },
-    { text: 'Finish the course!', id: 'g2' }
-  ]);
-
-  const addGoalHandler = enteredText => {
-    setCourseGoals(prevGoals => {
-      const updatedGoals = [...prevGoals];
-      updatedGoals.unshift({ text: enteredText, id: Math.random().toString() });
-      return updatedGoals;
-    });
-  };
-
-  const deleteItemHandler = goalId => {
-    setCourseGoals(prevGoals => {
-      const updatedGoals = prevGoals.filter(goal => goal.id !== goalId);
-      return updatedGoals;
-    });
-  };
-
-  let content = (
-    <p style={{ textAlign: 'center' }}>No goals found. Maybe add one?</p>
-  );
-
-  if (courseGoals.length > 0) {
-    content = (
-      <CourseGoalList items={courseGoals} onDeleteItem={deleteItemHandler} />
-    );
-  }
 
   return (
+    /*<div style={{position: 'absolute', width: '100vw', height: '100vh', background: 'rgba(2,2,2,0.54)'}}>
+      <div style={{background: 'white', marginTop: '30vh', marginLeft: '30vw', width: '40vw'}}>
+        <div style={{background: 'rgba(42,76,79,0.54)', padding: '5px 10px'}}>
+          title
+        </div>
+        <div style={{padding: '10px'}}>
+          The content of the modal
+        </div>
+        <div style={{textAlign: "center", padding: '15px'}}>
+          <button>Ok</button>
+        </div>
+      </div>
+    </div>*/
     <div>
-      <section id="goal-form">
-        <CourseInput onAddGoal={addGoalHandler} />
+      <Form/>
+      <section id={styles.card}>
+        <ul className={styles['user-list']}>
+          <li className={styles['user-item']}>
+            je ne suis là
+          </li>
+        </ul>
       </section>
-      <section id="goals">
-        {content}
-        {/* {courseGoals.length > 0 && (
-          <CourseGoalList
-            items={courseGoals}
-            onDeleteItem={deleteItemHandler}
-          />
-        ) // <p style={{ textAlign: 'center' }}>No goals found. Maybe add one?</p>
-        } */}
-      </section>
-    </div>
-  );
-};
 
-export default App;
+    </div>
+  )
+}
+
+export default App

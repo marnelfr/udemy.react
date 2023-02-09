@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import ExpenseApp from './components/ExpenseApp/App';
+// import ExpenseApp from './components/ExpenseApp/App';
 import reportWebVitals from './reportWebVitals';
+// import GoalApp from "./components/CourseGoals/App";
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -10,7 +11,8 @@ root.render(
   <React.StrictMode>
     {/*todo: add a first page with two btn that let choose the app we wanna use between those two*/}
     {/*<ExpenseApp/>*/}
-    <App/>
+    {/*<GoalApp/>*/}
+    <App />
   </React.StrictMode>
 );
 
