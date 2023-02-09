@@ -90,6 +90,11 @@ It's about moving data from a child component to some parent component to either
 In JavaScript, functions are just objects (i.e. regular values) and hence we can pass them as values via props to a component. 
 If that component then calls that function, it executes - and that's how we can trigger a function defined in a parent component from inside a child component.
 
-### For loop
+### Tips
 - We use for..of to loop over an array's elements
 - We use for..in to loop over an object's elements
+- To convert a number of type string to digit, we can use '+'
+````javascript
+const num = '-1992' //works for positive num as well
+console.log(+num) //print 1992 as digit, not string
+````
