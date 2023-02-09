@@ -1,6 +1,8 @@
 # Personal Notes
 
-Import * as bundled from ‘utility.js’;
+`````javascript
+import * as bundled from 'utility.js';
+`````
 
 - Numbers, strings, and boolean are primitive types. When they are reassigned to another variable, their value is copied completely to the new variable.
 - Arrays and objects are references type though. This means an array variable is just a pointer to the memory place allocated to store the array. When the variable is reassigned to another, only the pointer value is copied but the new variable still points to the same array.
@@ -139,7 +141,7 @@ export default CourseInput;
 Instead of using **styled-components**, we can use **CSS ModuleS** directly available in our 
 React projects.\
 To use it, we simply need to name our css files with the extension ``module.css``.
-So ```button.css``` becomes ```button.module.css```and then import it in our component file
+So ```button.css``` becomes ```button.module.css```and then we have to import it in our component file
 `````javascript
 import styles from './Button.module.css'
 
