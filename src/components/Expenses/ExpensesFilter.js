@@ -4,7 +4,8 @@ const ExpensesFilter = (props) => {
   const changeHandler = (event) => {
     props.onChange(event.target.value)
   }
-
+  // todo: receive a props of years based on expenses years and update this component
+  // todo: find the way to automatically switch to the year of a new added expense
   return (
     <div className='expenses-filter'>
       <div className='expenses-filter__control'>
