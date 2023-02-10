@@ -1,38 +1,31 @@
-import styles from './App.module.css'
-import Form from "./components/Section8/Form/Form";
-import React, {useState} from "react";
-import Modal from "./components/Section8/Modal/Modal";
-import UserList from "./components/Section8/UserList/UserList";
+import React, { useState } from 'react';
 
-const App = () => {
-  const [error, setError] = useState('')
-  const [users, setUsers] = useState([])
+import Login from './components/section10/Login/Login';
+import Home from './components/section10/Home/Home';
+import MainHeader from './components/section10/MainHeader/MainHeader';
 
-  const closeModalHandler = () => {
-    setError('')
-  }
+function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const formErrorHandler = message => {
-    setError(message)
-  }
+  const loginHandler = (email, password) => {
+    // We should of course check email and password
+    // But it's just a dummy/ demo anyways
+    setIsLoggedIn(true);
+  };
 
-  const newUserHandler = data => {
-    setUsers(users => {
-      const user = {...data, id: Math.random().toString()}
-      return [user, ...users]
-    })
-  }
+  const logoutHandler = () => {
+    setIsLoggedIn(false);
+  };
 
   return (
-    <div>
-      <Form onFormError={formErrorHandler} onNewUser={newUserHandler}/>
-      <section id={styles.card}>
-        <UserList users={users} />
-        {users.length === 0 && <p className={styles.notFound}>No user found.</p>}
-      </section>
-      {error && <Modal message={error} onClose={closeModalHandler} />}
-    </div>
-  )
+    <React.Fragment>
+      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+      <main>
+        {!isLoggedIn && <Login onLogin={loginHandler} />}
+        {isLoggedIn && <Home onLogout={logoutHandler} />}
+      </main>
+    </React.Fragment>
+  );
 }
 
-export default App
+export default App;
