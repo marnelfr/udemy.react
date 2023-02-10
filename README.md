@@ -334,6 +334,17 @@ useEffect(() => {
 }, [enteredPassword, enteredEmail])
 `````
 
+## useReducer hook
+We shouldn't update a state based on the value of another state. 
+I may not work correctly sometimes when the other state update doesn't processed in time 
+resulting then in an outdated value usage.\
+When updating a state which depends on another state, we should combine them in only 
+one state managing an object as value or think about using the hook **useReducer**.
+
+
+
+
+
 
 
 
