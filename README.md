@@ -218,7 +218,7 @@ our components with a div and this can lead to such of thing in very big app:
     </div>
 </div>
 `````
-To avoid this, we may use such of component:
+To avoid this and write semantic more correct code, we may use such of component:
 `````javascript
 const Wrapper = props => {
   return (
@@ -233,7 +233,28 @@ component ourselves. It's already provided by React and can be used with the tag
 ```<React.Fragment></React.Fragment>``` or simply ```<></>```.
 
 ## React Portals
+Using React Portals, we can render our components (such as modals,...) exactly where we need them
+to be rendered in the DOM in order to write semantic more correct code.\
+To achieve that, we'll need ReactDOM.
+`````javascript
+import ReactDOM from "react-dom";
 
+const ModalOverlay = props => {
+  return (
+    <div className={styles.modal}>
+      ...
+    </div>
+  )
+}
+
+const Modal = ({message, onClose}) => {
+  const clickHandler = () => onClose()
+
+  return <>
+    {ReactDOM.createPortal(<ModalOverlay message={message} onConfirm={clickHandler}/>, document.body)}
+  </>
+}
+`````
 
 
 

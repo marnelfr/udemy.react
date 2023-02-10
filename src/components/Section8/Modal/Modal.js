@@ -23,9 +23,7 @@ const ModalOverlay = props => {
 }
 
 const Modal = ({message, onClose}) => {
-  const clickHandler = () => {
-    onClose()
-  }
+  const clickHandler = () => onClose()
 
   return (
     <>
