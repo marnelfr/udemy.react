@@ -258,7 +258,8 @@ const Modal = ({message, onClose}) => {
 Using all of this certainly make us look more like a developer who knows what he's doing 😎😎😎
 
 ## React Refs
-Should be used rarely but let us access the DOM elements.
+Should be used rarely but let us access the DOM elements using then **uncontrolled components** 
+instead of **controlled** ones where their state is managed by React thanks to **useState/value/onChange**.\
 We use it thanks to ``useRef()`` hook like this:
 `````javascript
 import {useRef} from 'react';
@@ -269,6 +270,7 @@ const From = props => {
   const formHandler = event => {
     event.preventDefault()
     console.log(yearInpRef.current.value);
+    yearInpRef.current.value = ''
   }
 
   return (
