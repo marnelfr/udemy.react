@@ -317,10 +317,11 @@ we've got few exceptions such as:
 change because the component (or some parent component) re-rendered.**
 
 ### Mount and didUnmount events
-**The function A** provided to ```useEffet()``` runs at least once: when the component is mounted in the DOM.
-So with an empty array as dependencies, it never runs again after that.
-**The function A** can return another function B that's run first each time the function A should be runs again.
-With an empty array as dependencies, the function B only run when the component is unmounted from the DOM 
+**The function A** provided to ```useEffet()``` runs at least once: when the component is mounted in the DOM.\
+Without a second argument, the function is run everytime the component is rendered.\
+But with an empty array as dependencies, it never runs again after the first time.\
+**The function A** can return another **function B** that's run first each time the function A **should be run again**: not the first time.
+With an empty array as dependencies, the **function B** only run when the component is unmounted from the DOM.
 
 ### Debouncing with useEffet
 `````javascript
