@@ -237,7 +237,7 @@ Using React Portals, we can render our components (such as modals,...) exactly w
 to be rendered in the DOM in order to write semantic more correct code.\
 To achieve that, we'll need ReactDOM.
 `````javascript
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom"; //we don't import from "react-dom/client" but "react-dom"
 
 const ModalOverlay = props => {
   return (
@@ -255,8 +255,33 @@ const Modal = ({message, onClose}) => {
   </>
 }
 `````
+Using all of this certainly make us look more like a developer who knows what he's doing 😎😎😎
 
+## React Refs
+Should be used rarely but let us access the DOM elements.
+We use it thanks to ``useRef()`` hook like this:
+`````javascript
+import {useRef} from 'react';
 
+const From = props => {
+  const yearInpRef = useRef()
+
+  const formHandler = event => {
+    event.preventDefault()
+    console.log(yearInpRef.current.value);
+  }
+
+  return (
+    <form className={styles.form} onSubmit={formHandler}>
+      <div className={styles['form-control']}>
+        <label>Age (Years)</label>
+        <input type="number" ref={yearInpRef}/>
+      </div>
+      <Button type="submit">Add User</Button>
+    </form>
+  )
+}
+`````
 
 
 
