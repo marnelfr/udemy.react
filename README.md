@@ -316,6 +316,9 @@ we've got few exceptions such as:
 **All "things" used in the effect function must be added if those "things" could 
 change because the component (or some parent component) re-rendered.**
 
+**It's also very important to pass specific properties instead of the entire object as a dependency because this may
+make our useEffect to rerun our function everytime only one property of the given object changes**
+
 ### Mount and didUnmount events
 **The function A** provided to ```useEffet()``` runs at least once: when the component is mounted in the DOM.\
 Without a second argument, the function is run everytime the component is rendered.\
