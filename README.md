@@ -285,7 +285,25 @@ const From = props => {
 }
 `````
 
+## Side Effects
+The main job of the React library is to render the UI, react to users' input, rerender the UI when needed:
+- Evaluate and render UI
+- Manage state and props
+- React to users' events and input, 
+- Re-evaluate component upon state and props changes
 
+Therefore, **side effects** are everything else that happen in the application such as
+- sending http request
+- storing data in the browser local storage
+- timers and intervals management,...
+
+They may lead to rendering the UI but not directly, and we may not want to execute such of effect
+everytime React evaluate and render the UI. We then need to explicitly indicate they dependencies: 
+what their execution should depend on.\
+That's where the ``useEffect()`` hook comes in. It's called with two arguments:
+- a function that should be executed AFTER every component evaluation IF the specified dependencies changed
+- an array of dependencies of this effect
+ 
 
 
 
