@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useState} from 'react';
+import React, {useEffect, useReducer} from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
@@ -42,25 +42,21 @@ const Login = (props) => {
   })
 
   useEffect(() => {
-    const timeOutID = setTimeout(() => dispatch({type: 'CHECK_FORM'}), 200)
+    const timeOutID = setTimeout(() => dispatch({type: 'CHECK_FORM'}), 500)
     return () => clearTimeout(timeOutID)
   }, [state])
 
-  const emailChangeHandler = (event) => {
-    dispatch({type: 'USERNAME_CHANGED', value: event.target.value})
-  };
+  const emailChangeHandler = (event) => dispatch(
+    {type: 'USERNAME_CHANGED', value: event.target.value}
+  );
 
-  const passwordChangeHandler = (event) => {
-    dispatch({type: 'PASSWORD_CHANGED', value: event.target.value})
-  };
+  const passwordChangeHandler = (event) => dispatch(
+    {type: 'PASSWORD_CHANGED', value: event.target.value}
+  );
 
-  const validateEmailHandler = () => {
-    dispatch({type: 'CHECK_EMAIL'})
-  };
+  const validateEmailHandler = () => dispatch({type: 'CHECK_EMAIL'});
 
-  const validatePasswordHandler = () => {
-    dispatch({type: 'CHECK_PASSWORD'})
-  };
+  const validatePasswordHandler = () => dispatch({type: 'CHECK_PASSWORD'});
 
   const submitHandler = (event) => {
     event.preventDefault();
