@@ -307,6 +307,31 @@ That's where the ``useEffect()`` hook comes in. It's called with two arguments:
 - a function that should be executed AFTER every component evaluation IF the specified dependencies changed
 - an array of dependencies of this effect
 
+While all state variables and functions used in the effect function should be added as a dependencies,
+we've got few exceptions such as:
+- state updating functions,
+- "built-in" APIs or functions
+- variables or functions defined OUTSIDE the components
+
+**All "things" used in the effect function must be added if those "things" could 
+change because the component (or some parent component) re-rendered.**
+
+### Mount and didUnmount events
+**The function A** provided to ```useEffet()``` runs at least once: when the component is mounted in the DOM.
+So with an empty array as dependencies, it never runs again after that.
+**The function A** can return another function B that's run first each time the function A should be runs again.
+With an empty array as dependencies, the function B only run when the component is unmounted from the DOM 
+
+### Debouncing with useEffet
+`````javascript
+useEffect(() => {
+  const timeOutID = setTimeout(() => setFormIsValid(
+    enteredEmail.includes('@') && enteredPassword.trim().length > 6
+  ), 1000)
+
+  return () => clearTimeout(timeOutID)
+}, [enteredPassword, enteredEmail])
+`````
 
 
 
