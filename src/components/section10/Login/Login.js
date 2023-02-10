@@ -10,10 +10,10 @@ const reducer = (state, action) => {
     return {...state, isValidFrom}
   }
   if (action.type === 'USERNAME_CHANGED') {
-    return {...state, email: action.value}
+    return {...state, email: action.value, isValidEmail: action.value.includes('@')}
   }
   if (action.type === 'PASSWORD_CHANGED') {
-    return {...state, password: action.value}
+    return {...state, password: action.value, isValidPassword: action.value.trim().length > 6}
   }
   if (action.type === 'CHECK_EMAIL') {
     const isValidEmail = state.email.includes('@')
@@ -40,11 +40,12 @@ const Login = (props) => {
     isValidPassword: null,
     isValidFrom: false
   })
+  const {isValidEmail: validEmail, isValidPassword: validPass} = state
 
   useEffect(() => {
     const timeOutID = setTimeout(() => dispatch({type: 'CHECK_FORM'}), 500)
     return () => clearTimeout(timeOutID)
-  }, [state])
+  }, [validPass, validEmail])
 
   const emailChangeHandler = (event) => dispatch(
     {type: 'USERNAME_CHANGED', value: event.target.value}
