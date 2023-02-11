@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 // import GoalApp from "./components/CourseGoals/App";
 // import Section8App from "./components/Section8/App";
 import App from "./App"
+import {AuthContextProvider} from "./store/auth-context";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +15,9 @@ root.render(
     {/*<ExpenseApp/>*/}
     {/*<GoalApp/>*/}
     {/*<Section8App />*/}
-    <App />
+    <AuthContextProvider>
+      <App />
+    </AuthContextProvider>
   </React.StrictMode>
 );
 

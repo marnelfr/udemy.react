@@ -359,11 +359,12 @@ export default AuthContext
 `````
 In the parent that have children component which need the defined context, we need to provider it:
 `````javascript
+///src/App.js
 const isAuthenticatedUser = true
 const logoutHandler = () => {/*...*/}
 return (
   <AuthContext.Provider value={{isLoggedIn: isAuthenticatedUser, onLogout: logoutHandler}}>
-    //our component jsx code
+    /*our component jsx code*/
   </AuthContext.Provider>
 )
 `````
@@ -400,7 +401,7 @@ const Navigation = (props) => {
       <ul>
         {ctx.isLoggedIn && (
           <li>
-            <button onClick={props.onLogout}>Logout</button>
+            <button onClick={ctx.onLogout}>Logout</button>
           </li>
         )}
       </ul>
@@ -413,7 +414,62 @@ const Navigation = (props) => {
 it (we shall then end up having a context with its default values), having a parent provider is 
 always a good idea because it helps us to make our context dynamic.**
 
+While defining our context, we can also define a contextProvider that will directly manage 
+the state define by the context:
+`````javascript
+import React, {useEffect, useState} from "react";
 
+const AuthContext = React.createContext({
+  isLoggedIn: false,
+  loginHandler: (email, password) => {},
+  logoutHandler: () => {}
+})
+
+export const AuthContextProvider = props => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    const isAlreadyLoggedIn = localStorage.getItem('IsLoggedIn') === '1'
+    if (isAlreadyLoggedIn) {
+      setIsLoggedIn(true)
+    }
+  }, [])
+
+  const loginHandler = (email, password) => {
+    // We should of course check email and password. But it's just a dummy/demo anyway
+    localStorage.setItem('IsLoggedIn', '1')
+    setIsLoggedIn(true)
+  }
+
+  const logoutHandler = () => {
+    localStorage.removeItem('IsLoggedIn')
+    setIsLoggedIn(false)
+  }
+
+  return <AuthContext.Provider value={{isLoggedIn, logoutHandler, loginHandler}}>
+    {props.children}
+  </AuthContext.Provider>
+}
+
+export default AuthContext
+`````
+Now, we can surround our ``App`` (which won't manage anything about authentication anymore) 
+component with our ``AuthContextProvider`` directly in ``index.js``:
+`````javascript
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from "./App"
+import {AuthContextProvider} from "./store/auth-context";
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <AuthContextProvider>
+      <App />
+    </AuthContextProvider>
+  </React.StrictMode>
+);
+`````
 
 
 
