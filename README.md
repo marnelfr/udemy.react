@@ -488,6 +488,14 @@ An ``AuthButton`` then if we really need it.
 But we shouldn't use the ``AuthContext`` in ``Button`` 
 component which can be used in many other place for other purposes.
 
+## Rules of Hooks
+- Only call React Hooks in React Functions
+  - React Component Functions
+  - Custom Hooks
+- Only call React Hooks at the Top Level
+  - Don’t call them in nested functions
+  - Don’t call them in any block statements
+
 
 
 
