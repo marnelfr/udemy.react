@@ -344,9 +344,49 @@ resulting then in an outdated value usage.\
 When updating a state which depends on another state, we should combine them in only 
 one state managing an object as value or think about using the hook **useReducer**.
 
+## React Context API
+Help us avoid forwarding props through multiple components while we only need them in one.
+To use it, we need to define our context with a default value:
+`````javascript
+///src/store/auth-context.js
+import React from "react";
 
+const AuthContext = React.createContext({
+  isLoggedIn: false
+})
 
-
+export default AuthContext
+`````
+In the parent that have children component which need the defined context, we need to provider it:
+`````javascript
+const isAuthenticatedUser = true
+return (
+  <AuthContext.Provider value={{isLoggedIn: isAuthenticatedUser}}>
+    //our component jsx code
+  </AuthContext.Provider>
+)
+`````
+While providing our context, we can also set a value to the state as bellow.\
+Then everywhere we need to consume it, we can do:
+`````javascript
+return (
+  <AuthContext.Consumer>
+    {(ctx) => {
+      return (
+        <nav className={classes.nav}>
+          <ul>
+            {ctx.isLoggedIn && (
+              <li>
+                <button onClick={props.onLogout}>Logout</button>
+              </li>
+            )}
+          </ul>
+        </nav>
+      )
+    }}
+  </AuthContext.Consumer>
+)
+`````
 
 
 
