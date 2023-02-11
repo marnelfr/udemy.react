@@ -471,9 +471,22 @@ root.render(
 );
 `````
 
+### Context limitation
+**React Context is **NOT** optimized for high frequency changes**\
+We should then avoid using it to manage state which may change multiple time per second for example.
 
+### Avoid too custom components 
+We shouldn't lose the north because of all of these possibilities:
+- contexts should only be used to state management across the app
+- props for components configuration.
 
-
+React Context shouldn't be used to replace ALL component communications and props.
+We shouldn't end up using it in a giving (let's say...) UI component.\
+For example, instead of using our ``AuthContext`` in a ``Button`` component, 
+we may have beside another component using our ``Button`` component and the ``AuthContext``. 
+An ``AuthButton`` then if we really need it. 
+But we shouldn't use the ``AuthContext`` in ``Button`` 
+component which can be used in many other place for other purposes.
 
 
 
