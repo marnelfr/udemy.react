@@ -360,8 +360,9 @@ export default AuthContext
 In the parent that have children component which need the defined context, we need to provider it:
 `````javascript
 const isAuthenticatedUser = true
+const logoutHandler = () => {/*...*/}
 return (
-  <AuthContext.Provider value={{isLoggedIn: isAuthenticatedUser}}>
+  <AuthContext.Provider value={{isLoggedIn: isAuthenticatedUser, onLogout: logoutHandler}}>
     //our component jsx code
   </AuthContext.Provider>
 )
@@ -378,7 +379,7 @@ const Navigation = props => {
             <ul>
               {ctx.isLoggedIn && (
                 <li>
-                  <button onClick={props.onLogout}>Logout</button>
+                  <button onClick={ctx.onLogout}>Logout</button>
                 </li>
               )}
             </ul>
@@ -407,6 +408,10 @@ const Navigation = (props) => {
   )
 };
 `````
+
+**Now, while it's possible to consume a context in a component not having a parent providing 
+it (we shall then end up having a context with its default values), having a parent provider is 
+always a good idea because it helps us to make our context dynamic.**
 
 
 
