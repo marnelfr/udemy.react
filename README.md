@@ -369,25 +369,44 @@ return (
 While providing our context, we can also set a value to the state as bellow.\
 Then everywhere we need to consume it, we can do:
 `````javascript
-return (
-  <AuthContext.Consumer>
-    {(ctx) => {
-      return (
-        <nav className={classes.nav}>
-          <ul>
-            {ctx.isLoggedIn && (
-              <li>
-                <button onClick={props.onLogout}>Logout</button>
-              </li>
-            )}
-          </ul>
-        </nav>
-      )
-    }}
-  </AuthContext.Consumer>
-)
+const Navigation = props => {
+  return (
+    <AuthContext.Consumer>
+      {(ctx) => {
+        return (
+          <nav className={classes.nav}>
+            <ul>
+              {ctx.isLoggedIn && (
+                <li>
+                  <button onClick={props.onLogout}>Logout</button>
+                </li>
+              )}
+            </ul>
+          </nav>
+        )
+      }}
+    </AuthContext.Consumer>
+  )
+}
 `````
+Or simply use the ``useContext()`` hook:
+`````javascript
+const Navigation = (props) => {
+  const ctx = useContext(AuthContext)
 
+  return (
+    <nav className={classes.nav}>
+      <ul>
+        {ctx.isLoggedIn && (
+          <li>
+            <button onClick={props.onLogout}>Logout</button>
+          </li>
+        )}
+      </ul>
+    </nav>
+  )
+};
+`````
 
 
 
