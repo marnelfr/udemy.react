@@ -496,6 +496,7 @@ component which can be used in many other place for other purposes.
   - Don’t call them in nested functions
   - Don’t call them in any block statements
 
+## Forward refs
 
 
 
