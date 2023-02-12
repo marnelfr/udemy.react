@@ -497,6 +497,23 @@ component which can be used in many other place for other purposes.
   - Don’t call them in any block statements
 
 ## Forward refs
+We talk about forwarding ref when we have a component that render a given DOM and here, 
+we want to attach a reference to that DOM element from outside the component.
+We then need to define a ref that we attach to the component and forward it into the component
+in order to attach it to the given DOM element. Forwarded refs are received as second parameters 
+of our component and the component is surrounded by ```React.forwardRef()```.
+
+If a component receive a forwarded ref, it can then expose some of its internal function that will
+then be accessible from its parents thanks to its attached ref. This can be done using the 
+``useImperativeHandle()`` hook. Let's expose a given internal function called ``activate``:
+`````javascript
+useImperativeHandle(ref, () => {
+  return {
+    focus: activate
+  }
+})
+`````
+Here, ``ref`` is the forwarded ref. So in parent, we could do something like ``inpRef.current.focus()``.
 
 
 
