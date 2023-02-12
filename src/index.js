@@ -5,8 +5,9 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 // import GoalApp from "./components/CourseGoals/App";
 // import Section8App from "./components/Section8/App";
-import App from "./App"
-import {AuthContextProvider} from "./store/auth-context";
+// import LoginApp from "./components/section10/App"
+// import {AuthContextProvider} from "./store/Section10/auth-context";
+import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,9 +16,8 @@ root.render(
     {/*<ExpenseApp/>*/}
     {/*<GoalApp/>*/}
     {/*<Section8App />*/}
-    <AuthContextProvider>
-      <App />
-    </AuthContextProvider>
+    {/*<AuthContextProvider><LoginApp /></AuthContextProvider>*/}
+    <App />
   </React.StrictMode>
 );
 

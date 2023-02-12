@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useReducer, useRef} from 'react';
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
-import AuthContext from "../../../store/auth-context";
+import AuthContext from "../../../store/Section10/auth-context";
 import Input from "../../UI/Input/Input";
 
 const reducer = (state, action) => {
