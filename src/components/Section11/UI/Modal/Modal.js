@@ -1,10 +1,11 @@
 import ReactDOM from "react-dom"
 
 import styles from './Modal.module.css'
-import {useState} from "react";
+import {useContext} from "react";
+import ModalContext from "../../../../store/Section11/modal-context";
 
 const ModalBackdrop = props => {
-  return <div className={styles.backdrop} />
+  return <div onClick={props.onClose} className={styles.backdrop} />
 }
 
 const ModalOverlay = props => {
@@ -16,10 +17,12 @@ const ModalOverlay = props => {
 }
 
 const Modal = props => {
+  const context = useContext(ModalContext)
+
   return (
     <>
-      {ReactDOM.createPortal(<ModalBackdrop />, document.body)}
-      {ReactDOM.createPortal(<ModalOverlay>{props.children}</ModalOverlay>, document.body)}
+      {context.show && ReactDOM.createPortal(<ModalBackdrop onClose={context.hideModalHandler} />, document.body)}
+      {context.show && ReactDOM.createPortal(<ModalOverlay>{props.children}</ModalOverlay>, document.body)}
     </>
   )
 }
