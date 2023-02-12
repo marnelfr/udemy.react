@@ -234,7 +234,7 @@ component ourselves. It's already provided by React and can be used with the tag
 
 ## React Portals
 Using React Portals, we can render our components (such as modals,...) exactly where we need them
-to be rendered in the DOM in order to write semantic more correct code.\
+to be rendered in the DOM in order to write semantic more correct html code.\
 To achieve that, we'll need ReactDOM.
 `````javascript
 import ReactDOM from "react-dom"; //we don't import from "react-dom/client" but "react-dom"
