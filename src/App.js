@@ -1,7 +1,10 @@
+import Header from "./components/Section11/Layout/Header";
 
 const App = props => {
   return (
-    <div></div>
+    <>
+      <Header />
+    </>
   )
 }
 
