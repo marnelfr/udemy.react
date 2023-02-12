@@ -17,23 +17,19 @@ const reducer = (state, action) => {
     const items = [...filteredItems, action.item]
 
     const totalAmount = items.reduce((total, item) => {
-      const totalPrice = total + (item.price * item.amount)
-      return totalPrice
+      return total + (item.price * item.amount)
     }, 0)
 
     return {items, totalAmount}
   }
 
   if(action.type === 'REMOVE_ITEM') {
-    let price = 0
-    const items = state.items.filter(item => {
-      if(item.meal.id === action.id) {
-        price = item.meal.price
-        return false
-      }
-      return true
-    })
-    const totalAmount = state.totalAmount - price
+    const items = state.items.filter(item => item.id !== action.id)
+
+    const totalAmount = items.reduce((total, item) => {
+      return total + (item.price * item.amount)
+    }, 0)
+
     return {items, totalAmount}
   }
 }
