@@ -122,6 +122,14 @@ component from inside a child component.
 - We use for..of to loop over an array's elements
 - We use for..in to loop over an object's elements
 - To convert a number of type string to digit, we can use '+'
+- The ```bind()``` function call on a function's pointer allow us to set a value to ``this`` inside it and predefined the value of arguments it should be call with
+`````javascript
+//inside a component:
+const clickHandler = (id) => {}
+return (
+  <button onClick={clickHandler.bind(null, 5)}></button> /*the function will be called with id=5*/
+)
+`````
 
 ````javascript
 const num = '-1992' //works for positive num as well
