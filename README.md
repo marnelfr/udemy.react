@@ -22,8 +22,8 @@ class Human {
     return args.sort()
   }
 
-  timeTwo = (data = [1, 2, 3]) => { // Rest operator
-    return data.map((num) => num * 2) // data is not modified. It’s a new array that’s is returned
+  timesTwo = (data = [1, 2, 3]) => { 
+    return data.map((num) => num * 2) // data is not modified. It’s a new array which is is returned
   }
 
   destructuring = () => {
@@ -54,24 +54,25 @@ Particularly important in this course are:
 * splice()
   => [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
 
+\
 The simple rule which react apply is that
 
 - Lower case elements are built in html elements
-- Elements which name start by a capital letter are custom elements
+- Elements which name starts by a capital letter are custom elements
 
 ````javascript
-    const month = props.date.toLocaleString('en-US', {month: 'long'})
+const month = props.date.toLocaleString('en-US', {month: 'long'})
 const day = props.date.toLocaleString('en-US', {day: '2-digit'})
 const year = props.date.getFullYear()
 ````
 
-Adding component can also be in order to avoid code repetition even CSS code.
-That's where ``Card.js`` component comes in.
+Adding component can also be in order to avoid repeating our code even CSS code.
+That's why we can end up with a component like ``Card.js`` component ; just to avoid repeating some css code.
 
 JSX under the hood:
 
 ````javascript
-import Expenses from './Expenses.js'
+import Expenses from './Expenses'
 
 return (
   <div>
@@ -104,7 +105,7 @@ Next, only the last value of the state value is returned by react when rendering
 State can be updated for whatever reason we may have: upon user events, or because of a timer expired (with
 setTimeout()) for example.
 
-While updating the state that depends on the previous state, we should always refer to that previous state in order to
+While updating the state that depends on the previous state value, we should always refer to that previous state in order to
 make sure
 that we're operating on the latest state snapshot.
 
@@ -122,23 +123,24 @@ component from inside a child component.
 - We use for..of to loop over an array's elements
 - We use for..in to loop over an object's elements
 - To convert a number of type string to digit, we can use '+'
-- The ```bind()``` function call on a function's pointer allow us to set a value to ``this`` inside it and predefined the value of arguments it should be call with
+````javascript
+const num = '-1992' //works for positive num as well
+console.log(+num) //print -1992 as digit, not string
+````
+- The ```bind()``` function called on a function's pointer allow us to set a value to ``this`` 
+inside it and predefine the value of arguments it should be called with
 `````javascript
 //inside a component:
-const clickHandler = (id) => {}
+const clickHandler = (id) => {/*...*/}
 return (
-  <button onClick={clickHandler.bind(null, 5)}></button> /*the function will be called with id=5*/
+  /*the function will be called with id=5*/
+  <button onClick={clickHandler.bind(null, 5)}>Click me, please ((</button> 
 )
 `````
 
-````javascript
-const num = '-1992' //works for positive num as well
-console.log(+num) //print 1992 as digit, not string
-````
-
 ## [Styled-component](https://styled-components.com/)
 
-Very useful to avoid that styles apply to a given component affect others.
+Very useful to avoid that styles applied to a given component affect others.
 
 ````javascript
 const FormControl = styled.div`
@@ -176,9 +178,9 @@ export default CourseInput;
 
 ## [CSS Modules](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/)
 
-Instead of using **styled-components**, we can use **CSS ModuleS** directly available in our
+Instead of using **styled-components**, we can use **CSS Modules** which is directly available in our
 React projects.\
-To use it, we simply need to name our css files with the extension ``module.css``.
+To use it, we simply need to name our css files with the extension ``.module.css``.
 So ```button.css``` becomes ```button.module.css```and then we have to import it in our component file
 
 `````javascript
@@ -195,25 +197,24 @@ const Button = props => {
 export default Button;
 `````
 
-```styles``` here is an object containing our css classes and then can be used as bellow.\
+```styles``` here is an object containing our css classes and then can be used as bellow.
 
 ## Debugging React Apps
 
-In the dev tools of Chrome browser, we have the Source tab that contain most of the time our
+In the dev tools of Chrome browser, we have the Source tab that contains most of the time our
 written code under the ```Users/username/.../project-dir``` directory. We can then add some breakpoint
 there to try to understand our bug using actions such as:
 
-- Step into next function call: jump to the next function call even if it's a function call by the current one, even if
-  it's in another file.
+- Step into next function call: jump to the next function call even if it's a function called 
+by the current file or another one.
 - Step over next function call: jump to the next line in the same file
 - Resume script execution
 
-We can also install the React debug tools in chrome, very useful
+We can also install the React debug tools in chrome ; very useful
 
 ## React fragments
-
 As every React component must have one root element, we may end up wrapping
-our components with a div and this can lead to such of thing in very big app:
+our components with a div and this can lead to such of thing in a very big app:
 
 `````html
 <div>
@@ -293,6 +294,25 @@ const From = props => {
 }
 `````
 
+## Forward refs
+We talk about forwarding ref when we have a component that render a given DOM and here,
+we want to attach a reference to that DOM element from outside the component.
+We then need to define a ref that we attach to the component and forward it into the component
+in order to attach it to the given DOM element. Forwarded refs are received as second parameters
+of our component and the component is surrounded by ```React.forwardRef()```.
+
+If a component receive a forwarded ref, it can then expose some of its internal function that will
+then be accessible from its parents thanks to its attached ref. This can be done using the
+``useImperativeHandle()`` hook. Let's expose a given internal function called ``activate``:
+`````javascript
+useImperativeHandle(ref, () => {
+  return {
+    focus: activate
+  }
+})
+`````
+Here, ``ref`` is the forwarded ref. So in parent, we could do something like ``inpRef.current.focus()``.
+
 ## Side Effects
 The main job of the React library is to:
 - Evaluate, and render UI
@@ -328,10 +348,10 @@ change because the component (or some parent component) re-rendered.**
 make our useEffect to rerun our function everytime only one property of the given object changes**
 
 ### Mount and didUnmount events
-**The function A** provided to ```useEffet()``` runs at least once: when the component is mounted in the DOM.\
+**A function F** provided to ```useEffet()``` runs at least once: when the component is mounted in the DOM.\
 Without a second argument, the function is run everytime the component is rendered.\
 But with an empty array as dependencies, it never runs again after the first time.\
-**The function A** can return another **function B** that's run first each time the function A **should be run again**: not the first time.
+**The function F** can return another **function B** that's run first each time the function F**should be run again**: not the first time.
 With an empty array as dependencies, the **function B** only run when the component is unmounted from the DOM.
 
 ### Debouncing with useEffet
@@ -492,9 +512,9 @@ React Context shouldn't be used to replace ALL component communications and prop
 We shouldn't end up using it in a giving (let's say...) UI component.\
 For example, instead of using our ``AuthContext`` in a ``Button`` component, 
 we may have beside another component using our ``Button`` component and the ``AuthContext``. 
-An ``AuthButton`` then if we really need it. 
+An ``AuthButton`` then if we really need it.\
 But we shouldn't use the ``AuthContext`` in ``Button`` 
-component which can be used in many other place for other purposes.
+component which can be used in many other places for other purposes.
 
 ## Rules of Hooks
 - Only call React Hooks in React Functions
@@ -503,26 +523,6 @@ component which can be used in many other place for other purposes.
 - Only call React Hooks at the Top Level
   - Don’t call them in nested functions
   - Don’t call them in any block statements
-
-## Forward refs
-We talk about forwarding ref when we have a component that render a given DOM and here, 
-we want to attach a reference to that DOM element from outside the component.
-We then need to define a ref that we attach to the component and forward it into the component
-in order to attach it to the given DOM element. Forwarded refs are received as second parameters 
-of our component and the component is surrounded by ```React.forwardRef()```.
-
-If a component receive a forwarded ref, it can then expose some of its internal function that will
-then be accessible from its parents thanks to its attached ref. This can be done using the 
-``useImperativeHandle()`` hook. Let's expose a given internal function called ``activate``:
-`````javascript
-useImperativeHandle(ref, () => {
-  return {
-    focus: activate
-  }
-})
-`````
-Here, ``ref`` is the forwarded ref. So in parent, we could do something like ``inpRef.current.focus()``.
-
 
 
 
