@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from './Input.module.css'
 
-const Input = React.forwardRef((props, ref) => {
+const Input = (props, ref) => {
   const properties = {...props}
   delete properties.label
   delete properties.ref
@@ -12,6 +12,6 @@ const Input = React.forwardRef((props, ref) => {
       <input ref={ref} {...properties} />
     </div>
   )
-})
+}
 
-export default Input
+export default React.forwardRef(Input)

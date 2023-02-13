@@ -544,22 +544,87 @@ items[existingItemIndex] = updatedItem
 return {items, totalPrice}
 `````
 
+## React.memo
+If we have a component which is going to change or its props values are going to change
+with pretty much every re-evaluation of the parent component anyway, then 
+doesn't make a lot of sense because its result is that the component should re-render anyway,
+then we can also save that extra comparison of the props values. That's then just some 
+overhead cost, which is not worth it.
+For larger apps where we can cut off entire branches of unnecessary re-evaluations, it might 
+very well be worth it. We just don't want to wrap every component with ```React.memo```, instead
+we want to pick some key parts in our component tree which allows us to cut off an entire branch 
+of child components. That's way more effective than doing this on every child component.
+
+Using ```React.memo``` be like:
+`````javascript
+const MyComponent = (props) => {
+  return (
+    <>...</>
+  )
+}
+
+export default React.memo(MyComponent)
+`````
+
+However, using ```React.memo``` doesn't change anything for components that receive reference type
+variables as props such as arrays, objects, functions. Those props always change event if their value doesn't.
+And this is because they are pointer, not value. 
+- In order solve this problem about components that receive function as props, 
+we can use another hook, the ``useCallback()`` hook.
+- To solve this problem about components that receive function arrays, objects as props,
+we can use another hook, the ``useMemo()`` hook.
 
 
+## Deeper look
+States (from useState or useReducer) are only update after the first initialisation unless 
+the component was unmounted in meantime.\
+When we call a useState setter, it doesn't set the new value instantly but schedule that change. 
+It may then come that we have multiple state change scheduled at the same time maybe because 
+React is busy by another intensive work such as listening to a controlled input (ahoooo 😅).\
+Because multiple updates of the state can be scheduled at the same time, it important to
+change our states value using the previous one if the new value depends on it.
+
+Otherwise, you might just get the latest state when the component function was executed last, 
+which is not necessarily the same state as if the state changes are executed in order.
+Because if you have multiple outstanding state changes, they all come from the same last 
+re-render cycle of that app component. They all come from the last component snapshot, but of course
+if they were processed, the component would re-render in between but since they're all already scheduled, 
+all outstanding states changes don't take that new in-between component result into account.
+That's why this function form is helpful because there React will actually ensure that for every 
+outstanding state change, it looks into the latest state and gives you that and doesn't use the latest 
+state value from the last time the component was re-rendered. That's an important difference between when the 
+component was re-rendered and when a state change was scheduled. You can have multiple outstanding state 
+changes from one and the same component re-evaluation. That's the key takeaway here and that's why the function 
+update form matters.
+
+### Explanation
+Let imagine the following state:
+`````javascript
+const [count, setCount] = useState(0)
+const updateState = () => setCount(count +1)
+`````
+With this mechanism of scheduling state change, we may end up with this code having ``count === 5`` when 
+actually, we should have ``count === 10`` just because we may have 5 outstanding state changes and our 
+``updateState`` function will register a ``setCount(4+1)`` because at the time ``updateState`` was run, the 
+value of ```count``` was ``4`` but with 5 outstanding state changes.\
+And with those outstanding state changes take in account, the value of ```count``` would actually be ``9``.\
+And to take in account every outstanding state, our updateState function should be written this way:
+````javascript
+const updateState = () => setCount(count => count+1)
+````
+
+It gives us some advantage we also get from useEffet that ensure us to surely rerun our function it receives
+everytime its dependencies changes.
 
 
+## States batching
+In case we have 2 state updates in the same synchronous code snippet after each other. 
+So not in a promise in different blocks but in the same function, for example, where nothing in 
+between would cause a time delay or anything like that, React will batch those state updates together.
 
-
-
-
-
-
-
-
-
-
-
-
+In one long synchronous process, so for example, in one function that executes start to end without
+any callbacks or promises in between, in such cases, React will take all the state updates that are
+produces by that function, and it will batch them together into one state update.
 
 
 
