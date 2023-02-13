@@ -11,21 +11,16 @@ const cartReducer = (state, action) => {
   if(action.type === 'ADD') {
     const existingItemIndex = state.items.findIndex((item) => item.id === action.item.id)
     if(existingItemIndex >= 0) {
-      const existingItem = state.items[existingItemIndex];
-
       //Updating the item
-      const amount = existingItem.amount + action.item.amount
-      console.log(existingItem.amount, action.item.amount, amount);
-      const additionalPrice = action.item.amount * action.item.price;
-      const price = existingItem.price + additionalPrice
-      const updatedItem = {...existingItem, amount, price}
+      const amount = state.items[existingItemIndex].amount + action.item.amount
+      const updatedItem = {...state.items[existingItemIndex], amount}
 
       //Updating the totalPrice
-      const totalPrice = state.totalPrice + price
+      const totalPrice = state.totalPrice + action.item.price * action.item.amount
 
       //Updating the items
-      state.items[existingItemIndex] = updatedItem
       const items = [...state.items]
+      items[existingItemIndex] = updatedItem
 
       return {items, totalPrice}
     } else {

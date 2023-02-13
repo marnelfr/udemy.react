@@ -515,7 +515,24 @@ useImperativeHandle(ref, () => {
 `````
 Here, ``ref`` is the forwarded ref. So in parent, we could do something like ``inpRef.current.focus()``.
 
+## Bug in useReducer's reducer function
+While working in the reducer of the ``useReducer`` hook, thanks to a ``console.log``
+in the reducer shows us that it runs twice.\
+So it's important to not modify directly the state inside it. We can get data from the 
+state while building the new we want to return, but we should modify directly the state.
 
+This code for example leads to an error:
+`````javascript
+state.items[existingItemIndex] = updatedItem
+const items = [...state.items]
+return {items, totalPrice}
+`````
+While this code doesn't produce any error:
+`````javascript
+const items = [...state.items]
+items[existingItemIndex] = updatedItem
+return {items, totalPrice}
+`````
 
 
 
