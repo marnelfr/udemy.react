@@ -2,12 +2,12 @@ import React, {useState} from "react";
 
 const ModalContext = React.createContext({
   show: false,
-  showModalHandler: () => {},
-  hideModalHandler: () => {}
+  showModalHandler: (event) => {},
+  hideModalHandler: (event) => {}
 })
 
 
-const ModalContextProvider = props => {
+export const ModalContextProvider = props => {
   const [show, setShow] = useState(false)
 
   const showModalHandler = (event) => {
@@ -26,3 +26,5 @@ const ModalContextProvider = props => {
     </ModalContext.Provider>
   )
 }
+
+export default ModalContext
