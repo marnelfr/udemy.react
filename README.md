@@ -627,7 +627,21 @@ any callbacks or promises in between, in such cases, React will take all the sta
 produces by that function, and it will batch them together into one state update.
 
 
-
+## Fetch
+It sends GET request by default. But we can also use it to send POST request this way:
+`````javascript
+const response = await fetch('https://url/movies.json', {
+  method: 'POST',
+  body: JSON.stringify(movie),
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+if(!response.ok) {
+  //handle error
+}
+const responseData = await response.json()
+`````
 
 
 
