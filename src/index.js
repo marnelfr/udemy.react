@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 // import LoginApp from "./components/section10/App"
 // import {AuthContextProvider} from "./store/Section10/auth-context";
 // import FoodApp from "./components/Section11/App";
+// import MovieApp from "./components/Section14/App";
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,7 +20,8 @@ root.render(
     {/*<Section8App />*/}
     {/*<AuthContextProvider><LoginApp /></AuthContextProvider>*/}
     {/*<FoodApp />*/}
-    <App />
+    {/*<MovieApp />*/}
+    <App/>
   </React.StrictMode>
 );
 
