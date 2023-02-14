@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 
 import MoviesList from './components/Section14/MoviesList';
 import './App.css';
+import AddMovie from "./components/Section14/AddMovie";
 
 function App() {
   const [movies, setMovies] = useState([])
@@ -11,20 +12,25 @@ function App() {
   const fetchMovieHandler = useCallback(async () => {
     setIsLoading(true)
     try {
-      const response = await fetch('https://swapi.dev/api/films')
+      const response = await fetch('https://udemy-react-a7270-default-rtdb.firebaseio.com/movies.json')
       if(!response.ok) {
         throw new Error("Couldn't get data")
       }
+
       const data = await response.json()
-      const transformedData = data.results.map(movie => {
-        return {
-          id: movie.episode_id,
-          title: movie.title,
-          releaseDate: movie.release_date,
-          openingText: movie.opening_crawl
-        }
-      })
-      setMovies(transformedData)
+
+      const loadedMovies = []
+      for (const movieID in data) {
+        loadedMovies.push(
+          {
+            id: movieID,
+            title: data[movieID].title,
+            releaseDate: data[movieID].releaseDate,
+            openingText: data[movieID].openingText
+          }
+        )
+      }
+      setMovies(loadedMovies)
     } catch (error) {
       setError(error.message)
     }
@@ -32,6 +38,18 @@ function App() {
   }, [])
 
   useEffect(() => {
+    fetchMovieHandler()
+  }, [fetchMovieHandler])
+
+  const addMovieHandler = useCallback(async movie => {
+    const response = await fetch('https://udemy-react-a7270-default-rtdb.firebaseio.com/movies.json', {
+      method: 'POST',
+      body: JSON.stringify(movie),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await response.json()
     fetchMovieHandler()
   }, [fetchMovieHandler])
 
@@ -49,6 +67,9 @@ function App() {
 
   return (
     <React.Fragment>
+      <section>
+        <AddMovie onAddMovie={addMovieHandler} />
+      </section>
       <section>
         <button onClick={fetchMovieHandler}>Fetch Movies</button>
       </section>
