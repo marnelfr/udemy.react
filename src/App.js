@@ -1,21 +1,34 @@
-import Header from "./components/Section11/Layout/Header";
-import Meals from "./components/Section11/Meals/Meals";
-import Cart from "./components/Section11/Cart/Cart";
-import {ModalContextProvider} from "./store/Section11/modal-context";
-import {CartContextProvider} from "./store/Section11/cart-context";
+import React from 'react';
 
-const App = props => {
+import MoviesList from './components/Section14/MoviesList';
+import './App.css';
+
+function App() {
+  const dummyMovies = [
+    {
+      id: 1,
+      title: 'Some Dummy Movie',
+      openingText: 'This is the opening text of the movie',
+      releaseDate: '2021-05-18',
+    },
+    {
+      id: 2,
+      title: 'Some Dummy Movie 2',
+      openingText: 'This is the second opening text of the movie',
+      releaseDate: '2021-05-19',
+    },
+  ];
+
   return (
-    <CartContextProvider>
-      <ModalContextProvider>
-        <Cart/>
-        <Header />
-      </ModalContextProvider>
-      <main>
-        <Meals />
-      </main>
-    </CartContextProvider>
-  )
+    <React.Fragment>
+      <section>
+        <button>Fetch Movies</button>
+      </section>
+      <section>
+        <MoviesList movies={dummyMovies} />
+      </section>
+    </React.Fragment>
+  );
 }
 
-export default App
+export default App;
