@@ -643,5 +643,10 @@ if(!response.ok) {
 const responseData = await response.json()
 `````
 
+## Input validation
+If the user submit the form, all inputs are treated as touched. Even if the user didn't edit them,
+it submitted the form meaning he confirmed the whole form.
+An input should be validated when the user access to it and then let it empty and move on.
+
 
 
