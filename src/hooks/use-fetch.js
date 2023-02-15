@@ -1,11 +1,10 @@
-import {useState} from "react";
+import {useCallback, useState} from "react";
 
-const useFetch = (url, method = 'GET') => {
-  let fetchData
+const useFetch = (baseUrl= null) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  fetchData = async (confBody = null) => {
+  const sendRequest = useCallback(async (url, method = 'GET', confBody = null) => {
     setIsLoading(true);
     setError(null);
     let responseData
@@ -19,6 +18,9 @@ const useFetch = (url, method = 'GET') => {
         }
       } : null
 
+      if(baseUrl) {
+        url = baseUrl + url
+      }
       const response = await fetch(url, init);
 
       if (!response.ok) {
@@ -32,9 +34,9 @@ const useFetch = (url, method = 'GET') => {
     setIsLoading(false);
 
     return responseData
-  }
+  }, [baseUrl])
 
-  return [isLoading, error, fetchData]
+  return [isLoading, error, sendRequest]
 }
 
 export default useFetch

@@ -3,10 +3,10 @@ import TaskForm from './TaskForm';
 import useFetch from "../../../hooks/use-fetch";
 
 const NewTask = (props) => {
-  const [isLoading, error, fetchData] = useFetch('https://udemy-react-a7270-default-rtdb.firebaseio.com/tasks.json', 'POST')
+  const [isLoading, error, sendRequest] = useFetch('https://udemy-react-a7270-default-rtdb.firebaseio.com/')
 
   const enterTaskHandler = async (taskText) => {
-    const data = await fetchData(taskText);
+    const data = await sendRequest('tasks.json', 'POST', taskText);
 
     const generatedId = data.name; // firebase-specific => "name" contains generated id
     const createdTask = { id: generatedId, text: taskText };
