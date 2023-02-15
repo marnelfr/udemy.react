@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import ExpenseApp from './components/ExpenseApp/App';
 import reportWebVitals from './reportWebVitals';
+import App from "./App";
 // import GoalApp from "./components/CourseGoals/App";
 // import Section8App from "./components/Section8/App";
 // import LoginApp from "./components/section10/App"
@@ -10,7 +11,7 @@ import reportWebVitals from './reportWebVitals';
 // import FoodApp from "./components/Section11/App";
 // import MovieApp from "./components/Section14/App";
 // import CounterApp from "./components/Section15/App";
-import App from "./App";
+// import HttpApp from "./components/Section15.2/App";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,7 +24,8 @@ root.render(
     {/*<FoodApp />*/}
     {/*<MovieApp />*/}
     {/*<CounterApp/>*/}
-    <App />
+    {/*<HttpApp />*/}
+    <App/>
   </React.StrictMode>
 );
 
