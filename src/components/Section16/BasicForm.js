@@ -2,6 +2,9 @@ import {useState} from "react";
 import useInput from "../../hooks/use-input";
 import Input from "./UI/Input";
 
+const ValidateNotEmptyValue = val => val.trim() !== ''
+const ValidateEmailValue = val => val.includes('@')
+
 const BasicForm = (props) => {
   const {
     value: enteredName,
@@ -11,7 +14,7 @@ const BasicForm = (props) => {
     changeHandler: nameInputChangeHandler,
     blurHandler: nameInputBlurHandler,
     reset: resetNameInput
-  } = useInput(val => val.trim() !== '')
+  } = useInput(ValidateNotEmptyValue)
 
   const {
     value: enteredLastName,
@@ -21,7 +24,7 @@ const BasicForm = (props) => {
     changeHandler: lastNameInputChangeHandler,
     blurHandler: lastNameInputBlurHandler,
     reset: resetLastNameInput
-  } = useInput(val => val.trim() !== '')
+  } = useInput(ValidateNotEmptyValue)
 
   const {
     value: enteredEmail,
@@ -31,7 +34,7 @@ const BasicForm = (props) => {
     changeHandler: emailInputChangeHandler,
     blurHandler: emailInputBlurHandler,
     reset: resetEmailInput
-  } = useInput(val => val.includes('@'))
+  } = useInput(ValidateEmailValue)
 
   const formIsValid = enteredNameIsValid && enteredEmailIsValid && enteredLastNameIsValid
 
