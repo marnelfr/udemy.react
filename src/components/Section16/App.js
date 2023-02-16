@@ -1,9 +1,9 @@
-import SimpleInput from './components/Section16/SimpleInput';
-import BasicForm from "./components/Section16/BasicForm";
+import SimpleInput from './Form/SimpleInput';
+import BasicForm from "./Form/BasicForm";
 
 import './App.css'
 
-function App() {
+function FormApp() {
   return (
     <>
       <div className="app">
@@ -16,4 +16,4 @@ function App() {
   );
 }
 
-export default App;
+export default FormApp;

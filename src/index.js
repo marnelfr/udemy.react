@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import ExpenseApp from './components/ExpenseApp/App';
 import reportWebVitals from './reportWebVitals';
-import App from "./App";
+import FormApp from "./components/Section16/App";
 // import GoalApp from "./components/CourseGoals/App";
 // import Section8App from "./components/Section8/App";
 // import LoginApp from "./components/section10/App"
 // import {AuthContextProvider} from "./store/Section10/auth-context";
-// import FoodApp from "./components/Section11/App";
+import FoodApp from "./components/Section11/App";
 // import MovieApp from "./components/Section14/App";
 // import CounterApp from "./components/Section15/App";
 // import HttpApp from "./components/Section15.2/App";
@@ -21,11 +21,11 @@ root.render(
     {/*<GoalApp/>*/}
     {/*<Section8App />*/}
     {/*<AuthContextProvider><LoginApp /></AuthContextProvider>*/}
-    {/*<FoodApp />*/}
+    <FoodApp />
     {/*<MovieApp />*/}
     {/*<CounterApp/>*/}
     {/*<HttpApp />*/}
-    <App/>
+    <FormApp/>
   </React.StrictMode>
 );
 

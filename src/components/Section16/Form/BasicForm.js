@@ -1,6 +1,6 @@
 import {useState} from "react";
-import useInput from "../../hooks/use-input";
-import Input from "./UI/Input";
+import useInput from "../../../hooks/use-input";
+import Input from "../UI/Input";
 
 const ValidateNotEmptyValue = val => val.trim() !== ''
 const ValidateEmailValue = val => val.includes('@')

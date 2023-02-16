@@ -1,5 +1,5 @@
-import useInput from "../../hooks/use-input";
-import Input from "./UI/Input";
+import useInput from "../../../hooks/use-input";
+import Input from "../UI/Input";
 
 const SimpleInput = (props) => {
   const {
