@@ -1,4 +1,4 @@
-import SimpleInput from './components/Section16/components/SimpleInput';
+import SimpleInput from './components/Section16/SimpleInput';
 import './App.css'
 
 function App() {
