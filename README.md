@@ -656,4 +656,23 @@ errors about invalid inputs.
 **Never trust client side validation: always validate users input on server side as well**
 
 
+## Understanding Redux
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
