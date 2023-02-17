@@ -1,8 +1,10 @@
 import styles from './Cart.module.css'
 import Modal from "../UI/Modal/Modal";
 import {useCallback, useContext, useState} from "react";
+
 import ModalContext from "../../../store/Section11/modal-context";
 import CartContext from "../../../store/Section11/cart-context";
+
 import CartItem from "./CartItem";
 import Checkout from "./Checkout/Checkout";
 import useFetch from "../hooks/use-fetch";
@@ -11,7 +13,8 @@ const Cart = props => {
   const cartContext = useContext(CartContext)
   const modalContext = useContext(ModalContext)
   const [showForm, setShowForm] = useState(false)
-  const {isLoading, error, sendRequest} = useFetch()
+  const [didSubmit, setDidSubmit] = useState(false)
+  const {isLoading, sendRequest} = useFetch()
 
   const totalAmount = cartContext.cart.totalAmount.toFixed(2);
   const hasItems = cartContext.cart.items.length > 0;
@@ -48,7 +51,7 @@ const Cart = props => {
   const clearCartAfterSubmitting = () => {
     cartContext.resetCart()
     setShowForm(false)
-    modalContext.hideModalHandler()
+    setDidSubmit(true)
   }
 
   const orderSubmittedHandler = useCallback(customer => {
@@ -69,6 +72,18 @@ const Cart = props => {
       )}
     </ul>
   )
+
+  if(didSubmit) {
+    return (
+      <Modal>
+        <p>Your order has been submitted successfully</p>
+        <small>Please, check your email</small>
+        <div className={styles.actions}>
+          <button onClick={modalContext.hideModalHandler} className={styles['button--alt']}>Close</button>
+        </div>
+      </Modal>
+    )
+  }
 
   return (
     <Modal>
