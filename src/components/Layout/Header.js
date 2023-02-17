@@ -1,4 +1,4 @@
-import mealsImage from '../../../assets/img.png'
+import mealsImage from '../../assets/img.png'
 import styles from './Header.module.css'
 import HeaderCartButton from "./HeaderCartButton";
 
