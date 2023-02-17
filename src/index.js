@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 // import Section8App from "./components/Section8/App";
 // import LoginApp from "./components/section10/App"
 // import {AuthContextProvider} from "./store/Section10/auth-context";
-import FoodApp from "./components/Section11/App";
+import FoodApp from "./components/Section11Jsx/App";
 // import MovieApp from "./components/Section14/App";
 // import CounterApp from "./components/Section15/App";
 // import HttpApp from "./components/Section15.2/App";
