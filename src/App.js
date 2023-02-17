@@ -5,7 +5,7 @@ import Cart from "./components/Cart/Cart";
 const FoodApp = props => {
   return (
     <>
-      <Cart/>
+      {/*<Cart/>*/}
       <Header />
       <main>
         <Meals />

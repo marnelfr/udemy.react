@@ -25,7 +25,7 @@ const Checkout = (props) => {
         </div>
       </div>
       <div className={styles.actions}>
-        <button className={styles['button--alt']}>Cancel</button>
+        <button type="button" className={styles['button--alt']}>Cancel</button>
         <button>Submit</button>
       </div>
     </form>

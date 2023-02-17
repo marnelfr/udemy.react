@@ -6,7 +6,7 @@ const Header = props => {
   return (
     <>
       <header className={styles.header}>
-        <h1>ReactMeals</h1>
+        <h1>Meals App</h1>
         <HeaderCartButton />
       </header>
       <div className={styles.mainImage}>

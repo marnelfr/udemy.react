@@ -2,10 +2,11 @@ import styles from './Cart.module.css'
 
 import CartItem from "./CartItem";
 import Checkout from "./Checkout/Checkout";
+import Modal from "../UI/Modal/Modal";
 
 const Cart = props => {
   return (
-    <div>
+    <Modal>
       <CartItem/>
       <div className={styles.total}>
         <span>Total Amount</span>
@@ -22,7 +23,7 @@ const Cart = props => {
       <div className={styles.actions}>
         <button className={styles['button--alt']}>Close</button>
       </div>
-    </div>
+    </Modal>
   )
 }
 
