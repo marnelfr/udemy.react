@@ -4,7 +4,7 @@ import {useCallback, useContext, useState} from "react";
 import ModalContext from "../../../store/Section11/modal-context";
 import CartContext from "../../../store/Section11/cart-context";
 import CartItem from "./CartItem";
-import Form from "./Form/Form";
+import Checkout from "./Checkout/Checkout";
 import useFetch from "../hooks/use-fetch";
 
 const Cart = props => {
@@ -80,7 +80,7 @@ const Cart = props => {
           {hasItems && <button onClick={startOrderHandler} className={styles.button}>Order</button>}
         </div>
       )}
-      {showForm && <Form onOrderSubmitted ={orderSubmittedHandler} onCancel={cancelOrderHandler} />}
+      {showForm && <Checkout onOrderSubmitted ={orderSubmittedHandler} onCancel={cancelOrderHandler} />}
     </Modal>
   )
 }

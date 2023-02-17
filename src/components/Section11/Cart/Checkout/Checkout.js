@@ -1,12 +1,12 @@
 import useInput from "../../../../hooks/use-input";
 import Input from "../../../Section16/UI/Input";
 
-import styles from './Form.module.css'
+import styles from './Checkout.module.css'
 
 const ValidateNotEmptyValue = val => val.trim() !== ''
 const ValidateEmailValue = val => val.includes('@')
 
-const Form = (props) => {
+const Checkout = (props) => {
   const {
     value: enteredName,
     valueIsValid: enteredNameIsValid,
@@ -101,4 +101,4 @@ const Form = (props) => {
   );
 };
 
-export default Form;
+export default Checkout;
