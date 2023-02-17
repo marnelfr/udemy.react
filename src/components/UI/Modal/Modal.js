@@ -1,6 +1,8 @@
 import styles from './Modal.module.css'
+import {useContext} from "react";
+import ModalContext from "../../../store/modal-context";
 
-const Backdrop = props => <div className={styles.backdrop} />
+const Backdrop = props => <div onClick={props.onClose} className={styles.backdrop} />
 
 const ModalContent = props => {
   return (
@@ -11,10 +13,11 @@ const ModalContent = props => {
 }
 
 const Modal = props => {
+  const {show, hideModalHandler} = useContext(ModalContext)
   return (
     <>
-      <Backdrop />
-      <ModalContent>{props.children}</ModalContent>
+      { show && <Backdrop onClose={hideModalHandler} /> }
+      { show && <ModalContent>{props.children}</ModalContent> }
     </>
   )
 }
