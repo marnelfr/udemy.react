@@ -1,36 +1,29 @@
 import styles from './AvailableMeals.module.css'
 import Card from "../UI/Card/Card";
 import MealItem from "./MealItem/MealItem";
-
-const DUMMY_MEALS = [
-  {
-    id: 'm1',
-    name: 'Sushi',
-    description: 'Finest fish and veggies',
-    price: 22.99,
-  },
-  {
-    id: 'm2',
-    name: 'Schnitzel',
-    description: 'A german specialty!',
-    price: 16.5,
-  },
-  {
-    id: 'm3',
-    name: 'Barbecue Burger',
-    description: 'American, raw, meaty',
-    price: 12.99,
-  },
-  {
-    id: 'm4',
-    name: 'Green Bowl',
-    description: 'Healthy...and green...',
-    price: 18.99,
-  },
-];
+import useFetch from "../hooks/use-fetch";
+import {useCallback, useEffect, useState} from "react";
 
 const AvailableMeals = () => {
-  const mealsList = DUMMY_MEALS.map(meal => <MealItem
+  const {isLoading, error, sendRequest} = useFetch()
+  const [meals, setMeals] = useState([])
+
+  const getter = useCallback((data) => {
+    const fetchedMeals = []
+    for (const dataKey in data) {
+      fetchedMeals.push({
+        id: dataKey,
+        ...data[dataKey]
+      })
+    }
+    setMeals(fetchedMeals)
+  }, [])
+
+  useEffect(() => {
+    sendRequest('https://udemy-react-a7270-default-rtdb.firebaseio.com/meals/availableMeals.json', getter)
+  }, [])
+
+  const mealsList = meals.map(meal => <MealItem
     key={meal.id}
     id={meal.id}
     name={meal.name}
@@ -41,9 +34,9 @@ const AvailableMeals = () => {
   return (
     <section className={styles.meals}>
       <Card>
-        <ul>
-          {mealsList}
-        </ul>
+        {isLoading && <p className={styles.message}>Loading...</p>}
+        {!isLoading && !error && <ul>{mealsList}</ul>}
+        {error && <p className={styles.message}>{error}</p>}
       </Card>
     </section>
   )

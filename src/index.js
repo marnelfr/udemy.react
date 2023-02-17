@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import ExpenseApp from './components/ExpenseApp/App';
 import reportWebVitals from './reportWebVitals';
-import FormApp from "./components/Section16/App";
+// import FormApp from "./components/Section16/App";
 // import GoalApp from "./components/CourseGoals/App";
 // import Section8App from "./components/Section8/App";
 // import LoginApp from "./components/section10/App"
@@ -25,7 +25,7 @@ root.render(
     {/*<MovieApp />*/}
     {/*<CounterApp/>*/}
     {/*<HttpApp />*/}
-    <FormApp/>
+    {/*<FormApp/>*/}
   </React.StrictMode>
 );
 

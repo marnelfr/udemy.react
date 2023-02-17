@@ -1,3 +1,4 @@
+
 const Input = props => {
   return (
     <div className={props.className}>
@@ -10,7 +11,7 @@ const Input = props => {
         value={props.value}
       />
       {props.hasError && (
-        <p className='error-text'>{props.errorMessage}</p>
+        <p className={props.errorClass}>{props.errorMessage}</p>
       )}
     </div>
   )
