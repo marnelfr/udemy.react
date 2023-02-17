@@ -8,8 +8,11 @@ const CartContext = React.createContext({
     totalAmount: 0
   },
   addItemHandler: () => {},
-  removeItemHandler: () => {}
+  removeItemHandler: () => {},
+  resetCart: () => {}
 })
+
+const initialState = {items: [], totalAmount: 0};
 
 const reducer = (state, action) => {
   if(action.type === 'ADD_ITEM') {
@@ -32,10 +35,12 @@ const reducer = (state, action) => {
 
     return {items, totalAmount}
   }
+
+  return initialState
 }
 
 export const CartContextProvider = props => {
-  const [state, dispatch] = useReducer(reducer, {items: [], totalAmount: 0})
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   const addItemHandler = (item) => {
     dispatch({type: 'ADD_ITEM', item})
@@ -45,8 +50,12 @@ export const CartContextProvider = props => {
     dispatch({type: 'REMOVE_ITEM', id})
   }
 
+  const resetCart = () => {
+    dispatch({type: 'RESET'})
+  }
+
   return (
-    <CartContext.Provider value={{cart: state, addItemHandler, removeItemHandler}}>
+    <CartContext.Provider value={{cart: state, addItemHandler, removeItemHandler, resetCart}}>
       {props.children}
     </CartContext.Provider>
   )

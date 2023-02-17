@@ -645,8 +645,15 @@ const responseData = await response.json()
 
 ## Input validation
 If the user submit the form, all inputs are treated as touched. Even if the user didn't edit them,
-it submitted the form meaning he confirmed the whole form.
+it submitted the form meaning he confirmed the whole form.\
 An input should be validated when the user access to it and then let it empty and move on.
+
+However, instead of making complicating validation that may cost a lot of resources,
+we can just use some references for our input with a state of object registering if each 
+input is valid or not. then using the state, once the user submit the form, we can show
+errors about invalid inputs.
+
+**Never trust client side validation: always validate users input on server side as well**
 
 
 

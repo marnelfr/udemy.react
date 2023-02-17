@@ -95,7 +95,7 @@ const Checkout = (props) => {
 
       <div className={styles.actions}>
         <button onClick={props.onCancel} className={styles['button--alt']}>Cancel</button>
-        <button disabled={!formIsValid} className={styles.button}>Submit</button>
+        <button disabled={!formIsValid} className={styles.button}>{props.isLoading ? 'Submitting...' : 'Submit'}</button>
       </div>
     </form>
   );

@@ -45,9 +45,12 @@ const Cart = props => {
     setShowForm(false)
   }, [])
 
-  const getter = (response) => {
-
+  const clearCartAfterSubmitting = () => {
+    cartContext.resetCart()
+    setShowForm(false)
+    modalContext.hideModalHandler()
   }
+
   const orderSubmittedHandler = useCallback(customer => {
     const data = {
       ...customer,
@@ -56,7 +59,7 @@ const Cart = props => {
         totalAmount
       }
     }
-    sendRequest('https://udemy-react-a7270-default-rtdb.firebaseio.com/meals/orders.json', getter, 'POST', data)
+    sendRequest('https://udemy-react-a7270-default-rtdb.firebaseio.com/meals/orders.json', clearCartAfterSubmitting, 'POST', data)
   }, [cartContext.cart.items, totalAmount, sendRequest])
 
   const cartItems = (
@@ -80,7 +83,7 @@ const Cart = props => {
           {hasItems && <button onClick={startOrderHandler} className={styles.button}>Order</button>}
         </div>
       )}
-      {showForm && <Checkout onOrderSubmitted ={orderSubmittedHandler} onCancel={cancelOrderHandler} />}
+      {showForm && <Checkout onOrderSubmitted={orderSubmittedHandler} isLoading={isLoading} onCancel={cancelOrderHandler} />}
     </Modal>
   )
 }
