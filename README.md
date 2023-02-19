@@ -740,8 +740,17 @@ root.render(
 );
 `````
 
+Then using the hooks ``useStore()`` from **react-redux**, we can access our whole store (state)
+value or a part of it thanks to ``useSelector()`` hook. It receives a function that return from 
+the ``state``, the part of it that we want to use and then subscribe our component to the 
+store for us.\
+When our component is removed from the DOM, **react-redux also automatically clear the subscription**.\
+The hook ``useDispatch()`` let us access to the ``dispatcher``.
+`````javascript
+const dispatch = useDispatch()
+const counter = useSelector(state => state.counter)
+`````
 
-  
 
 
 
