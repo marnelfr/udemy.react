@@ -722,6 +722,23 @@ Then, we can dispatch some action and this will execute all subscribed functions
 store.dispatch({type: 'increment'})
 `````
 
+### Use Redux in our React app
+We need to install react-redux: ``npm install redux react-redux``
+Now, as our store is created, we can provide it thanks to the ``react-redux``'s Provider:
+`````javascript
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+
+import store from './store/index'
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <Provider store={store}>
+    <App/>
+  </Provider>
+);
+`````
 
 
   
