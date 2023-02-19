@@ -9,7 +9,12 @@ const Counter = () => {
 
   const incrementHandler = event => {
     event.preventDefault()
-    dispatch({type: 'increment'})
+    dispatch({type: 'increment', step: 1})
+  }
+
+  const incrementBy5Handler = event => {
+    event.preventDefault()
+    dispatch({type: 'increment', step: 5})
   }
 
   const decrementHandler = event => {
@@ -23,6 +28,7 @@ const Counter = () => {
       <div className={classes.value}>{counter}</div>
       <div>
         <button onClick={decrementHandler}>Decrement</button>
+        <button onClick={incrementBy5Handler}>Increment by 5</button>
         <button onClick={incrementHandler}>Increment</button>
       </div>
       <button onClick={toggleCounterHandler}>Toggle Counter</button>

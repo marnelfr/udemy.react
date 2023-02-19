@@ -7,7 +7,7 @@ const defaultState = {
 const counterReducer = (state = defaultState, action) => {
   if(action.type === 'increment') {
     return {
-      counter: state.counter + 1
+      counter: state.counter + action.step
     }
   }
   if(action.type === 'decrement') {
