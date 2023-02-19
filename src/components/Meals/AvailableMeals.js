@@ -2,43 +2,45 @@ import Card from "../UI/Card/Card";
 import MealItem from "./MealItem/MealItem";
 
 import styles from './AvailableMeals.module.css'
-
-
-const DUMMY_MEALS = [
-  {
-    id: 'm1',
-    name: 'Sushi',
-    description: 'Finest fish and veggies',
-    price: 22.99,
-  },
-  {
-    id: 'm2',
-    name: 'Schnitzel',
-    description: 'A german specialty!',
-    price: 16.5,
-  },
-  {
-    id: 'm3',
-    name: 'Barbecue Burger',
-    description: 'American, raw, meaty',
-    price: 12.99,
-  },
-  {
-    id: 'm4',
-    name: 'Green Bowl',
-    description: 'Healthy...and green...',
-    price: 18.99,
-  },
-];
+import {useEffect, useState} from "react";
 
 const AvailableMeals = () => {
+  const [meals, setMeals] = useState([])
 
-  const mealList = DUMMY_MEALS.map(meal => <MealItem key={meal.id} {...meal} />)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    fetch('https://udemy-react-a7270-default-rtdb.firebaseio.com/meals/availableMeals.json')
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        const loadedMeals = []
+        for (const key in data) {
+          loadedMeals.push({
+            id: key,
+            ...data[key]
+          })
+        }
+        setMeals(loadedMeals)
+        setIsLoading(false)
+        setError('')
+      })
+      .catch(error => {
+        setIsLoading(false)
+        setError('Error while loading data...')
+      })
+  }, [])
+
+  const mealList = meals.map(meal => <MealItem key={meal.id} {...meal} />)
 
   return (
     <section className={styles.meals}>
       <Card>
-        {mealList}
+        {!isLoading && !error && mealList}
+        {isLoading && <p className={styles.message}>Loading...</p>}
+        {!isLoading && error && <p className={styles.message + ' ' + styles.invalid}>{error}</p>}
       </Card>
     </section>
   )

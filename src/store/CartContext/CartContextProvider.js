@@ -50,19 +50,18 @@ const cartReducer = (state, action) => {
 const CartContextProvider = props => {
   const [state, dispath] = useReducer(cartReducer, defaultState)
 
-  const addItem = item => {
-    dispath({type: 'ADD', item})
-  }
+  const addItem = item => dispath({type: 'ADD', item})
 
-  const removeItem = id => {
-    dispath({type: 'REMOVE', id})
-  }
+  const removeItem = id => dispath({type: 'REMOVE', id})
+
+  const resetAll = () => dispath({type: 'RESET'})
 
   const providerValue = {
     items: state.items,
     totalPrice: state.totalPrice,
     addItem,
-    removeItem
+    removeItem,
+    resetAll
   }
 
   return (

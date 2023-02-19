@@ -7,19 +7,16 @@ import CartContext from "../../store/CartContext/cart-context";
 const HeaderCartButton = props => {
   const { showModalHandler } = useContext(ModalContext)
   const { items } = useContext(CartContext)
-  const [isAnimated, setIsAnimated] = useState(true)
+  const [isAnimated, setIsAnimated] = useState(false)
   const totalItem = items.reduce((prevValue, item) => prevValue + item.amount, 0)
   let btnClasses = `${styles.button} ${styles.bump}`
 
   useEffect(() => {
-    if(totalItem === 0) {
-      return
-    }
+    setIsAnimated(true)
     const timer = setTimeout(() => {
       setIsAnimated(false)
-    }, 500)
-
-    return () => clearTimeout(timer)
+    }, 300)
+    return () => {}
   }, [totalItem])
 
   if(!isAnimated) {
