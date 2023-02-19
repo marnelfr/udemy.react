@@ -3,35 +3,26 @@ import MealItem from "./MealItem/MealItem";
 
 import styles from './AvailableMeals.module.css'
 import {useEffect, useState} from "react";
+import useFetch from "../../hooks/use-fetch";
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([])
+  const {isLoading, error, sendRequest} = useFetch()
 
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState('')
+  const getter = (data) => {
+    const loadedMeals = []
+    for (const key in data) {
+      loadedMeals.push({
+        id: key,
+        ...data[key]
+      })
+    }
+    setMeals(loadedMeals)
+  }
 
   useEffect(() => {
-    fetch('https://udemy-react-a7270-default-rtdb.firebaseio.com/meals/availableMeals.json')
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        const loadedMeals = []
-        for (const key in data) {
-          loadedMeals.push({
-            id: key,
-            ...data[key]
-          })
-        }
-        setMeals(loadedMeals)
-        setIsLoading(false)
-        setError('')
-      })
-      .catch(error => {
-        setIsLoading(false)
-        setError('Error while loading data...')
-      })
-  }, [])
+    sendRequest('https://udemy-react-a7270-default-rtdb.firebaseio.com/meals/availableMeals.json', getter)
+  }, [sendRequest])
 
   const mealList = meals.map(meal => <MealItem key={meal.id} {...meal} />)
 

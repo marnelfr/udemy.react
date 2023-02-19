@@ -6,6 +6,7 @@ import Modal from "../UI/Modal/Modal";
 import {useContext, useState} from "react";
 import ModalContext from "../../store/modal-context";
 import CartContext from "../../store/CartContext/cart-context";
+import useFetch from "../../hooks/use-fetch";
 
 const Cart = props => {
   const cartContext = useContext(CartContext)
@@ -15,8 +16,7 @@ const Cart = props => {
   const price = cartContext.totalPrice.toFixed(2);
   const hasItem = cartContext.items.length !== 0
 
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
+  const {isLoading, error, sendRequest} = useFetch()
   const [didSubmit, setDidSubmit] = useState(false)
 
   const showFormHandler = event => {
@@ -34,30 +34,21 @@ const Cart = props => {
     modalContext.hideModalHandler(event)
   }
 
+  const getter = data => {
+    cartContext.resetAll()
+  }
+  const final = () => {
+    setShowForm(false)
+    setDidSubmit(true)
+  }
+
   const checkoutSubmitHandler = customer => {
     const data = {
       customer,
       items: cartContext.items,
       totalPrice: price
     }
-    setIsLoading(true)
-    fetch('https://udemy-react-a7270-default-rtdb.firebaseio.com/meals/orders.json', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    }).then((response) => {
-      if(response.ok) {
-        cartContext.resetAll()
-      }
-    }).catch(error => {
-      setError('Error while saving the order information')
-    }).finally(() => {
-      setIsLoading(false)
-      setShowForm(false)
-      setDidSubmit(true)
-    })
+    sendRequest('https://udemy-react-a7270-default-rtdb.firebaseio.com/meals/orders.json', getter, final, 'POST', data)
   }
 
   return (
