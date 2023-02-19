@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { Provider } from 'react-redux'
+
 // import ExpenseApp from './components/ExpenseApp/App';
 import reportWebVitals from './reportWebVitals';
 // import FormApp from "./components/Section16/App";
@@ -8,10 +9,13 @@ import reportWebVitals from './reportWebVitals';
 // import Section8App from "./components/Section8/App";
 // import LoginApp from "./components/section10/App"
 // import {AuthContextProvider} from "./store/Section10/auth-context";
-import FoodApp from "./components/Section11Jsx/App";
+// import FoodApp from "./components/Section11Jsx/App";
 // import MovieApp from "./components/Section14/App";
 // import CounterApp from "./components/Section15/App";
 // import HttpApp from "./components/Section15.2/App";
+import App from "./App";
+import store from './store/Section18/index'
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,11 +25,14 @@ root.render(
     {/*<GoalApp/>*/}
     {/*<Section8App />*/}
     {/*<AuthContextProvider><LoginApp /></AuthContextProvider>*/}
-    <FoodApp />
+    {/*<FoodApp />*/}
     {/*<MovieApp />*/}
     {/*<CounterApp/>*/}
     {/*<HttpApp />*/}
     {/*<FormApp/>*/}
+    <Provider store={store}>
+      <App/>
+    </Provider>
   </React.StrictMode>
 );
 
