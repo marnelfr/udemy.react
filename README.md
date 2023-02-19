@@ -657,12 +657,40 @@ errors about invalid inputs.
 
 
 ## Understanding Redux
-Redux is a state management system for cross-component or app-wide state
+Redux is a state management system for cross-component or app-wide state. It's then an alternative
+for the build in feature React Context. However, we're not obliged to choose one of them because
+we can use both in the same application.
+
+**So why should we use Redux instead of React Context ?** Here are some React context potential 
+disadvantages:
+- We can have a complex setup and managing state with React context can become quite complex because
+in very large application, using context, we can end up with code like this:
+`````javascript
+return (
+  <AuthContextProvider>
+    <ThemeContextProvider>
+      <UIIteractionContextProvider>
+        <MutiLanguageContextProvider>
+          <UserRegistration />
+        </MutiLanguageContextProvider>
+      </UIIteractionContextProvider>
+    </ThemeContextProvider>
+  </AuthContextProvider>
+)
+`````
+- We can instead use a single context that manage a big state about everything we need in our application
+but this is may become quite complicate to maintain.
+- We can have **performance issue** while using context because it's not recommended for high 
+frequency changes state management: **it's not ready for flux like state management but Redux do.**
 
 
-
-
-
+### How Redux works?
+Redux only has one **Central Data (State) Store** and components subscribe to that state.
+However, they can't change that state directly. Instead, they can **dispatch** an action.
+**An action** is just a really javascript object which describe the kind of operation that
+the reducer function that can manipulate the Redux state should perform.\
+Once the Redux state is updated, components that subscribed to it are re-rendered.
+  
 
 
 
