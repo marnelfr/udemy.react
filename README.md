@@ -781,7 +781,9 @@ createSlice({
   }
 })
 `````
-
+**In slices' reducers, we are allow to mutate the state** because redux
+toolkit internally uses a package which detect mutation and automatically
+create a new object from the one we mutated.
 
 
 
