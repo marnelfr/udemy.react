@@ -747,6 +747,8 @@ store for us.\
 When our component is removed from the DOM, **react-redux also automatically clear the subscription**.\
 The hook ``useDispatch()`` let us access to the ``dispatcher``.
 `````javascript
+import {useDispatch, useSelector} from "react-redux";
+
 const dispatch = useDispatch()
 const counter = useSelector(state => state.counter)
 `````
@@ -765,7 +767,7 @@ const initialState = {
   showCounter: true
 }
 
-createSlice({
+const counterSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
@@ -781,10 +783,22 @@ createSlice({
   }
 })
 `````
-**In slices' reducers, we are allow to mutate the state** because redux
+- **In slices' reducers, we are allow to mutate the state** because redux
 toolkit internally uses a package which detect mutation and automatically
 create a new object from the one we mutated.
-
+- **createSlice** automatically create unique action identifiers for our different
+reducers. They can be accessed through ``counterSlice.actions`` which has keys that
+matches our different reducer's function defined in the slice. 
+We could then export ``counterSlice.actions`` as ``counterActions`` to use it in our components.
+`````javascript
+const counterActions = counterSlice.actions
+counterActions.increment(5) //=> {type: SOME_UNIQUE_KEY, payload: 5}
+`````
+So we can do
+`````javascript
+const dispatch = useDispatch()
+dispatch(counterActions.increment(5))
+`````
 
 
 
