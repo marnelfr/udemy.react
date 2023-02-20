@@ -751,6 +751,45 @@ const dispatch = useDispatch()
 const counter = useSelector(state => state.counter)
 `````
 
+**While working with reduce, the existing state should never be mutated (changed).
+Instead, always override it by returning a brand new state object**
+
+### [@Reduxjs/Toolkit](https://redux-toolkit.js.org/)
+Installation: ``npm install @reduxjs/toolkit``\
+Then we can create our ``Slices`` thanks to it:
+`````javascript
+import { createSlice } from '@reduxjs/toolkit'
+
+const initialState = {
+  counter: 0,
+  showCounter: true
+}
+
+createSlice({
+  name: 'counter',
+  initialState,
+  reducers: {
+    increment(state, action) {
+      state.counter += action.step
+    },
+    decrement(state) {
+      state.counter--
+    },
+    toggle(state) {
+      state.showCounter = !state.showCounter
+    }
+  }
+})
+`````
+
+
+
+
+
+
+
+
+
 
 
 
