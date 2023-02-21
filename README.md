@@ -67,7 +67,7 @@ const year = props.date.getFullYear()
 ````
 
 Adding component can also be in order to avoid repeating our code even CSS code.
-That's why we can end up with a component like ``Card.js`` component ; just to avoid repeating some css code.
+That's why we can end up with a component like ``Card.js``; just to avoid repeating some css code.
 
 JSX under the hood:
 
@@ -91,14 +91,14 @@ return React.createElement(
 
 - With react, we write Declarative js code: we define the "goal" (i.e. what should be shown on the screen) and let React
   figure out how to get there.
-- "Components" are really just a way of thinking about user interfaces. React embraces that concept and gives you tools
-  to build components that you can then combine.
+- "Components" are really just a way of thinking about user interfaces. React embraces that concept and gives us tools
+  to build components that we can then combine.
 
 ## React State
 
 React evaluate every single component and then render them in the DOM as the app is initially rendered, and it doesn't
 do that again.
-It only reevaluates and rerender a given component when its state changes.\
+It only reevaluates and rerender a given component when its state or props change.\
 The initial value gives to ``useState()`` is only considered when the state is registered.
 Next, only the last value of the state value is returned by react when rendering the component instance.
 
@@ -181,7 +181,8 @@ export default CourseInput;
 Instead of using **styled-components**, we can use **CSS Modules** which is directly available in our
 React projects.\
 To use it, we simply need to name our css files with the extension ``.module.css``.
-So ```button.css``` becomes ```button.module.css```and then we have to import it in our component file
+So ```button.css``` becomes ```button.module.css```and then we have to import it 
+in our component
 
 `````javascript
 import styles from './Button.module.css'
@@ -197,7 +198,7 @@ const Button = props => {
 export default Button;
 `````
 
-```styles``` here is an object containing our css classes and then can be used as bellow.
+```styles``` here is an object containing our css classes and then can be used as above.
 
 ## Debugging React Apps
 
@@ -206,7 +207,7 @@ written code under the ```Users/username/.../project-dir``` directory. We can th
 there to try to understand our bug using actions such as:
 
 - Step into next function call: jump to the next function call even if it's a function called 
-by the current file or another one.
+from the current file or another one.
 - Step over next function call: jump to the next line in the same file
 - Resume script execution
 
@@ -214,7 +215,7 @@ We can also install the React debug tools in chrome ; very useful
 
 ## React fragments
 As every React component must have one root element, we may end up wrapping
-our components with a div and this can lead to such of thing in a very big app:
+our components with a div and this can lead to such thing in a very big app:
 
 `````html
 <div>
@@ -227,7 +228,7 @@ our components with a div and this can lead to such of thing in a very big app:
     </div>
 </div>
 `````
-To avoid this and write semantic more correct code, we may use such of component:
+To avoid this and write semantic more correct html code, we may use such of component:
 `````javascript
 const Wrapper = props => {
   return (
@@ -295,13 +296,13 @@ const From = props => {
 `````
 
 ## Forward refs
-We talk about forwarding ref when we have a component that render a given DOM and here,
+We talk about forwarding ref when we have a component that render a given DOM element and here,
 we want to attach a reference to that DOM element from outside the component.
 We then need to define a ref that we attach to the component and forward it into the component
 in order to attach it to the given DOM element. Forwarded refs are received as second parameters
 of our component and the component is surrounded by ```React.forwardRef()```.
 
-If a component receive a forwarded ref, it can then expose some of its internal function that will
+If a component receives a forwarded ref, it can then expose some of its internal function that will
 then be accessible from its parents thanks to its attached ref. This can be done using the
 ``useImperativeHandle()`` hook. Let's expose a given internal function called ``activate``:
 `````javascript
@@ -311,7 +312,7 @@ useImperativeHandle(ref, () => {
   }
 })
 `````
-Here, ``ref`` is the forwarded ref. So in parent, we could do something like ``inpRef.current.focus()``.
+Above, ``ref`` is a forwarded one. So in the parent component, we could do something like ``inpRef.current.focus()``.
 
 ## Side Effects
 The main job of the React library is to:
@@ -330,9 +331,9 @@ they are then our dependencies here.
 
 Side effects may lead to rendering the UI but not directly, and we may not want to execute such of effect
 everytime React evaluate and render the UI. We then need to explicitly indicate they dependencies: 
-what their execution should depend on.\
+what changes their execution should depend on.\
 That's where the ``useEffect()`` hook comes in. It's called with two arguments:
-- a function that should be executed AFTER every component evaluation IF the specified dependencies changed
+- a function that should be executed **AFTER** every component evaluation **IF** the specified dependencies changed
 - an array of dependencies of this effect
 
 While all state variables and functions used in the effect function should be added as a dependencies,
@@ -344,14 +345,14 @@ we've got few exceptions such as:
 **All "things" used in the effect function must be added if those "things" could 
 change because the component (or some parent component) re-rendered.**
 
-**It's also very important to pass specific properties instead of the entire object as a dependency because this may
+**It's also very important to pass specific properties instead of an entire object as a dependency because this may
 make our useEffect to rerun our function everytime only one property of the given object changes**
 
 ### Mount and didUnmount events
 **A function F** provided to ```useEffet()``` runs at least once: when the component is mounted in the DOM.\
 Without a second argument, the function is run everytime the component is rendered.\
 But with an empty array as dependencies, it never runs again after the first time.\
-**The function F** can return another **function B** that's run first each time the function F**should be run again**: not the first time.
+**The function F** can return another **function B** that's run first each time the function **F should be run again**: not the first time.
 With an empty array as dependencies, the **function B** only run when the component is unmounted from the DOM.
 
 ### Debouncing with useEffet
@@ -367,13 +368,13 @@ useEffect(() => {
 
 ## useReducer hook
 We shouldn't update a state based on the value of another state. 
-I may not work correctly sometimes when the other state update doesn't processed in time 
+It may not work correctly sometimes when the other state update doesn't processed in time 
 resulting then in an outdated value usage.\
-When updating a state which depends on another state, we should combine them in only 
+When we need to update a state which depends on another state, we should consider combining them in only 
 one state managing an object as value or think about using the hook **useReducer**.
 
 ## React Context API
-Help us avoid forwarding props through multiple components while we only need them in one.
+Help us avoid forwarding props through multiple components while we only need them in few ones.
 To use it, we need to define our context with a default value:
 `````javascript
 ///src/store/auth-context.js
@@ -385,7 +386,8 @@ const AuthContext = React.createContext({
 
 export default AuthContext
 `````
-In the parent that have children component which need the defined context, we need to provider it:
+In the parent that have children components which need the defined context, 
+we need to provide it:
 `````javascript
 ///src/App.js
 const isAuthenticatedUser = true
@@ -527,9 +529,9 @@ component which can be used in many other places for other purposes.
 
 ## Bug in useReducer's reducer function
 While working in the reducer of the ``useReducer`` hook, thanks to a ``console.log``
-in the reducer shows us that it runs twice.\
+in the reducer, we can notice that it runs twice.\
 So it's important to not modify directly the state inside it. We can get data from the
-state while building the new we want to return, but we should modify directly the state.
+state while building the new we want to return, but we shouldn't modify directly the state.
 
 This code for example leads to an error:
 `````javascript
@@ -546,10 +548,11 @@ return {items, totalPrice}
 
 ## React.memo
 If we have a component which is going to change or its props values are going to change
-with pretty much every re-evaluation of the parent component anyway, then 
-doesn't make a lot of sense because its result is that the component should re-render anyway,
-then we can also save that extra comparison of the props values. That's then just some 
+with pretty much every re-evaluation of the parent component anyway, then it
+doesn't make a lot of sense to use ``memo`` because its result is that the component will re-render anyway,
+then we can also save that extra comparison of the props values. That then just brings some 
 overhead cost, which is not worth it.
+
 For larger apps where we can cut off entire branches of unnecessary re-evaluations, it might 
 very well be worth it. We just don't want to wrap every component with ```React.memo```, instead
 we want to pick some key parts in our component tree which allows us to cut off an entire branch 
@@ -568,15 +571,15 @@ export default React.memo(MyComponent)
 
 However, using ```React.memo``` doesn't change anything for components that receive reference type
 variables as props such as arrays, objects, functions. Those props always change event if their value doesn't.
-And this is because they are pointer, not value. 
+And this is because they are pointers, not value. 
 - In order solve this problem about components that receive function as props, 
-we can use another hook, the ``useCallback()`` hook.
-- To solve this problem about components that receive function arrays, objects as props,
-we can use another hook, the ``useMemo()`` hook.
+we can use another hook, the ``useCallback()``.
+- To solve this problem about components that receive arrays, objects as props,
+we can use another hook, the ``useMemo()``.
 
 
 ## Deeper look
-States (from useState or useReducer) are only update after the first initialisation unless 
+States (from useState or useReducer) are only updated (the default value is no longer used) after the first initialisation unless 
 the component was unmounted in meantime.\
 When we call a useState setter, it doesn't set the new value instantly but schedule that change. 
 It may then come that we have multiple state change scheduled at the same time maybe because 
@@ -595,10 +598,10 @@ outstanding state change, it looks into the latest state and gives you that and 
 state value from the last time the component was re-rendered. That's an important difference between when the 
 component was re-rendered and when a state change was scheduled. You can have multiple outstanding state 
 changes from one and the same component re-evaluation. That's the key takeaway here and that's why the function 
-update form matters.
+update form matters. 👇
 
-### Explanation
-Let imagine the following state:
+### Explanation 👇
+Given the following state:
 `````javascript
 const [count, setCount] = useState(0)
 const updateState = () => setCount(count +1)
@@ -608,7 +611,8 @@ actually, we should have ``count === 10`` just because we may have 5 outstanding
 ``updateState`` function will register a ``setCount(4+1)`` because at the time ``updateState`` was run, the 
 value of ```count``` was ``4`` but with 5 outstanding state changes.\
 And with those outstanding state changes take in account, the value of ```count``` would actually be ``9``.\
-And to take in account every outstanding state, our updateState function should be written this way:
+
+So to take in account every outstanding state, our updateState function should be written this way:
 ````javascript
 const updateState = () => setCount(count => count+1)
 ````
@@ -646,7 +650,7 @@ const responseData = await response.json()
 ## Input validation
 If the user submit the form, all inputs are treated as touched. Even if the user didn't edit them,
 it submitted the form meaning he confirmed the whole form.\
-An input should be validated when the user access to it and then let it empty and move on.
+An input should be validated when the user access to it and then blur.
 
 However, instead of making complicating validation that may cost a lot of resources,
 we can just use some references for our input with a state of object registering if each
@@ -678,14 +682,14 @@ return (
         </AuthContextProvider>
 )
 `````
-- We can instead use a single context that manage a big state about everything we need in our application
-  but this is may become quite complicate to maintain.
+- Surely, we can instead use a single context that manage a big state about everything we need in our application
+  but this may become quite complicate to maintain.
 - We can have **performance issue** while using context because it's not recommended for high
   frequency changes state management: **it's not ready for flux like state management but Redux do.**
 
 
 ### How Redux works?
-Redux only has one **Central Data (State) Store** and components subscribe to that state.
+Redux only has one **Central Data Store (State)** and components subscribe to that state.
 However, they can't change that state directly. Instead, they can **dispatch** an action.
 **An action** is just a really javascript object which describe the kind of operation that
 the reducer function that can manipulate the Redux state should perform.\
@@ -741,8 +745,8 @@ root.render(
 `````
 
 Then using the hooks ``useStore()`` from **react-redux**, we can access our whole store (state)
-value or a part of it thanks to ``useSelector()`` hook. It receives a function that return from 
-the ``state``, the part of it that we want to use and then subscribe our component to the 
+value or a part of it thanks to the ``useSelector()`` hook. It receives a function that return from 
+the ``state``, the part of it that we want to use and then subscribe our component to that part of the 
 store for us.\
 When our component is removed from the DOM, **react-redux also automatically clear the subscription**.\
 The hook ``useDispatch()`` let us access to the ``dispatcher``.
@@ -757,7 +761,7 @@ const counter = useSelector(state => state.counter)
 Instead, always override it by returning a brand new state object**
 
 ### [@Reduxjs/Toolkit](https://redux-toolkit.js.org/)
-Installation: ``npm install @reduxjs/toolkit``\
+Installation: ``npm install @reduxjs/toolkit``. We can then avoid installing redux itself.\
 Then we can create our ``Slices`` thanks to it:
 `````javascript
 import { createSlice } from '@reduxjs/toolkit'
@@ -789,7 +793,30 @@ create a new object from the one we mutated.
 - **createSlice** automatically create unique action identifiers for our different
 reducers. They can be accessed through ``counterSlice.actions`` which has keys that
 matches our different reducer's function defined in the slice. 
-We could then export ``counterSlice.actions`` as ``counterActions`` to use it in our components.
+- **I don't know if it's a bug from my side but overriding the state here seems to not work 🤒**
+
+Once the slice is defined, we can export its reducer that will be used to config our store:
+`````javascript
+export default counterSlice.reducer
+`````
+And then, in our ``index.js``, we can have such of thing:
+````javascript
+import counterReducer from './counter'
+import authReducer from './auth'
+import { configureStore } from "@reduxjs/toolkit";
+
+const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+    auth: authReducer
+  }
+})
+
+export default store
+````
+
+We could also export ``counterSlice.actions`` as ``counterActions`` from our slice
+and use it in our components:
 `````javascript
 const counterActions = counterSlice.actions
 counterActions.increment(5) //=> {type: SOME_UNIQUE_KEY, payload: 5}
