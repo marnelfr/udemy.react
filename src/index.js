@@ -13,9 +13,10 @@ import reportWebVitals from './reportWebVitals';
 // import MovieApp from "./components/Section14/App";
 // import CounterApp from "./components/Section15/App";
 // import HttpApp from "./components/Section15.2/App";
-import App from "./App";
-import store from './store/Section18.Revision/index'
+// import ReduxCounterApp from "./components/Section18.Revision/App";
+// import store from './store/Section18.Revision/index'
 import './index.css';
+import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -30,9 +31,8 @@ root.render(
     {/*<CounterApp/>*/}
     {/*<HttpApp />*/}
     {/*<FormApp/>*/}
-    <Provider store={store}>
-      <App/>
-    </Provider>
+    {/*<Provider store={store}><ReduxCounterApp/></Provider>*/}
+    <App />
   </React.StrictMode>
 );
 
