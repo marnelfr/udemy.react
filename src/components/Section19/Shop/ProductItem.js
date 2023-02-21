@@ -1,4 +1,4 @@
-import Card from '../UI/Card';
+import Card from '../UI/Card/Card';
 import classes from './ProductItem.module.css';
 
 const ProductItem = (props) => {
