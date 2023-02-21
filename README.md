@@ -827,7 +827,13 @@ const dispatch = useDispatch()
 dispatch(counterActions.increment(5))
 `````
 
-
+## Redux & Async code
+**Reducers must be pure, side effect free, synchronous functions**: we should never perform
+side effect inside our reducers no matter it's sync or async side effect! And even never write
+async code in reducers in general!!\
+So such side effects, they can be added 
+- inside our components (thanks to **useEffect** for example), ignoring then redux at this point,
+- inside **action creators** that allow us to write async codes or side effects code generally.
 
 
 
