@@ -1,6 +1,20 @@
 import styles from './Modal.module.css'
+import {useDispatch} from "react-redux";
+import {useCallback} from "react";
+import {modalActions} from "../../../../store/Section19/modal";
 
-const Backdrop = props => <div className={styles.backdrop}/>
+const Backdrop = props => {
+  const dispatch = useDispatch()
+
+  const clickHandler = useCallback(event => {
+    event.preventDefault()
+    dispatch(modalActions.hide())
+  }, [dispatch])
+
+  return (
+    <div onClick={clickHandler} className={styles.backdrop}/>
+  )
+}
 
 const ModalContent = props => {
   return (
