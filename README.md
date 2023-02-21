@@ -366,6 +366,11 @@ useEffect(() => {
 }, [enteredPassword, enteredEmail])
 `````
 
+### Avoid first execution with useEffect
+To avoid executing a given code at the first execution of the function managed by useEffect,
+we could declare a variable outside our component that could be ``let initialExec = true``
+and set it to ``false`` when it's truthy and ``return`` inside our useEffect in order to not pursue.
+
 ## useReducer hook
 We shouldn't update a state based on the value of another state. 
 It may not work correctly sometimes when the other state update doesn't processed in time 
