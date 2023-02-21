@@ -835,7 +835,15 @@ So such side effects, they can be added
 - inside our components (thanks to **useEffect** for example), ignoring then redux at this point,
 - inside **action creators** that allow us to write async codes or side effects code generally.
 
+**NEVER MUTATE REDUX STATE OUTSIDE THE REDUCERS**\
+This will first be a very bad code and will change the object represented by the redux state in 
+memory without making redux aware of it. 
 
+### Where should our logic (code) go?
+- When talking about **synchronous, side effect free code (i.e. data transformations)**, 
+we should **prefer** reducers and **avoid** action creators or components.
+- and when it comes to **async code or code with side effects**, we should **prefer** action
+creators or components and **NEVER use** reducers.
 
 
 
