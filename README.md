@@ -788,8 +788,8 @@ const counterSlice = createSlice({
 })
 `````
 - **In slices' reducers, we are allow to mutate the state** because redux
-toolkit internally uses a package which detect mutation and automatically
-create a new object from the one we mutated.
+toolkit internally uses the package [immerjs/immer](https://github.com/immerjs/immer)
+which detect mutation and automatically create a new object from the one we mutated.
 - **createSlice** automatically create unique action identifiers for our different
 reducers. They can be accessed through ``counterSlice.actions`` which has keys that
 matches our different reducer's function defined in the slice. 
@@ -826,6 +826,12 @@ So we can do
 const dispatch = useDispatch()
 dispatch(counterActions.increment(5))
 `````
+
+
+
+
+
+
 
 
 
