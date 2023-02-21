@@ -9,7 +9,7 @@ const Cart = (props) => {
 
   const cartItemList = items.map(item => <CartItem
     key={item.id}
-    item={{ title: item.title, quantity: item.quantity, total: item.total, price: item.price }}
+    item={{ id:item.id, title: item.title, quantity: item.quantity, total: item.total, price: item.price }}
   />)
 
   return (
