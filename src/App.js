@@ -1,3 +1,12 @@
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+
+import RootLayout from "./pages/Section20.2/Layout/Root";
+import HomePage from "./pages/Section20.2/Home";
+import EventsPage from "./pages/Section20.2/Events";
+import EventDetailPage from "./pages/Section20.2/EventDetail";
+import NewEventPage from "./pages/Section20.2/NewEvent";
+import EditEventPage from "./pages/Section20.2/EditEvent";
+
 import './App.css'
 
 // Challenge / Exercise
@@ -22,8 +31,23 @@ import './App.css'
 // 7. Output the ID of the selected event on the EventDetailPage
 // BONUS: Add another (nested) layout route that adds the <EventNavigation> component above all /events... page components
 
+const route = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: 'events', element: <EventsPage /> },
+      { path: 'events/:eventID', element: <EventDetailPage /> },
+      { path: 'events/new', element: <NewEventPage /> },
+      { path: 'events/:eventID/edit', element: <EditEventPage /> }
+    ]
+  }
+])
+
+
 function App() {
-  return <div></div>;
+  return <RouterProvider router={route} />;
 }
 
 export default App;
