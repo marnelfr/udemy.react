@@ -4,7 +4,8 @@ import { Provider } from 'react-redux'
 
 // import ExpenseApp from './components/ExpenseApp/App';
 import reportWebVitals from './reportWebVitals';
-import App from "./App";
+import App from './App'
+// import RouteApp from "./components/Section20/App";
 // import FormApp from "./components/Section16/App";
 // import GoalApp from "./components/CourseGoals/App";
 // import Section8App from "./components/Section8/App";
@@ -35,7 +36,8 @@ root.render(
     {/*<FormApp/>*/}
     {/*<Provider store={store}><ReduxCounterApp/></Provider>*/}
     {/*<Provider store={store}><App19 /></Provider>*/}
-    <App/>
+    {/*<RouteApp />*/}
+    <App />
   </React.StrictMode>
 );
 
