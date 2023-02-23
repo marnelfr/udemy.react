@@ -909,6 +909,16 @@ const App = () => {
 }
 ````
 
+We also create our routes using ``createRouteFromElement``
+````javascript
+const routeDefinition = createRoutesFromElements(
+  <Route>
+    <Route path='/' element={<HomePage />} />
+    <Route path='/products' element={<ProductsPage />} />
+  </Route>
+)
+const router = createBrowserRouter(routeDefinition)
+````
 
 
 
