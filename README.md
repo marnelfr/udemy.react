@@ -924,6 +924,24 @@ To navigate between pages, we should use the ``Link`` component provided by reac
 <p>Go to the <Link to={'/products'}>products page</Link></p>
 `````
 
+### Nested routes
+`````javascript
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      { path: '/', element: <HomePage />},
+      { path: '/products', element: <ProductsPage />}
+    ]
+  },
+])
+`````
+Our ``RoutLayout`` here will wrap our page component which will then replace the ``Outlet``
+component inside our **RoutLayout**. We can then place in our RoutLayout, our navigation bar or things 
+like that.
+
+
 
 
 
