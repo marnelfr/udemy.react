@@ -11,7 +11,7 @@ const EditEventPage = () => {
     throw new Error('Event not found')
   }
 
-  return <EventForm method="POST" event={event} />
+  return <EventForm method="PUT" event={event} />
 }
 
 export default EditEventPage

@@ -13,7 +13,13 @@ const eventSlice = createSlice({
   initialState,
   reducers: {
     add(state, action) {
+      const newEvent = {...action.payload}
+      const id = state.events.length + 1
 
+      newEvent.id = 'event-' + id
+      newEvent.isDeleted = false
+
+      state.events.push(newEvent)
     },
     delete(state, action) {
       const event = state.events.find(event => event.id === action.payload)

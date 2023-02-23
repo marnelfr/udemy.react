@@ -21,13 +21,18 @@ function EventForm({ method, event }) {
   const submitHandler = useCallback(e => {
     e.preventDefault()
     const editedEvent = {
-      id: event.id,
       title: titleRef.current.value,
       date: dateRef.current.value,
       description: descRef.current.value,
       image: imageRef.current.value
     }
-    dispatch(eventActions.edit(editedEvent))
+    if(method === 'POST') {
+      dispatch(eventActions.add(editedEvent))
+    }
+    if(method === 'PUT') {
+      editedEvent.id = event.id
+      dispatch(eventActions.edit(editedEvent))
+    }
     navigate('..', {relative: 'path'})
   }, [dispatch, navigate])
 
