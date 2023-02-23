@@ -941,8 +941,20 @@ Our ``RoutLayout`` here will wrap our page component which will then replace the
 component inside our **RoutLayout**. We can then place in our RoutLayout, our navigation bar or things 
 like that.
 
+### errorElement
+On every route we add, we can add the ``errorElement`` that will be shown is some error occurs.\
+It supposed to be an page element nicely styled 😅
 
-
+### NavLink
+Instead of using **Link** in our navigation, we should use **NavLink** which provides such advantages:
+- className: here it's a function which receive ``({isActive})``. isActive is true is the route represented is active.
+- the ``end`` props on it let us say if the route should be considered active is other including its path are.
+`````javascript
+const activeHandler = useCallback(({isActive}) => isActive ? classes.active : undefined, [])
+return (
+  <NavLink to={'/'} end className={activeHandler}>Home</NavLink>
+)
+`````
 
 
 
