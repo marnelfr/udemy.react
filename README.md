@@ -956,8 +956,29 @@ return (
 )
 `````
 
+### Navigating programmatically
+This may be needed after handling a form for example. It's done thanks to the ``useNavigate()`` hook provide 
+but the react-router-dom package
+`````javascript
+const navigate = useNavigate()
+const submitHandler = (event) => {
+  //...
+  navigate('/products')
+}
+`````
 
+### Dynamic Routes
+`````javascript
+//We can defined route with params like this:
+const dRoute= { path: '/products/:id', element: <ProductDetailsPage />}
 
+//Then we can access the params like this:
+import {useParams} from "react-router-dom";
+const ProductDetailsPage = () => {
+  const { id } = useParams()
+  return (/*...*/)
+}
+`````
 
 
 
