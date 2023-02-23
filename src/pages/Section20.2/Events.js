@@ -3,7 +3,8 @@ import {useSelector} from "react-redux";
 
 const EventsPage = () => {
   const events = useSelector(state => state.event.events)
-  return <EventsList events={events} />
+  const filteredEvents = events.filter(event => event.isDeleted === false)
+  return <EventsList events={filteredEvents} />
 }
 
 export default EventsPage
