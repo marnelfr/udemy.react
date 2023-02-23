@@ -16,9 +16,10 @@ import reportWebVitals from './reportWebVitals';
 // import ReduxCounterApp from "./components/Section18.Revision/App";
 // import store from './store/Section18.Revision/index'
 import './index.css';
-import App from "./App";
-import store from "./store/Section19";
-
+// import App from "./components/src/App";
+// import store from "./components/src/store/index";
+import App from './App'
+import store from './store/Section19'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

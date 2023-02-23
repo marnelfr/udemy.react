@@ -2,7 +2,7 @@ import Card from '../UI/Card/Card';
 import classes from './ProductItem.module.css';
 import {useCallback} from "react";
 import {useDispatch} from "react-redux";
-import {cartActions} from "../../../store/Section19/cart";
+import {cartActions} from "../../../store/Section19/cart-slice";
 
 const ProductItem = ({id, title, price, description }) => {
   const dispatch = useDispatch()

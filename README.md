@@ -850,7 +850,40 @@ we should **prefer** reducers and **avoid** action creators or components.
 - and when it comes to **async code or code with side effects**, we should **prefer** action
 creators or components and **NEVER use** reducers.
 
+### Action creator function
+We can add custom action creator function to create so-called **Thunk**.\
+A thunk is a function that delays an action until later, until something finish.
 
+They are functions (that can receive parameters)
+that return another function that receive the dispatcher as parameter.\
+The advantage here is that 
+- we can perform side effect inside our custom action creator function
+- we can make the function they return ``async``
+- thanks to the dispatcher it receives, we can dispatch as many actions as we want
+- we can dispatch them as other action creator using the dispatch function.
+`````javascript
+// in the cart-slice.js
+export const sendCartData = (data) => {
+  return async (dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(data)
+      })
+      if(!response.ok) {
+        throw new Error("Can't send data")
+      }
+    }
+    try {
+      await sendRequest()
+    } catch (error) {}
+  }
+}
+
+// can be dispatched this way
+const dispatch = useDispatch()
+dispatch(sendCartData(items))
+`````
 
 
 

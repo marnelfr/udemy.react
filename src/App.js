@@ -1,19 +1,30 @@
 import Cart from './components/Section19/Cart/Cart';
 import Layout from './components/Section19/Layout/Layout';
 import Products from './components/Section19/Shop/Products';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
+import {fetchCartData, sendCartData} from "./store/Section19/cart-actions";
+
+let initialRender = true
 
 function App() {
   const showModal = useSelector(state => state.modal.display)
-  const items = useSelector(state => state.cart.items)
+  const cart = useSelector(state => state.cart)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    fetch('https://udemy-react-a7270-default-rtdb.firebaseio.com/cart.json', {
-      method: 'PUT',
-      body: JSON.stringify(items)
-    })
-  }, [items])
+    dispatch(fetchCartData())
+  }, [dispatch])
+
+  useEffect(() => {
+    if(initialRender) {
+      initialRender = false
+      return
+    }
+    if(cart.changed) {
+      dispatch(sendCartData(cart.items))
+    }
+  }, [cart, dispatch])
 
   return (
     <Layout>
