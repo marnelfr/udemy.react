@@ -21,6 +21,17 @@ const eventSlice = createSlice({
         throw new Error('Event not found')
       }
       event.isDeleted = true
+    },
+    edit(state, action) {
+      const event = state.events.find(event => event.id === action.payload.id)
+      if(!event) {
+        throw new Error('Event not found')
+      }
+      event.image = action.payload.image
+      event.title = action.payload.title
+      event.date = action.payload.date
+      event.description = action.payload.description
+      event.isDeleted = false
     }
   }
 })
