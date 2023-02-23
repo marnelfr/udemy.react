@@ -1000,6 +1000,12 @@ const router = createBrowserRouter([
 `````
 Instead of having ``path: '''``, we could have ``{ index: true, element: <HomePage />}``
 
-
+## The loader
+`````javascript
+const route = { index: true, element: <EventsPage />, loader: async () => {} } 
+`````
+The ``loader`` function can be used to fetch data we may need in our ``EventsPage``.
+The data loaded is returned and then available in the component page thanks to the
+``useLoaderData()`` hook.
 
 
