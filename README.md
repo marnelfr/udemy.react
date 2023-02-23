@@ -885,8 +885,13 @@ const dispatch = useDispatch()
 dispatch(sendCartData(items))
 `````
 
-
-
+## [React router](https://reactrouter.com/en/main)
+installation: ``npm install react-router-dom``
+Adding routing to our app is a multistep process:
+1. we must define the routes (urls) we want to support and which components should be loaded to these paths.
+2. we have to activate the router and load the routes definition defined in the first step.
+3. we want to make sure that we have all these components we want to load and provide some means of navigating 
+between those pages to allow our users to move smoothly between pages.
 
 
 
