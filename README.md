@@ -1007,9 +1007,55 @@ const route = { index: true, element: <EventsPage />, loader: async () => {} }
 The ``loader`` function can be used to fetch data we may need in our ``EventsPage``.
 The data loaded is returned and then available in the component page thanks to the
 ``useLoaderData()`` hook. The hook can be used in the current component that load the 
-data or in any of its child components.
+data or in any of its child components ; and the router always wait for the data to finish
+being fetched before loading the component.\
+We've also got the ``useNavigation()`` that can help us to reflect the current navigation state.
+`````javascript
+const navigation = useNavigation()
+navigation.state === 'loading' // the needed data is being fetching
+`````
+The ``useNavigation()`` hook can be used from any component currently visible on the screen.
 
-However, instead of putting the loader function code in the route, we should consider exporting 
+However, instead of putting the loader function code in the router definition, we may consider exporting 
 it from the ``EventsPage`` component.
 
+``loader()s`` support ``Response``type object. This means we can even do something like:
+````javascript
+const eventLoader = async () => {
+  const response = await fetch('http://localhost:8080/events');
+  if(!response.ok) {
+    // We can return an object that indicate that an 
+    // error occured and then handle it in our component
+    return {isError: true, message: 'some message'}
+    // OR
+    // throw and object as error
+    throw {message: 'Some error message'}
+    // Or throw and error using its constructor
+    throw new Error('Some message')
+    // Or return an Response object
+    throw new Response(JSON.stringify({/**/}), {status: statusCode})
+  }
+  return response
+}
+````
+In case, we throw an error, react-router will render the closest error page to our component.
+in the error page, we can access the error thanks to the ``useRouteError()`` hook.\
+In case we return an object, we shall get that object. Otherwise, we could take advantage of the 
+status code provided by the ``Response`` object.
+````javascript
+//in our Error component
+const response = useRouteError()
+let message = 'An error occured!'
+let title = 'Error'
+
+if(response.status === 500) {
+  message = JSON.parse(response.data).message
+}
+if(response.status === 400) {
+  message = 'Page not found'
+  title = 404
+}
+````
+
+**Since loaders are not components or hooks, we can't use hooks inside them**
 
