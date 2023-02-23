@@ -8,6 +8,7 @@ import NewEventPage from "./pages/Section20.2/NewEvent";
 import EditEventPage from "./pages/Section20.2/EditEvent";
 
 import './App.css'
+import ErrorPage from "./pages/Section20.2/Error";
 
 // Challenge / Exercise
 
@@ -38,7 +39,7 @@ const route = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: 'events', element: <EventsPage /> },
-      { path: 'events/:eventId', element: <EventDetailPage /> },
+      { path: 'events/:eventId', element: <EventDetailPage />, errorElement: <ErrorPage message="Event not found" /> },
       { path: 'events/new', element: <NewEventPage /> },
       { path: 'events/:eventId/edit', element: <EditEventPage /> }
     ]
