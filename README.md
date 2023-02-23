@@ -980,9 +980,25 @@ const ProductDetailsPage = () => {
 }
 `````
 
-
-
-
+### Relative vs absolute route
+When ever a defined route path start by '/', the path is absolute. To define a path
+which should be relative to its root component path, we should avoid the '/' at the beginning of the path.\
+We've got a ``relative`` props on our ``Link`` component that can be **route** or **path**.
+We've also got ``to=".."`` path that lead to the **route** path of the current one if ``relatvive="route"``
+(default value) or to one path above if ``relative="path"``.
+`````javascript
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      { path: '', element: <HomePage />},
+      { path: 'products', element: <ProductsPage />}
+    ]
+  },
+])
+`````
+Instead of having ``path: '''``, we could have ``{ index: true, element: <HomePage />}``
 
 
 
