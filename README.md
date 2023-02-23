@@ -919,7 +919,10 @@ const routeDefinition = createRoutesFromElements(
 )
 const router = createBrowserRouter(routeDefinition)
 ````
-
+To navigate between pages, we should use the ``Link`` component provided by react-router
+`````javascript
+<p>Go to the <Link to={'/products'}>products page</Link></p>
+`````
 
 
 
