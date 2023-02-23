@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 
 // import ExpenseApp from './components/ExpenseApp/App';
 import reportWebVitals from './reportWebVitals';
+import App from "./App";
 // import FormApp from "./components/Section16/App";
 // import GoalApp from "./components/CourseGoals/App";
 // import Section8App from "./components/Section8/App";
@@ -15,11 +16,10 @@ import reportWebVitals from './reportWebVitals';
 // import HttpApp from "./components/Section15.2/App";
 // import ReduxCounterApp from "./components/Section18.Revision/App";
 // import store from './store/Section18.Revision/index'
-import './index.css';
 // import App from "./components/src/App";
 // import store from "./components/src/store/index";
-import App from './App'
-import store from './store/Section19'
+// import App19 from './components/Section19/App'
+// import store from './store/Section19'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -34,9 +34,8 @@ root.render(
     {/*<HttpApp />*/}
     {/*<FormApp/>*/}
     {/*<Provider store={store}><ReduxCounterApp/></Provider>*/}
-    <Provider store={store}>
-      <App />
-    </Provider>
+    {/*<Provider store={store}><App19 /></Provider>*/}
+    <App/>
   </React.StrictMode>
 );
 
