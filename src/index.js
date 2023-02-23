@@ -21,6 +21,7 @@ import App from './App'
 // import store from "./components/src/store/index";
 // import App19 from './components/Section19/App'
 // import store from './store/Section19'
+import store from './store/Section20'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -37,7 +38,9 @@ root.render(
     {/*<Provider store={store}><ReduxCounterApp/></Provider>*/}
     {/*<Provider store={store}><App19 /></Provider>*/}
     {/*<RouteApp />*/}
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
