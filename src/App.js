@@ -2,7 +2,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 import RootLayout from "./pages/Section20.2/Layout/Root";
 import HomePage from "./pages/Section20.2/Home";
-import EventsPage from "./pages/Section20.2/Events";
+import EventsPage, {eventLoader} from "./pages/Section20.2/Events";
 import EventDetailPage from "./pages/Section20.2/EventDetail";
 import NewEventPage from "./pages/Section20.2/NewEvent";
 import EditEventPage from "./pages/Section20.2/EditEvent";
@@ -42,16 +42,7 @@ const route = createBrowserRouter([
         path: 'events',
         element: <EventRootLayout />,
         children: [
-          { index: true, element: <EventsPage />, loader: async () => {
-              const response = await fetch('http://localhost:8080/events');
-
-              if (!response.ok) {
-                // setError('Fetching events failed.');
-              } else {
-                const resData = await response.json();
-                return resData.events
-              }
-          } },
+          { index: true, element: <EventsPage />, loader: eventLoader },
           { path: ':eventId', element: <EventDetailPage /> },
           { path: 'new', element: <NewEventPage /> },
           { path: ':eventId/edit', element: <EditEventPage /> }

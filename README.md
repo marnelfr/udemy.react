@@ -1006,6 +1006,10 @@ const route = { index: true, element: <EventsPage />, loader: async () => {} }
 `````
 The ``loader`` function can be used to fetch data we may need in our ``EventsPage``.
 The data loaded is returned and then available in the component page thanks to the
-``useLoaderData()`` hook.
+``useLoaderData()`` hook. The hook can be used in the current component that load the 
+data or in any of its child components.
+
+However, instead of putting the loader function code in the route, we should consider exporting 
+it from the ``EventsPage`` component.
 
 
