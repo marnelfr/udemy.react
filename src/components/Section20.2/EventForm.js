@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import classes from './EventForm.module.css';
 import {useCallback, useRef} from "react";
 import {useDispatch} from "react-redux";
-import {eventActions} from "../../store/Section20/events";
+import {eventActions} from "../../store/Section20/events-slice";
+import {saveEventData} from "../../store/Section20/event-actions";
 
 function EventForm({ method, event }) {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function EventForm({ method, event }) {
       image: imageRef.current.value
     }
     if(method === 'POST') {
-      dispatch(eventActions.add(editedEvent))
+      dispatch(saveEventData(editedEvent))
     }
     if(method === 'PUT') {
       editedEvent.id = event.id

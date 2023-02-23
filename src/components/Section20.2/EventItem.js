@@ -2,7 +2,7 @@ import classes from './EventItem.module.css';
 import {Link, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {useCallback} from "react";
-import {eventActions} from "../../store/Section20/events";
+import {eventActions} from "../../store/Section20/events-slice";
 
 function EventItem({ event }) {
   const dispatch = useDispatch()

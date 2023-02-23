@@ -10,6 +10,9 @@ import EditEventPage from "./pages/Section20.2/EditEvent";
 import './App.css'
 import ErrorPage from "./pages/Section20.2/Error";
 import EventLayout from "./pages/Section20.2/Layout/Event";
+import {useEffect} from "react";
+import {fetchEventData} from "./store/Section20/event-actions";
+import {useDispatch} from "react-redux";
 
 // Challenge / Exercise
 
@@ -55,6 +58,12 @@ const route = createBrowserRouter([
 
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchEventData())
+  }, [dispatch, fetchEventData])
+
   return <RouterProvider router={route} />;
 }
 
