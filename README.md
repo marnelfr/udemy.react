@@ -892,8 +892,22 @@ Adding routing to our app is a multistep process:
 2. we have to activate the router and load the routes definition defined in the first step.
 3. we want to make sure that we have all these components we want to load and provide some means of navigating 
 between those pages to allow our users to move smoothly between pages.
+````javascript
+import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 
+import './App.css'
+import HomePage from "./pages/Home";
+import ProductsPage from "./pages/Products";
 
+const router = createBrowserRouter([
+  { path: '/', element: <HomePage />},
+  { path: '/products', element: <ProductsPage />}
+])
+
+const App = () => {
+  return <RouterProvider router={router} />;
+}
+````
 
 
 
