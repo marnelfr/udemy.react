@@ -1058,6 +1058,10 @@ if(response.status === 400) {
 }
 ````
 
+**Instead of throwing ``new Response``, we can ``throw json({message: ''}, {status: 500})``**. Using
+the ```json()``` method from react-router-dom, we don't need to stringify our data and then no need to 
+``JSON.parse`` it in our Error component.
+
 **Since loaders are not components or hooks, we can't use hooks inside them**
 
 

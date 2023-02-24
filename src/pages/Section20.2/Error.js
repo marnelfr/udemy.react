@@ -2,14 +2,15 @@ import PageContent from "../../components/Section20.2/PageContent";
 import {useRouteError} from "react-router-dom";
 
 const ErrorPage = () => {
-  const response = useRouteError()
+  const error = useRouteError()
   let message = 'An error occured!'
   let title = 'Error'
+  console.log(error);
 
-  if(response.status === 500) {
-    message = JSON.parse(response.data).message
+  if(error.status === 500) {
+    message = error.data.message
   }
-  if(response.status === 400) {
+  if(error.status === 400) {
     message = 'Page not found'
     title = 404
   }
