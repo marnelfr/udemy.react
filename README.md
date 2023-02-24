@@ -1069,8 +1069,22 @@ Our loaders functions receive automatically some data from which we can destruct
 - From ``request`` we can access the url from example
 - From the ``params`` we can access every parameter in the route
 
-
-
+### The useRouteLoaderData hook
+We could have such of defined route: 
+`````javascript
+const route = {
+  path: ':eventId',
+  id: 'event-detail',
+  loader: eventItemLoader,
+  children: [
+    { index: true, element: <EventDetailPage /> },
+    { path: 'edit', element: <EditEventPage /> },
+  ]
+}
+`````
+This allows us to get access to the ```eventItemLoader``` in both ```EventDetailPage``` and 
+```EditEventPage``` components.
+For that, we shall use the ``useRouteLoaderData('event-detail')`` that receive the route id as parameter.
 
 
 
