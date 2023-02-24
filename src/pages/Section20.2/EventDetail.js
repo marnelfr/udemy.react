@@ -1,7 +1,6 @@
 import {json, useLoaderData} from "react-router-dom";
 import EventItem from "../../components/Section20.2/EventItem";
 
-
 export const eventItemLoader = async ({params}) => {
   const response = await fetch('http://localhost:8080/events/' + params.eventId)
   if(!response.ok) {
@@ -13,10 +12,8 @@ export const eventItemLoader = async ({params}) => {
   return response
 }
 
-
 const EventDetailPage = () => {
   const data = useLoaderData()
-  console.log(data);
   return <EventItem event={data.event} />
 }
 

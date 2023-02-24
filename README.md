@@ -1064,7 +1064,10 @@ the ```json()``` method from react-router-dom, we don't need to stringify our da
 
 **Since loaders are not components or hooks, we can't use hooks inside them**
 
-
+### Loader with dynamic routes
+Our loaders functions receive automatically some data from which we can destruct ``({request, params})``. 
+- From ``request`` we can access the url from example
+- From the ``params`` we can access every parameter in the route
 
 
 
