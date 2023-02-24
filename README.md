@@ -909,7 +909,7 @@ const App = () => {
 }
 ````
 
-We also create our routes using ``createRouteFromElement``
+We can also create our routes using ``createRouteFromElement``
 ````javascript
 const routeDefinition = createRoutesFromElements(
   <Route>
@@ -942,23 +942,24 @@ component inside our **RoutLayout**. We can then place in our RoutLayout, our na
 like that.
 
 ### errorElement
-On every route we add, we can add the ``errorElement`` that will be shown is some error occurs.\
-It supposed to be an page element nicely styled 😅
+On every route we add, we can define the ``errorElement`` that will be shown if some error occurs.\
+It supposed to be a page element nicely styled 😅
 
 ### NavLink
 Instead of using **Link** in our navigation, we should use **NavLink** which provides such advantages:
-- className: here it's a function which receive ``({isActive})``. isActive is true is the route represented is active.
-- the ``end`` props on it let us say if the route should be considered active is other including its path are.
+- className: here it's a function which receives ``({isActive})``. isActive is true is the route 
+represented by the NavLink is active.
+- the ``end`` props on it let us say if the route should be considered active if other including its path are.
 `````javascript
-const activeHandler = useCallback(({isActive}) => isActive ? classes.active : undefined, [])
+const isActiveHandler = useCallback(({isActive}) => isActive ? classes.active : undefined, [])
 return (
-  <NavLink to={'/'} end className={activeHandler}>Home</NavLink>
+  <NavLink to={'/'} end className={isActiveHandler}>Home</NavLink>
 )
 `````
 
 ### Navigating programmatically
-This may be needed after handling a form for example. It's done thanks to the ``useNavigate()`` hook provide 
-but the react-router-dom package
+This may be needed after handling a form for example. It's done thanks to the ``useNavigate()`` hook provided
+by the react-router-dom package
 `````javascript
 const navigate = useNavigate()
 const submitHandler = (event) => {
@@ -984,7 +985,7 @@ const ProductDetailsPage = () => {
 When ever a defined route path start by '/', the path is absolute. To define a path
 which should be relative to its root component path, we should avoid the '/' at the beginning of the path.\
 We've got a ``relative`` props on our ``Link`` component that can be **route** or **path**.
-We've also got ``to=".."`` path that lead to the **route** path of the current one if ``relatvive="route"``
+We've also got ``to=".."`` path which leads to the **route** path of the current one if ``relatvive="route"``
 (default value) or to one path above if ``relative="path"``.
 `````javascript
 const router = createBrowserRouter([
@@ -998,25 +999,25 @@ const router = createBrowserRouter([
   },
 ])
 `````
-Instead of having ``path: '''``, we could have ``{ index: true, element: <HomePage />}``
+Instead of having ``path: ''``, we could have ``{ index: true, element: <HomePage />}``
 
 ## The loader
 `````javascript
 const route = { index: true, element: <EventsPage />, loader: async () => {} } 
 `````
 The ``loader`` function can be used to fetch data we may need in our ``EventsPage``.
-The data loaded is returned and then available in the component page thanks to the
+The data loaded is returned and then is available in the component page thanks to the
 ``useLoaderData()`` hook. The hook can be used in the current component that load the 
 data or in any of its child components ; and the router always wait for the data to finish
 being fetched before loading the component.\
-We've also got the ``useNavigation()`` that can help us to reflect the current navigation state.
+We've also got the ``useNavigation()`` hook that can help us to reflect the current navigation state.
 `````javascript
 const navigation = useNavigation()
 navigation.state === 'loading' // the needed data is being fetching
 `````
 The ``useNavigation()`` hook can be used from any component currently visible on the screen.
 
-However, instead of putting the loader function code in the router definition, we may consider exporting 
+Instead of putting the loader function code in the router definition, we may consider exporting 
 it from the ``EventsPage`` component.
 
 ``loader()s`` support ``Response``type object. This means we can even do something like:
@@ -1058,4 +1059,27 @@ if(response.status === 400) {
 ````
 
 **Since loaders are not components or hooks, we can't use hooks inside them**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

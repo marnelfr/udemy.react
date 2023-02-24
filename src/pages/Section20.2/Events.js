@@ -3,7 +3,7 @@ import {useLoaderData} from "react-router-dom";
 
 
 export const eventLoader = async () => {
-  const response = await fetch('http://localhost:8080/eventsazrze');
+  const response = await fetch('http://localhost:8080/events');
 
   if (!response.ok) {
     throw new Response(JSON.stringify({message: 'Cannot load data..'}), {status: 500})
