@@ -4,7 +4,7 @@ import RootLayout from "./pages/Section20.2/Layout/Root";
 import HomePage from "./pages/Section20.2/Home";
 import EventsPage, {eventLoader} from "./pages/Section20.2/Events";
 import EventDetailPage, {eventItemLoader} from "./pages/Section20.2/EventDetail";
-import NewEventPage from "./pages/Section20.2/NewEvent";
+import NewEventPage, {newEventAction} from "./pages/Section20.2/NewEvent";
 import EditEventPage from "./pages/Section20.2/EditEvent";
 
 import './App.css'
@@ -54,7 +54,7 @@ const route = createBrowserRouter([
               { path: 'edit', element: <EditEventPage /> },
             ]
           },
-          { path: 'new', element: <NewEventPage /> },
+          { path: 'new', element: <NewEventPage />, action: newEventAction },
         ]
       },
     ]

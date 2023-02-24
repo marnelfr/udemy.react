@@ -1086,6 +1086,29 @@ This allows us to get access to the ```eventItemLoader``` in both ```EventDetail
 ```EditEventPage``` components.
 For that, we shall use the ``useRouteLoaderData('event-detail')`` that receive the route id as parameter.
 
+### Form from react-router
+React router help us to handle our forms' submission. For that, we need to
+- use the ``Form`` component from 'react-router-dom' package and then specify the correct method among
+get, post, patch, put and delete
+- define the ``action`` property on our component route. It value is a function that should be exported from
+our component file. The function receive automatically the ``({request, params})``
+- On ``request``, we can await the ``request.formData()`` and ``get('input-name')`` our input data using their name
+- Once we've done handling/saving our data, we can ``redirect(path)`` our users to where ever we want.
+``````javascript
+export const newEventAction = async ({request}) => {
+  const data = await request.formData()
+  const event = {title: data.get('title')}
+
+  const response = await fetch(/*...*/)
+
+  if(!response.ok) {
+    throw json({message: 'Could not save event data'}, {
+      status: 500
+    })
+  }
+  return redirect('/events')
+}
+``````
 
 
 
