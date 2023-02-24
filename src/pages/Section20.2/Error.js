@@ -5,7 +5,6 @@ const ErrorPage = () => {
   const error = useRouteError()
   let message = 'An error occured!'
   let title = 'Error'
-  console.log(error);
 
   if(error.status === 500) {
     message = error.data.message
