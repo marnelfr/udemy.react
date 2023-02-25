@@ -1110,19 +1110,6 @@ export const newEventAction = async ({request}) => {
 }
 ``````
 
-### useSubmit hook
-Can be used to call an action programmatically, thus to submit a given form programmatically.
-`````javascript
-// submitting a FormData
-let formData = new FormData();
-formData.append("cheese", "gouda");
-submit(formData); // with no action provided, the current route action is trigged
-// we can also submit a simple object or null if no data is
-// needed for delete route for example
-submit(null, {action: "/events/" + eventId, method: 'DELETE'});
-submit(null, {action: "/logout", method: "post"})
-`````
-
 useNavigation can also help us to update the UI state based on our submission status
 `````javascript
 // in our EventForm component
@@ -1134,6 +1121,40 @@ return (
     <button disabled={isSubmitting}>{isSubmitting ? 'Submitting...' : 'Save'}</button>
   </form>
 )
+`````
+
+### Form error handling
+In case we've got some error in the backend, we can return the response in our action and then access 
+its data thanks to the ``useActionData()`` hook:
+`````javascript
+// in our action:
+if(response.status === 422) { // a status code defined and returned by this server in case of server side validation error
+  return response;
+}
+
+// in our EventForm component
+const errorData = useActionData();
+return (
+  <Form method="POST" className={classes.form}>
+    {errorData && errorData.errors && <ul>
+      {Object.values(errorData.errors).map(error => <li key={error}>{error}</li>)}
+    </ul>}
+    /*...*/
+  </Form>
+)
+`````
+
+### useSubmit hook
+Can be used to call an action programmatically, thus to submit a given form programmatically.
+`````javascript
+// submitting a FormData
+let formData = new FormData();
+formData.append("cheese", "gouda");
+submit(formData); // with no action provided, the current route action is trigged
+// we can also submit a simple object or null if no data is
+// needed for delete route for example
+submit(null, {action: "/events/" + eventId, method: 'DELETE'});
+submit(null, {action: "/logout", method: "post"})
 `````
 
 
