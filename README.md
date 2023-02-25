@@ -1157,9 +1157,41 @@ submit(null, {action: "/events/" + eventId, method: 'DELETE'});
 submit(null, {action: "/logout", method: "post"})
 `````
 
+### useFetcher hook
+The useFetcher hook (without s at its end) is the tool we should use if we want to trigger a 
+loader/action without actually loading the page/route to which this loader/action belongs to.
+Perfect then to do some work behind-the-scenes.\
+It brings a particular ``Form`` component that we should use if we want to work with it.
+````javascript
+const NewsletterSignup = () => {
+  const {Form, data, state} = useFetcher()
 
+  const isSubmitting = state === 'submitting'
 
+  useEffect(() => {
+    console.log(data, state);
+    if(state === 'idle' && data && data.message) {
+      alert(data.message)
+    }
+  }, [data, state])
 
+  return (
+    <Form method="post" action="/newsletter" className={classes.newsletter}>
+      <input
+        type="email"
+        name="email"
+        placeholder="Sign up for newsletter..."
+        aria-label="Sign up for newsletter"
+      />
+      <button>{isSubmitting ? 'Submitting...' : 'Sign up'}</button>
+    </Form>
+  );
+}
+````
+Here, we're using it to handle a newsletter form which is a shared component (may appear in multiple part
+of our app) without actually loading the route its the given action.
+- ``data`` contains the data returns by the loader/action used
+- ``state`` here tell us whether the fetcher behind-the-scene, completed its loader/action that was triggered. 
 
 
 
