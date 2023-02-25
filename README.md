@@ -1113,16 +1113,28 @@ export const newEventAction = async ({request}) => {
 ### useSubmit hook
 Can be used to call an action programmatically, thus to submit a given form programmatically.
 `````javascript
-//submitting a FormData
+// submitting a FormData
 let formData = new FormData();
 formData.append("cheese", "gouda");
 submit(formData); // with no action provided, the current route action is trigged
 // we can also submit a simple object or null if no data is
 // needed for delete route for example
 submit(null, {action: "/events/" + eventId, method: 'DELETE'});
-submit(null, {action: "/logout", method: "post",})
+submit(null, {action: "/logout", method: "post"})
 `````
 
+useNavigation can also help us to update the UI state based on our submission status
+`````javascript
+// in our EventForm component
+const navigation = useNavigation()
+const isSubmitting = navigation.state === 'submitting'
+return (
+  <form>
+    /*....*/
+    <button disabled={isSubmitting}>{isSubmitting ? 'Submitting...' : 'Save'}</button>
+  </form>
+)
+`````
 
 
 
