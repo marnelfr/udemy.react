@@ -1193,9 +1193,45 @@ of our app) without actually loading the route its the given action.
 - ``data`` contains the data returns by the loader/action used
 - ``state`` here tell us whether the fetcher behind-the-scene, completed its loader/action that was triggered. 
 
+### Deferring data fetching with defer()
+We may end up with some component which need data that take time to load.
+We can and should then defer those data fetching 
+````javascript
+import { Suspense } from 'react'
+import EventsList from "../../components/Section20.2/EventsList";
+import {Await, defer, json, useLoaderData} from "react-router-dom";
+
+const dataLoader = async () => {
+  const response = await fetch('http://localhost:8080/events');
+  if (!response.ok) {
+    throw json({message: 'Could not fetch events'}, {status: 500})
+  } else {
+    // If we want to use defer, we can't return a response anymore
+    const data = await response.json()
+    return data.events
+  }
+}
+
+export const eventLoader = () => {
+  return defer({
+    events: dataLoader()
+  })
+}
 
 
+function EventsPage() {
+  const { events } = useLoaderData() // we get here the object gave to defer() in eventLoader()
+  // We must wrap Await by Suspense in order to show something while loading our data
+  return <Suspense fallback={<p>Loading...</p>}>
+    {/*Await receive a defer value as resolver and a function with loaded data as children*/}
+    <Await resolve={events}>
+      { loadedEvents => <EventsList events={loadedEvents} /> }
+    </Await>
+  </Suspense>
+}
 
+export default EventsPage;
+````
 
 
 
