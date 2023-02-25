@@ -1195,7 +1195,10 @@ of our app) without actually loading the route its the given action.
 
 ### Deferring data fetching with defer()
 We may end up with some component which need data that take time to load.
-We can and should then defer those data fetching 
+We can and should then defer those data fetching.\
+Important to notice that while using ``defer()``, we shouldn't therefore return a response 
+after loading our data.
+
 ````javascript
 import { Suspense } from 'react'
 import EventsList from "../../components/Section20.2/EventsList";
@@ -1218,12 +1221,15 @@ export const eventLoader = () => {
   })
 }
 
-
 function EventsPage() {
   const { events } = useLoaderData() // we get here the object gave to defer() in eventLoader()
-  // We must wrap Await by Suspense in order to show something while loading our data
+  
+  // We must wrap Await by Suspense 
+  // Supsense here, is used to show a fallback while the data needed is been loading
   return <Suspense fallback={<p>Loading...</p>}>
-    {/*Await receive a defer value as resolver and a function with loaded data as children*/}
+    {/*Await receive one of our defered values as resolver, 
+     will wait to the data to be there 
+     and then call the function it receives as children with the loaded data*/}
     <Await resolve={events}>
       { loadedEvents => <EventsList events={loadedEvents} /> }
     </Await>

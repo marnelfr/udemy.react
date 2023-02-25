@@ -9,7 +9,6 @@ function NewsletterSignup() {
   const isSubmitting = state === 'submitting'
 
   useEffect(() => {
-    console.log(data, state);
     if(state === 'idle' && data && data.message) {
       alert(data.message)
       ref.current.value = ''
