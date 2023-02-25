@@ -4,12 +4,13 @@ import RootLayout from "./pages/Section20.2/Layout/Root";
 import HomePage from "./pages/Section20.2/Home";
 import EventsPage, {eventLoader} from "./pages/Section20.2/Events";
 import EventDetailPage, {eventItemAction, eventItemLoader} from "./pages/Section20.2/EventDetail";
-import NewEventPage, {newEventAction} from "./pages/Section20.2/NewEvent";
+import NewEventPage from "./pages/Section20.2/NewEvent";
 import EditEventPage from "./pages/Section20.2/EditEvent";
 
 import './App.css'
 import EventRootLayout from "./pages/Section20.2/Layout/EventRoot";
 import ErrorPage from "./pages/Section20.2/Error";
+import {cruEventAction} from "./components/Section20.2/EventForm";
 
 // Challenge / Exercise
 
@@ -51,10 +52,10 @@ const route = createBrowserRouter([
             loader: eventItemLoader,
             children: [
               { index: true, element: <EventDetailPage />, action: eventItemAction },
-              { path: 'edit', element: <EditEventPage /> },
+              { path: 'edit', element: <EditEventPage />, action: cruEventAction },
             ]
           },
-          { path: 'new', element: <NewEventPage />, action: newEventAction },
+          { path: 'new', element: <NewEventPage />, action: cruEventAction },
         ]
       },
     ]
