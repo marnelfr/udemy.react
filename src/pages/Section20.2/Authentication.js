@@ -1,5 +1,6 @@
 import AuthForm from "../../components/Section20.2/AuthForm";
 import {json, redirect, useActionData} from "react-router-dom";
+import {setAuthToken} from "../../util/auth";
 
 export const authAction = async ({request, params}) => {
   const searchParams = new URL(request.url).searchParams
@@ -27,7 +28,9 @@ export const authAction = async ({request, params}) => {
     throw json({message: 'Can not signup user'}, {status: 500})
   }
 
-  console.log(response);
+  const resData = await response.json()
+  setAuthToken(resData.token)
+
   return redirect('/')
 }
 
