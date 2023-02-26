@@ -17,7 +17,7 @@ function AuthForm() {
         {errorData.message}
       </p>}
       {errorData && errorData.errors && <ul>
-        {Object.values(errorData.errors).map(error => <li>{error}</li>)}
+        {Object.values(errorData.errors).map(error => <li key={error}>{error}</li>)}
       </ul>}
       <Form method="post" className={classes.form}>
         <h1>{isLogin ? 'Log in' : 'Create a new user'}</h1>

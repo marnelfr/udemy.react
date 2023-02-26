@@ -5,3 +5,11 @@ export const setAuthToken = token => {
 export const getAuthToken = () => {
   return localStorage.getItem('token')
 }
+
+export const removeAuthToken = () => {
+  localStorage.removeItem('token')
+}
+
+export const tokenLoader = () => {
+  return getAuthToken()
+}

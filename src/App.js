@@ -13,6 +13,8 @@ import ErrorPage from "./pages/Section20.2/Error";
 import {cruEventAction} from "./components/Section20.2/EventForm";
 import NewsletterPage, {newsletterAction} from "./pages/Section20.2/Newsletter";
 import AuthenticationPage, {authAction} from "./pages/Section20.2/Authentication";
+import {logoutAction} from "./pages/Section20.2/Logout";
+import {tokenLoader} from "./util/auth";
 
 // Challenge / Exercise
 
@@ -41,6 +43,8 @@ const route = createBrowserRouter([
     path: '/',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
+    id: 'root',
+    loader: tokenLoader,
     children: [
       { index: true, element: <HomePage /> },
       {
@@ -69,6 +73,10 @@ const route = createBrowserRouter([
         path: 'auth',
         element: <AuthenticationPage />,
         action: authAction
+      },
+      {
+        path: 'logout',
+        action: logoutAction
       }
     ]
   }
