@@ -1,1 +1,12 @@
-{"events":[{"title":"Giant concert","date":"2023-03-30","image":"https://www.shutterstock.com/image-photo/blur-image-sound-engineer-backstage-260nw-1447287752.jpg","description":"Portez ce vieux whisky au juge blond qui fume","id":"39498f96-32dd-4029-bbf0-a65c9dc87345"},{"title":"Another event","date":"2022-02-02","image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCHHszTd58C-92Ca3Hhne2CbBJllLDm7cuacVC7WBQhPTOCe1sGhpxtwMfUKE8XtTmYcc&usqp=CAU","description":"Portez ce vieux whisky au juge blond qui fume","id":"5b7d91d4-a397-471e-b1e3-366069e98340"},{"title":"Camp missing info","date":"2023-03-09","image":"https://thumbs.dreamstime.com/b/conference-participants-events-presentations-listen-to-speaker-sitting-chairs-rear-view-men-women-event-149546933.jpg","description":"Portez ce vieux whisky au juge blond qui fume","id":"c7d2c78d-e8d4-495c-90fd-ec42ff4c2aaa"},{"id":"e1","title":"A dummy event","date":"2023-02-22","image":"https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg","description":"Join this amazing event and connect with fellow developers."}]}
+{
+  "events": [
+    {
+      "title": "A new event",
+      "image": "https://cdn.muenchen-p.de/fl_progressive,q_65/.imaging/stk/responsive/teaser300/dms/va-2016/muenchner-christkindlmarkt/christkindlmarkt-marienplat-logo-hp/document/christkindlmarkt-marienplat-logo-hp.jpg",
+      "date": "2022-10-01",
+      "description": "Some awesome event!",
+      "id": "2a42fcc4-ea21-4bdd-abf6-c40006dc66a9"
+    }
+  ],
+  "users": []
+}
