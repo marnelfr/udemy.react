@@ -1255,6 +1255,28 @@ all of their component rendering in one ``Suspense`` component but it will lead 
 showing.
 
 
+## Authentication
+### useSearchParams hook
+It gives us access to search parameters:
+````javascript
+// on a path locahost/auth?mode=login
+const [searchParams, setSearchParams] = useSearchParams()
+const isLogin = searchParams.get('mode') === 'login'
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
