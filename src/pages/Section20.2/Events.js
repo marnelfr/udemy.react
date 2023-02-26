@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import EventsList from "../../components/Section20.2/EventsList";
 import {Await, defer, json, useLoaderData} from "react-router-dom";
 
-const dataLoader = async () => {
+export const loadEvents = async () => {
   const response = await fetch('http://localhost:8080/events');
 
   if (!response.ok) {
@@ -15,7 +15,7 @@ const dataLoader = async () => {
 
 export const eventLoader = () => {
   return defer({
-    events: dataLoader()
+    events: loadEvents()
   })
 }
 

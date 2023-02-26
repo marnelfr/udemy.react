@@ -1238,7 +1238,21 @@ function EventsPage() {
 
 export default EventsPage;
 ````
-
+We can even have multiple deferred data loading on the same page.
+````javascript
+export const eventItemLoader = async ({params}) => {
+  return defer({
+    event: await loadEventItem(params.eventId),
+    events: loadEvents()
+  })
+}
+````
+Here, we are deferring the load of ``eventItem`` and ``events``. However, since we
+made async the ``eventItemLoader``, we could await the loading of the ``eventItem``.
+Then, event detail will be loaded before the page rendering.\
+For every single deferred data usage, we have to use the ``Suspense`` component. We could wrap 
+all of their component rendering in one ``Suspense`` component but it will lead to a single fallback
+showing.
 
 
 
