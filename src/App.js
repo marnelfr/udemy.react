@@ -14,7 +14,7 @@ import {cruEventAction} from "./components/Section20.2/EventForm";
 import NewsletterPage, {newsletterAction} from "./pages/Section20.2/Newsletter";
 import AuthenticationPage, {authAction} from "./pages/Section20.2/Authentication";
 import {logoutAction} from "./pages/Section20.2/Logout";
-import {tokenLoader} from "./util/auth";
+import {checkAuthLoader, tokenLoader} from "./util/auth";
 
 // Challenge / Exercise
 
@@ -58,10 +58,10 @@ const route = createBrowserRouter([
             loader: eventItemLoader,
             children: [
               { index: true, element: <EventDetailPage />, action: eventItemAction },
-              { path: 'edit', element: <EditEventPage />, action: cruEventAction },
+              { path: 'edit', element: <EditEventPage />, action: cruEventAction, loader: checkAuthLoader },
             ]
           },
-          { path: 'new', element: <NewEventPage />, action: cruEventAction },
+          { path: 'new', element: <NewEventPage />, action: cruEventAction, loader: checkAuthLoader },
         ]
       },
       {

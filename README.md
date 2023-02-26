@@ -1264,6 +1264,19 @@ const [searchParams, setSearchParams] = useSearchParams()
 const isLogin = searchParams.get('mode') === 'login'
 ````
 
+**Important**: ``loader()``s must return null or any other value\
+We should make sure that we do add an extra return null statement in all if statement 
+branches where nothing would be returned otherwise to avoid errors or just add
+an extra ``return null`` at the end of our loader
+````javascript
+export const checkAuthLoader = () => {
+  const token = getAuthToken()
+  if(!token) {
+    return redirect('/auth?mode=login')
+  }
+  return null // very important then as I understand. But why? ☹️
+}
+````
 
 
 
