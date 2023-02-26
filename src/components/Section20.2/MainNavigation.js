@@ -14,7 +14,7 @@ const MainNavigation = () => {
           <li><NavLink to="/" className={activeHandler}>Home</NavLink></li>
           <li><NavLink to="events" className={activeHandler}>Events</NavLink></li>
           <li><NavLink to="/newsletter" className={activeHandler}>Newsletter</NavLink></li>
-          <li><NavLink to="/auth" className={activeHandler}>Login</NavLink></li>
+          <li><NavLink to="/auth?mode=login" className={activeHandler}>Login</NavLink></li>
         </ul>
       </nav>
       <NewsletterSignup />
