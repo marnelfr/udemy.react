@@ -12,7 +12,7 @@ import EventRootLayout from "./pages/Section20.2/Layout/EventRoot";
 import ErrorPage from "./pages/Section20.2/Error";
 import {cruEventAction} from "./components/Section20.2/EventForm";
 import NewsletterPage, {newsletterAction} from "./pages/Section20.2/Newsletter";
-import AuthenticationPage from "./pages/Section20.2/Authentication";
+import AuthenticationPage, {authAction} from "./pages/Section20.2/Authentication";
 
 // Challenge / Exercise
 
@@ -67,7 +67,8 @@ const route = createBrowserRouter([
       },
       {
         path: 'auth',
-        element: <AuthenticationPage />
+        element: <AuthenticationPage />,
+        action: authAction
       }
     ]
   }
