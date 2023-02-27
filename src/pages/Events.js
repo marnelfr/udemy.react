@@ -2,7 +2,7 @@ import EventsList from "../components/EventsList";
 import {Await, defer, json, useLoaderData} from "react-router-dom";
 import {Suspense} from "react";
 
-const loadEventData = async () => {
+export const loadEventData = async () => {
   const response = await fetch('http://localhost:8080/events')
   if(!response.ok) {
     throw json({message: 'Can not load events data'}, {status: 500})
