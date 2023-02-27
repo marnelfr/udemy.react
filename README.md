@@ -1287,6 +1287,28 @@ const url = new URL(request.url)
 const searchParams = url.searchParams
 `````
 
+## Lazy loading
+It's important to implement lazy loading in our app before sending it to prod. This 
+is because without it, every file used by our app is downloaded while the first
+page of our app is being rendered. But thanks to lazy loading, we shall henceforth 
+load a given file only if we need it.\
+Given this code:
+`````javascript
+import EventsPage, {loader as EventLoader} from './pages/Events';
+const route = { index: true, element: <EventsPage />, loader: EventsLoader } 
+`````
+Applying lazy loading to it will give:
+`````javascript
+import EventsPage, {loader as EventLoader} from './pages/Events';
+const EventsPage = lazy(() => import('./pages/Events')) 
+const route = {
+  index: true, 
+  element: <Suspense fallback={<p>Loading...</p>}>
+    <EventsPage />
+  </Suspense>, 
+  loader: (meta) => import('./pages/Events').then(module => module.loader(meta))
+} 
+`````
 
 
 
