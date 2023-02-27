@@ -1,11 +1,13 @@
 import './App.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import HomePage from "./pages/Home";
-import EventsPage from "./pages/Events";
-import EventDetailPage from "./pages/EventDetail";
+import EventsPage, {eventsLoader} from "./pages/Events";
+import EventDetailPage, {eventItemLoader} from "./pages/EventDetail";
 import NewEventPage from "./pages/NewEvent";
 import EditEventPage from "./pages/EditEvent";
 import RootLayout from "./pages/Layouts/Root";
+import EventRootLayout from "./pages/Layouts/EventRoot";
+import ErrorPage from "./pages/Error";
 
 // Challenge / Exercise
 
@@ -33,12 +35,26 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {index: true, element: <HomePage />},
-      {path: 'events', element: <EventsPage />},
-      {path: 'events/:eventId', element: <EventDetailPage />},
-      {path: 'events/new', element: <NewEventPage />},
-      {path: 'events/:eventId/edit', element: <EditEventPage />}
+      {
+        path: 'events',
+        element: <EventRootLayout />,
+        children: [
+          {index: true, element: <EventsPage />, loader: eventsLoader},
+          {
+            path: ':eventId',
+            id: 'event-item',
+            loader: eventItemLoader,
+            children: [
+              {index: true, element: <EventDetailPage />},
+              {path: 'edit', element: <EditEventPage />}
+            ]
+          },
+          {path: 'new', element: <NewEventPage />}
+        ]
+      },
     ]
   }
 ])
