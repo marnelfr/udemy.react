@@ -4,8 +4,8 @@
 import * as bundled from 'utility.js';
 `````
 
-- Numbers, strings, and boolean are primitive types. When they are reassigned to another variable, their value is copied
-  completely to the new variable.
+- Numbers, strings, and boolean are primitive types. When they are reassigned to another variable, their value is completely copied
+to the new variable.
 - Arrays and objects are references type though. This means an array variable is just a pointer to the memory place
   allocated to store the array. When the variable is reassigned to another, only the pointer value is copied but the new
   variable still points to the same array.
@@ -98,7 +98,7 @@ return React.createElement(
 
 React evaluate every single component and then render them in the DOM as the app is initially rendered, and it doesn't
 do that again.
-It only reevaluates and rerender a given component when its state or props change.\
+It only reevaluates and rerender a given component when one of its state or props change.\
 The initial value gives to ``useState()`` is only considered when the state is registered.
 Next, only the last value of the state value is returned by react when rendering the component instance.
 
@@ -238,7 +238,7 @@ const Wrapper = props => {
 export default Wrapper
 `````
 Using this to wrap our components can make us avoid useless html tags in our final DOM code.
-And this is where React Fragments comes is because we don't need to create the ```Wrapper``` 
+And this is where React Fragments comes in because we don't need to create the ```Wrapper``` 
 component ourselves. It's already provided by React and can be used with the tags
 ```<React.Fragment></React.Fragment>``` or simply ```<></>```.
 
@@ -340,7 +340,7 @@ While all state variables and functions used in the effect function should be ad
 we've got few exceptions such as:
 - state updating functions,
 - "built-in" APIs or functions
-- variables or functions defined OUTSIDE the components
+- variables or functions defined OUTSIDE components
 
 **All "things" used in the effect function must be added if those "things" could 
 change because the component (or some parent component) re-rendered.**
@@ -519,7 +519,7 @@ React Context shouldn't be used to replace ALL component communications and prop
 We shouldn't end up using it in a giving (let's say...) UI component.\
 For example, instead of using our ``AuthContext`` in a ``Button`` component, 
 we may have beside another component using our ``Button`` component and the ``AuthContext``. 
-An ``AuthButton`` then if we really need it.\
+An ``AuthButton`` then if we really need it in many places.\
 But we shouldn't use the ``AuthContext`` in ``Button`` 
 component which can be used in many other places for other purposes.
 
@@ -536,7 +536,7 @@ component which can be used in many other places for other purposes.
 While working in the reducer of the ``useReducer`` hook, thanks to a ``console.log``
 in the reducer, we can notice that it runs twice.\
 So it's important to not modify directly the state inside it. We can get data from the
-state while building the new we want to return, but we shouldn't modify directly the state.
+state while building the new one we want to return, but we shouldn't modify directly the state.
 
 This code for example leads to an error:
 `````javascript
@@ -550,6 +550,7 @@ const items = [...state.items]
 items[existingItemIndex] = updatedItem
 return {items, totalPrice}
 `````
+So our reducer function should be pure function.
 
 ## React.memo
 If we have a component which is going to change or its props values are going to change
@@ -615,7 +616,7 @@ With this mechanism of scheduling state change, we may end up with this code hav
 actually, we should have ``count === 10`` just because we may have 5 outstanding state changes and our 
 ``updateState`` function will register a ``setCount(4+1)`` because at the time ``updateState`` was run, the 
 value of ```count``` was ``4`` but with 5 outstanding state changes.\
-And with those outstanding state changes take in account, the value of ```count``` would actually be ``9``.\
+And with those outstanding state changes take in account, the value of ```count``` would actually be ``9``.
 
 So to take in account every outstanding state, our updateState function should be written this way:
 ````javascript
@@ -637,7 +638,7 @@ produces by that function, and it will batch them together into one state update
 
 
 ## Fetch
-It sends GET request by default. But we can also use it to send POST request this way:
+It sends GET request by default. But we can also use it to send POST/.../DELETE request this way:
 `````javascript
 const response = await fetch('https://url/movies.json', {
   method: 'POST',
@@ -657,9 +658,9 @@ If the user submit the form, all inputs are treated as touched. Even if the user
 it submitted the form meaning he confirmed the whole form.\
 An input should be validated when the user access to it and then blur.
 
-However, instead of making complicating validation that may cost a lot of resources,
-we can just use some references for our input with a state of object registering if each
-input is valid or not. then using the state, once the user submit the form, we can show
+However, instead of making complicate validation that may cost a lot of resources,
+we can just use some references for our inputs with a state of object registering if each
+input is valid or not. Then using the state, once the user submit the form, we can show
 errors about invalid inputs.
 
 **Never trust client side validation: always validate users input on server side as well**
@@ -667,37 +668,37 @@ errors about invalid inputs.
 
 ## Understanding Redux
 Redux is a state management system for cross-component or app-wide state. It's then an alternative
-for the build in feature React Context. However, we're not obliged to choose one of them because
+for the build in feature **React Context**. However, we're not obliged to choose one of them because
 we can use both in the same application.
 
 **So why should we use Redux instead of React Context ?** Here are some React context potential
 disadvantages:
-- We can have a complex setup and managing state with React context can become quite complex because
+- We can have a complex setup, and managing state with React context can become quite complex because
   in very large application, using context, we can end up with code like this:
 `````javascript
 return (
-        <AuthContextProvider>
-          <ThemeContextProvider>
-            <UIIteractionContextProvider>
-              <MutiLanguageContextProvider>
-                <UserRegistration />
-              </MutiLanguageContextProvider>
-            </UIIteractionContextProvider>
-          </ThemeContextProvider>
-        </AuthContextProvider>
+  <AuthContextProvider>
+    <ThemeContextProvider>
+      <UIIteractionContextProvider>
+        <MutiLanguageContextProvider>
+          <UserRegistration />
+        </MutiLanguageContextProvider>
+      </UIIteractionContextProvider>
+    </ThemeContextProvider>
+  </AuthContextProvider>
 )
 `````
 - Surely, we can instead use a single context that manage a big state about everything we need in our application
   but this may become quite complicate to maintain.
 - We can have **performance issue** while using context because it's not recommended for high
-  frequency changes state management: **it's not ready for flux like state management but Redux do.**
+  frequency changes state management: **it's not ready for flux like state management while Redux do.**
 
 
 ### How Redux works?
 Redux only has one **Central Data Store (State)** and components subscribe to that state.
-However, they can't change that state directly. Instead, they can **dispatch** an action.
-**An action** is just a really javascript object which describe the kind of operation that
-the reducer function that can manipulate the Redux state should perform.\
+However, they can't change that state directly. Instead, they can **dispatch** actions.
+**An action** is just a really javascript object which describes the kind of operation that
+the reducer function that manipulate the Redux state should perform.\
 Once the Redux state is updated, components that subscribed to it are re-rendered.
 
 ### Working with Redux
@@ -766,7 +767,7 @@ const counter = useSelector(state => state.counter)
 Instead, always override it by returning a brand new state object**
 
 ### [@Reduxjs/Toolkit](https://redux-toolkit.js.org/)
-Installation: ``npm install @reduxjs/toolkit``. We can then avoid installing redux itself.\
+Installation: ``npm install @reduxjs/toolkit react-redux``: we can then avoid installing redux itself.\
 Then we can create our ``Slices`` thanks to it:
 `````javascript
 import { createSlice } from '@reduxjs/toolkit'
@@ -804,11 +805,12 @@ Once the slice is defined, we can export its reducer that will be used to config
 `````javascript
 export default counterSlice.reducer
 `````
-And then, in our ``index.js``, we can have such of thing:
+And then, in our ``//store/index.js``, we can have such of thing:
 ````javascript
+import { configureStore } from "@reduxjs/toolkit";
+
 import counterReducer from './counter'
 import authReducer from './auth'
-import { configureStore } from "@reduxjs/toolkit";
 
 const store = configureStore({
   reducer: {
@@ -820,7 +822,7 @@ const store = configureStore({
 export default store
 ````
 
-We could also export ``counterSlice.actions`` as ``counterActions`` from our slice
+We can also export ``counterSlice.actions`` as ``counterActions`` from our slice
 and use it in our components:
 `````javascript
 const counterActions = counterSlice.actions
@@ -836,12 +838,12 @@ dispatch(counterActions.increment(5))
 **Reducers must be pure, side effect free, synchronous functions**: we should never perform
 side effect inside our reducers no matter it's sync or async side effect! And even never write
 async code in reducers in general!!\
-So such side effects, they can be added 
+So such side effects can be added 
 - inside our components (thanks to **useEffect** for example), ignoring then redux at this point,
 - inside **action creators** that allow us to write async codes or side effects code generally.
 
 **NEVER MUTATE REDUX STATE OUTSIDE THE REDUCERS**\
-This will first be a very bad code and will change the object represented by the redux state in 
+This will be firstly, a very bad code and will change the object represented by the redux state in 
 memory without making redux aware of it. 
 
 ### Where should our logic (code) go?
@@ -887,6 +889,7 @@ dispatch(sendCartData(items))
 
 ## [React router](https://reactrouter.com/en/main)
 installation: ``npm install react-router-dom``
+
 Adding routing to our app is a multistep process:
 1. we must define the routes (urls) we want to support and which components should be loaded to these paths.
 2. we have to activate the router and load the routes definition defined in the first step.
@@ -947,9 +950,9 @@ It supposed to be a page element nicely styled 😅
 
 ### NavLink
 Instead of using **Link** in our navigation, we should use **NavLink** which provides such advantages:
-- className: here it's a function which receives ``({isActive})``. isActive is true is the route 
+1. [x] className: here it's a function which receives ``({isActive})``. isActive is true is the route 
 represented by the NavLink is active.
-- the ``end`` props on it let us say if the route should be considered active if other including its path are.
+2. [x] the ``end`` props on it let us say if the route should be considered active if other including its path are.
 `````javascript
 const isActiveHandler = useCallback(({isActive}) => isActive ? classes.active : undefined, [])
 return (
@@ -1028,6 +1031,7 @@ const eventLoader = async () => {
     // We can return an object that indicate that an 
     // error occured and then handle it in our component
     return {isError: true, message: 'some message'}
+    
     // OR
     // throw and object as error
     throw {message: 'Some error message'}
@@ -1039,7 +1043,7 @@ const eventLoader = async () => {
   return response
 }
 ````
-In case, we throw an error, react-router will render the closest error page to our component.
+In case, we throw something, react-router will render the closest error page to our component.
 in the error page, we can access the error thanks to the ``useRouteError()`` hook.\
 In case we return an object, we shall get that object. Otherwise, we could take advantage of the 
 status code provided by the ``Response`` object.
@@ -1066,7 +1070,7 @@ the ```json()``` method from react-router-dom, we don't need to stringify our da
 
 ### Loader with dynamic routes
 Our loaders functions receive automatically some data from which we can destruct ``({request, params})``. 
-- From ``request`` we can access the url from example
+- From ``request`` we can access the url from for example or await formData() from,
 - From the ``params`` we can access every parameter in the route
 
 ### The useRouteLoaderData hook
@@ -1158,7 +1162,7 @@ submit(null, {action: "/logout", method: "post"})
 `````
 
 ### useFetcher hook
-The useFetcher hook (without s at its end) is the tool we should use if we want to trigger a 
+The useFetcher hook (without 's' at its end) is the tool we should use if we want to trigger a 
 loader/action without actually loading the page/route to which this loader/action belongs to.
 Perfect then to do some work behind-the-scenes.\
 It brings a particular ``Form`` component that we should use if we want to work with it.
@@ -1188,8 +1192,8 @@ const NewsletterSignup = () => {
   );
 }
 ````
-Here, we're using it to handle a newsletter form which is a shared component (may appear in multiple part
-of our app) without actually loading the route its the given action.
+Here, we're using it to submit a newsletter form which is a shared component (may appear in multiple part
+of our app) without actually loading the route it's action for.
 - ``data`` contains the data returns by the loader/action used
 - ``state`` here tell us whether the fetcher behind-the-scene, completed its loader/action that was triggered. 
 
@@ -1277,7 +1281,11 @@ export const checkAuthLoader = () => {
   return null // very important then as I understand. But why? ☹️
 }
 ````
-
+In our loader or action, we can access searchParams this way:
+`````javascript
+const url = new URL(request.url)
+const searchParams = url.searchParams
+`````
 
 
 
