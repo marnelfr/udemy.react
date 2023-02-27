@@ -1287,7 +1287,8 @@ const url = new URL(request.url)
 const searchParams = url.searchParams
 `````
 
-## Lazy loading
+## Deploying
+### Lazy loading - Code optimization
 It's important to implement lazy loading in our app before sending it to prod. This 
 is because without it, every file used by our app is downloaded while the first
 page of our app is being rendered. But thanks to lazy loading, we shall henceforth 
@@ -1310,8 +1311,13 @@ const route = {
 } 
 `````
 
-
-
+### Build for production
+Command: ``npm run build``\
+Once the command end executing, our code ready for production is placed in the ``//build``
+folder.\
+Our app can then be uploaded to production using for example Firebase hosting. To do that,
+we need to create a project on our firebase console. Once done, we can click on ``Build`` then
+on ``Hosting`` and then click on ``Get started`` and follow instructions. 
 
 
 
