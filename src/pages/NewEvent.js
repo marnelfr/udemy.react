@@ -1,6 +1,12 @@
+import EventForm from "../components/EventForm";
+
+export const newEventAction = ({request, params}) => {
+
+}
+
 const NewEventPage = () => {
   return (
-    <h1>New Event Page</h1>
+    <EventForm />
   )
 }
 

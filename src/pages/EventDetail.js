@@ -10,6 +10,16 @@ export const eventItemLoader = async ({params}) => {
   return response
 }
 
+export const eventAction = async ({request, params}) => {
+  const response = await fetch('http://localhost:8080/events/' + params.eventId, {
+    method: request.method
+  })
+  if(!response.ok) {
+    throw json({message: 'Can not delete event'}, {status: 500})
+  }
+  return response
+}
+
 const EventDetailPage = () => {
   const data = useRouteLoaderData('event-item')
   return (
