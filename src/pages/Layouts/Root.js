@@ -8,6 +8,9 @@ const RootLayout = () => {
   const token = getAuthToken()
 
   useEffect(() => {
+    if(!token || token === 'EXPIRED') {
+      return;
+    }
     const duration = getExpirationDuration()
     const timer = setTimeout(() => {
       submit(null, {action: '/logout', method: 'post'})
