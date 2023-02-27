@@ -9,6 +9,7 @@ import RootLayout from "./pages/Layouts/Root";
 import EventRootLayout from "./pages/Layouts/EventRoot";
 import ErrorPage from "./pages/Error";
 import NewsletterPage, {newsletterAction} from "./pages/Newsletter";
+import AuthenticationPage from "./pages/Authentication";
 
 // Challenge / Exercise
 
@@ -56,7 +57,8 @@ const router = createBrowserRouter([
           {path: 'new', element: <NewEventPage />, action: newEventAction}
         ]
       },
-      {path: 'newsletter', element: <NewsletterPage />, action: newsletterAction}
+      {path: 'newsletter', element: <NewsletterPage />, action: newsletterAction},
+      {path: 'auth', element: <AuthenticationPage />}
     ]
   }
 ])
