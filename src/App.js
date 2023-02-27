@@ -10,6 +10,8 @@ import EventRootLayout from "./pages/Layouts/EventRoot";
 import ErrorPage from "./pages/Error";
 import NewsletterPage, {newsletterAction} from "./pages/Newsletter";
 import AuthenticationPage, {authAction} from "./pages/Authentication";
+import {checkAuthLoader} from "./util/auth";
+import {logoutAction} from "./pages/Logout";
 
 // Challenge / Exercise
 
@@ -38,6 +40,8 @@ const router = createBrowserRouter([
     path: '/',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
+    loader: checkAuthLoader,
+    id: 'root',
     children: [
       {index: true, element: <HomePage />},
       {
@@ -58,7 +62,8 @@ const router = createBrowserRouter([
         ]
       },
       {path: 'newsletter', element: <NewsletterPage />, action: newsletterAction},
-      {path: 'auth', element: <AuthenticationPage />, action: authAction}
+      {path: 'auth', element: <AuthenticationPage />, action: authAction},
+      {path: 'logout', action: logoutAction}
     ]
   }
 ])
