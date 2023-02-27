@@ -13,7 +13,7 @@ function MainNavigation() {
           <li><NavLink to="/" end className={isActiveHandler}>Home</NavLink></li>
           <li><NavLink to="/events" className={isActiveHandler}>Events</NavLink></li>
           <li><NavLink to="/newsletter" className={isActiveHandler}>Newsletter</NavLink></li>
-          <li><NavLink to="/auth" className={isActiveHandler}>Login</NavLink></li>
+          <li><NavLink to="/auth?mode=login" className={isActiveHandler}>Login</NavLink></li>
         </ul>
       </nav>
 
