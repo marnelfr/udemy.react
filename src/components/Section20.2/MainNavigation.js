@@ -16,7 +16,7 @@ const MainNavigation = () => {
           <li><NavLink to="events" className={activeHandler}>Events</NavLink></li>
           <li><NavLink to="/newsletter" className={activeHandler}>Newsletter</NavLink></li>
           {
-            token
+            token && token !== 'EXPIRED'
               ? <Form action="/logout" method="POST"><button>Logout</button></Form>
               : <li><NavLink to="/auth?mode=login" className={activeHandler}>Login</NavLink></li>
           }
