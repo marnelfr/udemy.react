@@ -10,10 +10,6 @@ export const newEventAction = async ({request, params}) => {
     date: data.get('date')
   }
 
-  if(request.method === 'PATCH') {
-
-  }
-
   const response = await fetch('http://localhost:8080/events', {
     method: request.method,
     headers: {

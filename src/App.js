@@ -4,10 +4,11 @@ import HomePage from "./pages/Home";
 import EventsPage, {eventsLoader} from "./pages/Events";
 import EventDetailPage, {deleteEventAction, eventItemLoader} from "./pages/EventDetail";
 import NewEventPage, {newEventAction} from "./pages/NewEvent";
-import EditEventPage from "./pages/EditEvent";
+import EditEventPage, {editEventAction} from "./pages/EditEvent";
 import RootLayout from "./pages/Layouts/Root";
 import EventRootLayout from "./pages/Layouts/EventRoot";
 import ErrorPage from "./pages/Error";
+import NewsletterPage, {newsletterAction} from "./pages/Newsletter";
 
 // Challenge / Exercise
 
@@ -49,12 +50,13 @@ const router = createBrowserRouter([
             loader: eventItemLoader,
             children: [
               {index: true, element: <EventDetailPage />, action: deleteEventAction},
-              {path: 'edit', element: <EditEventPage />}
+              {path: 'edit', element: <EditEventPage />, action: editEventAction}
             ]
           },
           {path: 'new', element: <NewEventPage />, action: newEventAction}
         ]
       },
+      {path: 'newsletter', element: <NewsletterPage />, action: newsletterAction}
     ]
   }
 ])
