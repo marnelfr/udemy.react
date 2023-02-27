@@ -10,8 +10,8 @@ import EventRootLayout from "./pages/Layouts/EventRoot";
 import ErrorPage from "./pages/Error";
 import NewsletterPage, {newsletterAction} from "./pages/Newsletter";
 import AuthenticationPage, {authAction} from "./pages/Authentication";
-import {checkAuthLoader} from "./util/auth";
 import {logoutAction} from "./pages/Logout";
+import {checkAuthLoader} from "./pages/Login";
 
 // Challenge / Exercise
 

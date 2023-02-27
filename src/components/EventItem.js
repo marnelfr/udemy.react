@@ -1,9 +1,10 @@
 import classes from './EventItem.module.css';
-import {Link, useNavigate, useSubmit} from "react-router-dom";
+import {Link, useNavigate, useRouteLoaderData, useSubmit} from "react-router-dom";
 
 
 function EventItem({ event }) {
   const submit = useSubmit()
+  const isLoggedIn = useRouteLoaderData('root')
 
   function startDeleteHandler() {
     const proceed = window.confirm(`Sure... You want to deleted the event ${event.title}?`)
@@ -18,10 +19,12 @@ function EventItem({ event }) {
       <h1>{event.title}</h1>
       <time>{event.date}</time>
       <p>{event.description}</p>
-      <menu className={classes.actions}>
-        <Link to="edit">Edit</Link>
-        <button onClick={startDeleteHandler}>Delete</button>
-      </menu>
+      {isLoggedIn && (
+        <menu className={classes.actions}>
+          <Link to="edit">Edit</Link>
+          <button onClick={startDeleteHandler}>Delete</button>
+        </menu>
+      )}
     </article>
   );
 }

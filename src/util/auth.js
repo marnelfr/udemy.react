@@ -15,11 +15,8 @@ export const getAuthToken = () => {
   return localStorage.getItem('token')
 };
 
-export const checkAuthLoader = () => {
-  return getAuthToken()
-}
-
 export const removeAuthToken = () => {
   localStorage.removeItem('token')
   localStorage.removeItem('expiration')
 }
+
