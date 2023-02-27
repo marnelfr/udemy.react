@@ -11,7 +11,8 @@ import ErrorPage from "./pages/Error";
 import NewsletterPage, {newsletterAction} from "./pages/Newsletter";
 import AuthenticationPage, {authAction} from "./pages/Authentication";
 import {logoutAction} from "./pages/Logout";
-import {checkAuthLoader} from "./pages/Login";
+import {authLoader} from "./pages/Login";
+import {checkAuthLoader} from "./util/auth";
 
 // Challenge / Exercise
 
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
-    loader: checkAuthLoader,
+    loader: authLoader,
     id: 'root',
     children: [
       {index: true, element: <HomePage />},
@@ -55,10 +56,10 @@ const router = createBrowserRouter([
             loader: eventItemLoader,
             children: [
               {index: true, element: <EventDetailPage />, action: deleteEventAction},
-              {path: 'edit', element: <EditEventPage />, action: editEventAction}
+              {path: 'edit', element: <EditEventPage />, action: editEventAction, loader: checkAuthLoader}
             ]
           },
-          {path: 'new', element: <NewEventPage />, action: newEventAction}
+          {path: 'new', element: <NewEventPage />, action: newEventAction, loader: checkAuthLoader}
         ]
       },
       {path: 'newsletter', element: <NewsletterPage />, action: newsletterAction},
