@@ -1330,7 +1330,7 @@ It got:
 - timeout props which defined the transition time.
 ````javascript
 <button onClick={() => setShowDiv(showDiv => !showDiv)} className="Button">Toggle</button>
-<Transition in={showDiv} mountOnEnter unmountOnExit timeout={1000}>
+<Transition in={showDiv} mountOnEnter unmountOnExit timeout={400}>
   {state => <div
     style={{
       background: 'red',

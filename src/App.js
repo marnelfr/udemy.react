@@ -29,7 +29,7 @@ class App extends Component {
       <div className="App">
         <h1>React Animations</h1>
         <button onClick={this.toggler} className="Button">Toggle</button>
-        <Transition in={this.state.showDiv} mountOnEnter unmountOnExit timeout={1000}>
+        <Transition in={this.state.showDiv} mountOnEnter unmountOnExit timeout={400}>
           {state => <div
             style={{
               background: 'red',
@@ -42,8 +42,10 @@ class App extends Component {
           />}
         </Transition>
         <br/><br/>
-        <Modal show={this.state.showModal} closed={this.hideModal} />
-        <Backdrop closed={this.hideModal} show={this.state.showModal} />
+        <Transition in={this.state.showModal} timeout={300} mountOnEnter unmountOnExit>
+          {state => <Modal show={state} closed={this.hideModal} />}
+        </Transition>
+        {this.state.showModal && <Backdrop closed={this.hideModal} show />}
         <button onClick={this.showModal} className="Button">Open Modal</button>
         <h3>Animating Lists</h3>
         <List />
