@@ -29,8 +29,17 @@ class App extends Component {
       <div className="App">
         <h1>React Animations</h1>
         <button onClick={this.toggler} className="Button">Toggle</button>
-        <Transition in={this.state.showDiv} timeout={1000}>
-          {state => <p>{state}</p>}
+        <Transition in={this.state.showDiv} mountOnEnter unmountOnExit timeout={1000}>
+          {state => <div
+            style={{
+              background: 'red',
+              height: 100,
+              width: 100,
+              margin: 'auto',
+              opacity: state === 'entered' ? 1 : 0,
+              transition: 'opacity 0.4s linear'
+            }}
+          />}
         </Transition>
         <br/><br/>
         <Modal show={this.state.showModal} closed={this.hideModal} />
