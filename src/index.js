@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import registerServiceWorker from "./registerServiceWorker";
 import App from "./App";
-import {Provider} from "react-redux";
-import store from "./store/Section25";
+import {ProductContextProvider} from "./context/products";
 
 // import AnimationApp from "./components/Section24/App";
 // import ExpenseApp from './components/ExpenseApp/App';
@@ -27,6 +26,7 @@ import store from "./store/Section25";
 // import store from "./components/src/store/index";
 // import App19 from './components/Section19/App'
 // import store from './store/Section19'
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -45,9 +45,9 @@ root.render(
     {/*<RouteApp />*/}
     {/*<DeferredApp />*/}
     {/*<AnimationApp/>*/}
-    <Provider store={store}>
+    <ProductContextProvider>
       <App />
-    </Provider>
+    </ProductContextProvider>
   </React.StrictMode>
 );
 registerServiceWorker();
