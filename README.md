@@ -1352,7 +1352,8 @@ Can be used in place of the **Transition** component. It doesn't receive a funct
 a ``classNames`` props that will be used to add CSS classes dynamically to our component based on the ``state``.
 So `modal-class` will give us
 - `modal-class-enter` when `state === 'enter'`
-- `modal-class-enter-active` when `state === 'entering' || state === 'entered'`
+- `modal-class-enter-active` when `state === 'entering'`
+- `modal-class-enter-done` when `state === 'entered'`
 - `modal-class-exit` when `state === 'exit'`
 - `modal-class-exit-active` when `state === 'exiting' || state === 'exited'`
 
