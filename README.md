@@ -692,6 +692,8 @@ return (
   but this may become quite complicate to maintain.
 - We can have **performance issue** while using context because it's not recommended for high
   frequency changes state management: **it's not ready for flux like state management while Redux do.**
+- Once only one property of the state managed by a context change, every component that subscribed to it
+are reloaded even if they don't use that particular property, so not directly affected by that change.
 
 
 ### How Redux works?
