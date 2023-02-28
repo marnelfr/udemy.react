@@ -1373,6 +1373,10 @@ enter, enterActive, exit, exitActive, appear, appearActive
 </CSSTransition>
 `````
 
+### TransitionGroup
+Can be used to render a list of element. By default, it renders a div element, but
+we can change this thanks to the ``component`` props.\
+Its children should be wrapped with ``Transition`` or `CSSTransition` element.
 
 
 
