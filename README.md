@@ -1327,7 +1327,7 @@ It got:
 - four state (entering, entered, exiting, exited) that we can use to adjust our css for animating
 - in props that receive the state related to the display of our component
 - mountOnEnter/unmountOnExit props that can be added if we want to remove completely the element from the dom on ``exited``
-- timeout props which defined the transition time.
+- timeout props which defined the transition time. It can receive an object defining the ``enter`` and ``exit`` timing.
 ````javascript
 <button onClick={() => setShowDiv(showDiv => !showDiv)} className="Button">Toggle</button>
 <Transition in={showDiv} mountOnEnter unmountOnExit timeout={400}>
@@ -1343,6 +1343,7 @@ It got:
   />}
 </Transition>
 ````
+
 
 
 
