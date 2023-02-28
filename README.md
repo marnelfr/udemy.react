@@ -1378,8 +1378,10 @@ Can be used to render a list of element. By default, it renders a div element, b
 we can change this thanks to the ``component`` props.\
 Its children should be wrapped with ``Transition`` or `CSSTransition` element.
 
-
-
+### Other animation packages
+- [React Motion](https://github.com/chenglou/react-motion)
+- [React Move](https://react-move-docs.netlify.app/getting-started/installation) for more complex animations
+- [React Router Transition](https://github.com/maisano/react-router-transition)
 
 
 
