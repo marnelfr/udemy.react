@@ -4,10 +4,12 @@ import "./App.css";
 import Modal from "./components/Section24/Modal/Modal";
 import Backdrop from "./components/Section24/Backdrop/Backdrop";
 import List from "./components/Section24/List/List";
+import {Transition} from "react-transition-group";
 
 class App extends Component {
   state = {
-    showModal: false
+    showModal: false,
+    showDiv: false
   }
 
   showModal = () => {
@@ -18,10 +20,19 @@ class App extends Component {
     this.setState({showModal: false})
   }
 
+  toggler = () => {
+    this.setState(state => ({showDiv: !state.showDiv}))
+  }
+
   render() {
     return (
       <div className="App">
         <h1>React Animations</h1>
+        <button onClick={this.toggler} className="Button">Toggle</button>
+        <Transition in={this.state.showDiv} timeout={1000}>
+          {state => <p>{state}</p>}
+        </Transition>
+        <br/><br/>
         <Modal show={this.state.showModal} closed={this.hideModal} />
         <Backdrop closed={this.hideModal} show={this.state.showModal} />
         <button onClick={this.showModal} className="Button">Open Modal</button>
