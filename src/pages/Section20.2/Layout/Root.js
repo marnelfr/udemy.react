@@ -1,7 +1,7 @@
 import {Outlet, useLoaderData, useSubmit} from "react-router-dom";
 import MainNavigation from "../../../components/Section20.2/MainNavigation";
 import {useEffect} from "react";
-import {getTokenDuration} from "../../../util/auth";
+import {getTokenDuration} from "../../../util/Section20.2/auth";
 
 const RootLayout = () => {
   const token = useLoaderData();

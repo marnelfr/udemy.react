@@ -1,7 +1,7 @@
 import {Form, json, redirect, useActionData, useNavigate, useNavigation} from 'react-router-dom';
 
 import classes from './EventForm.module.css';
-import {getAuthToken} from "../../util/auth";
+import {getAuthToken} from "../../util/Section20.2/auth";
 
 export const cruEventAction = async ({request, params}) => {
   const data = await request.formData()

@@ -4,7 +4,7 @@ import {Await, defer, json, redirect, useRouteLoaderData} from "react-router-dom
 import EventItem from "../../components/Section20.2/EventItem";
 // import {loadEvents} from "./Events";
 import EventsList from "../../components/Section20.2/EventsList";
-import {getAuthToken} from "../../util/auth";
+import {getAuthToken} from "../../util/Section20.2/auth";
 
 const loadEventItem = async id => {
   const response = await fetch('http://localhost:8080/events/' + id)

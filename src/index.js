@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux'
+
+import reportWebVitals from './reportWebVitals';
+import registerServiceWorker from "./registerServiceWorker";
+import App from "./App";
 
 // import ExpenseApp from './components/ExpenseApp/App';
-import reportWebVitals from './reportWebVitals';
-import App from './App'
+// import DeferredApp from './components/Section20.2/App'
+// import { Provider } from 'react-redux'
 // import RouteApp from "./components/Section20/App";
 // import FormApp from "./components/Section16/App";
 // import GoalApp from "./components/CourseGoals/App";
@@ -37,9 +40,11 @@ root.render(
     {/*<Provider store={store}><ReduxCounterApp/></Provider>*/}
     {/*<Provider store={store}><App19 /></Provider>*/}
     {/*<RouteApp />*/}
-    <App />
+    {/*<DeferredApp />*/}
+    <App/>
   </React.StrictMode>
 );
+registerServiceWorker();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

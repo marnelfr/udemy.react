@@ -1,6 +1,6 @@
 import AuthForm from "../../components/Section20.2/AuthForm";
 import {json, redirect, useActionData} from "react-router-dom";
-import {setAuthToken} from "../../util/auth";
+import {setAuthToken} from "../../util/Section20.2/auth";
 
 export const authAction = async ({request, params}) => {
   const searchParams = new URL(request.url).searchParams
