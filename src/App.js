@@ -1,55 +1,25 @@
-import React, { Component } from "react";
+import React from 'react';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 
-import "./App.css";
-import Modal from "./components/Section24/Modal/Modal";
-import Backdrop from "./components/Section24/Backdrop/Backdrop";
-import List from "./components/Section24/List/List";
-import {Transition} from "react-transition-group";
+import './App.css'
 
-class App extends Component {
-  state = {
-    showModal: false,
-    showDiv: false
-  }
+import ProductsPage from './pages/Section25/Products';
+import FavoritesPage from './pages/Section25/Favorites';
+import RootLayout from "./pages/Section25/Layout/Root";
 
-  showModal = () => {
-    this.setState({showModal: true})
-  }
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout/>,
+    children: [
+      {index: true, element: <ProductsPage/>},
+      {path: '/favorites', element: <FavoritesPage/>}
+    ]
+  },
+])
 
-  hideModal = () => {
-    this.setState({showModal: false})
-  }
-
-  toggler = () => {
-    this.setState(state => ({showDiv: !state.showDiv}))
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <h1>React Animations</h1>
-        <button onClick={this.toggler} className="Button">Toggle</button>
-        <Transition in={this.state.showDiv} mountOnEnter unmountOnExit on timeout={400}>
-          {state => <div
-            style={{
-              background: 'red',
-              height: 100,
-              width: 100,
-              margin: 'auto',
-              opacity: state === 'entered' ? 1 : 0,
-              transition: 'opacity 0.4s linear'
-            }}
-          />}
-        </Transition>
-        <br/><br/>
-        <Modal show={this.state.showModal} closed={this.hideModal} />
-        {this.state.showModal && <Backdrop closed={this.hideModal} show />}
-        <button onClick={this.showModal} className="Button">Open Modal</button>
-        <h3>Animating Lists</h3>
-        <List />
-      </div>
-    );
-  }
-}
+const App = () => {
+  return <RouterProvider router={router} />
+};
 
 export default App;

@@ -4,7 +4,10 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import registerServiceWorker from "./registerServiceWorker";
 import App from "./App";
+import {Provider} from "react-redux";
+import store from "./store/Section25";
 
+// import AnimationApp from "./components/Section24/App";
 // import ExpenseApp from './components/ExpenseApp/App';
 // import DeferredApp from './components/Section20.2/App'
 // import { Provider } from 'react-redux'
@@ -41,7 +44,10 @@ root.render(
     {/*<Provider store={store}><App19 /></Provider>*/}
     {/*<RouteApp />*/}
     {/*<DeferredApp />*/}
-    <App/>
+    {/*<AnimationApp/>*/}
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 registerServiceWorker();
