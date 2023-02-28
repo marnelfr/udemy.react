@@ -1323,6 +1323,8 @@ on ``Hosting`` and then click on ``Get started`` and follow instructions.
 We can do this by using build in CSS property or take advantage from the [React-Transition-Group](https://reactcommunity.org/react-transition-group/)
 package offered by the React community.\
 Installation: ``npm install react-transition-group --save``\
+
+### Transition component
 It got:
 - four state (entering, entered, exiting, exited) that we can use to adjust our css for animating
 - in props that receive the state related to the display of our component
@@ -1343,7 +1345,16 @@ It got:
   />}
 </Transition>
 ````
+- onEnter/onEntering/onEntered/onExit/onExiting/onExited event that can be used to execute what ever function we need to execute.
 
+### CSSTransition
+Can be used in place of the **Transition** component. It doesn't receive a function as children but 
+a ``classNames`` props that will be used to add CSS classes dynamically to our component based on the ``state``.
+So `modal-class` will give us
+- `modal-class-enter` when `state === 'enter'`
+- `modal-class-enter-active` when `state === 'entering' || state === 'entered'`
+- `modal-class-exit` when `state === 'exit'`
+- `modal-class-exit-active` when `state === 'exiting' || state === 'exited'`
 
 
 
