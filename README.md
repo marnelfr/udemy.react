@@ -1319,6 +1319,30 @@ Our app can then be uploaded to production using for example Firebase hosting. T
 we need to create a project on our firebase console. Once done, we can click on ``Build`` then
 on ``Hosting`` and then click on ``Get started`` and follow instructions. 
 
+## Animating ReactApp
+We can do this by using build in CSS property or take advantage from the [React-Transition-Group](https://reactcommunity.org/react-transition-group/)
+package offered by the React community.\
+Installation: ``npm install react-transition-group --save``\
+It got:
+- four state (entering, entered, exiting, exited) that we can use to adjust our css for animating
+- in props that receive the state related to the display of our component
+- mountOnEnter/unmountOnExit props that can be added if we want to remove completely the element from the dom on ``exited``
+- timeout props which defined the transition time.
+````javascript
+<button onClick={() => setShowDiv(showDiv => !showDiv)} className="Button">Toggle</button>
+<Transition in={showDiv} mountOnEnter unmountOnExit timeout={1000}>
+  {state => <div
+    style={{
+      background: 'red',
+      height: 100,
+      width: 100,
+      margin: 'auto',
+      opacity: state === 'entered' ? 1 : 0,
+      transition: 'opacity 0.4s linear'
+    }}
+  />}
+</Transition>
+````
 
 
 
