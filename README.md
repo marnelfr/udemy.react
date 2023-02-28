@@ -1357,7 +1357,21 @@ So `modal-class` will give us
 - `modal-class-exit` when `state === 'exit'`
 - `modal-class-exit-active` when `state === 'exiting' || state === 'exited'`
 
-
+Another way will be to define those state classes thanks to an object having the property
+enter, enterActive, exit, exitActive, appear, appearActive
+`````javascript
+<CSSTransition 
+  in={props.show} 
+  timeout={animationTiming} 
+  mountOnEnter unmountOnExit 
+  classNames={{enterActive: 'modalOpen', exitActive: 'modalClose'}}
+>
+  <div className='Modal'>
+    <h1>A Modal</h1>
+    <button className="Button" onClick={props.closed}>Dismiss</button>
+  </div>
+</CSSTransition>
+`````
 
 
 

@@ -13,11 +13,11 @@
     transition: all 0.3s ease-out;
 }
 
-.fade-slide-enter-active {
+.modalOpen {
     animation: openModal 0.5s ease-out forwards;
 }
 
-.fade-slide-exit-active {
+.modalClose {
     animation: closeModal 1s ease-out forwards;
 }
 
