@@ -1441,16 +1441,25 @@ Our test function can be async, and we can mock external function or api used by
 to mack sure our tests won't fail because of them. 
 ````javascript
 test('renders listitem as expected', async () => {
+  // Arrange
   window.fetch = jest.fn() // help us to create a mock function
   window.fetch.mockResolvedValueOnce({ // used to mock the returned value of our mock function
     json: async () => [{id: 'p1', title: 'First post'}]
   })
   render(<Async />)
 
+  // Assert
   const listItemElements = await screen.findAllByRole('listitem', {})
   expect(listItemElements).not.toHaveLength(0)
 })
 ````
+
+More about [Jestjs](https://jestjs.io/docs/getting-started), the 
+[React testing library](https://testing-library.com/docs/react-testing-library/intro/),
+and the [React hooks testing library](https://react-hooks-testing-library.com/installation)
+
+
+
 
 
 
