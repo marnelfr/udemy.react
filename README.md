@@ -1412,23 +1412,28 @@ It gives us
 - `get` functions which throw error if the requested element in the vDOM is not found
 
 They result is then passed to the globally available `expect()` function on which we've got various matches.
+It may also be a good idea as our app grows, to group our test using the `describe()` function
 ````javascript
 import {render, screen} from "@testing-library/react";
 import Greeting from "./Greeting";
 
-test('renders hello world as a text', () => {
-  // Arrange
-  render(<Greeting/>)
+describe('Greeting component', () => {
+  test('renders hello world as a text', () => {
+    // Arrange
+    render(<Greeting/>)
 
-  // Act
-  //... nothing to do here
+    // Act
+    //... nothing to do here
 
-  //Assert
-  const helloWorldElement = screen.getByText('Hello World!')
-  const loginElement = screen.queryByText('Login')
+    //Assert
+    const helloWorldElement = screen.getByText('Hello World!')
+    const loginElement = screen.queryByText('Login')
 
-  expect(helloWorldElement).toBeInTheDocument()
-  expect(loginElement).not.toBeInTheDocument()
+    expect(helloWorldElement).toBeInTheDocument()
+    expect(loginElement).not.toBeInTheDocument()
+  })
+  
+  test('renders Here is as test', () => {/*...**/})
 })
 ````
 
