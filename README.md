@@ -1385,6 +1385,61 @@ Its children should be wrapped with ``Transition`` or `CSSTransition` element.
 - [React Move](https://react-move-docs.netlify.app/getting-started/installation) for more complex animations
 - [React Router Transition](https://github.com/maisano/react-router-transition)
 
+## Testing 🤓
+When writing our test, we can use the `test` function available globally.\
+It takes 2 arguments: 
+- A description of what we're testing
+- An anonymous function which will contains the testing code that we should write 
+by using the three **A**s: arrange, act, and assert.
+
+### Arrange
+Here, we set up the test data, test condition and test environment. 
+For example, we may render the component that we want to test. To do that, we may need to
+- import the component we want to test
+- render it thanks to the `render()` function from the testing-library that receive a JSX code
+- ...
+
+### Act
+We do the thing we want to test, run logic that should be tested such 
+as a function execution or a button click simulation. 
+
+### Assert the result
+We compare then the execution results (the output on the screen for example) with the 
+expected results. This can be done thanks to `screen` which give us access to the virtual dom rendered.
+It gives us 
+- `query` functions which can be used to get an element in the vDOM
+- `find` functions which returns a promise.
+- `get` functions which throw error if the requested element in the vDOM is not found
+
+They result is then passed to the globally available `expect()` function on which we've got various matches.
+````javascript
+import {render, screen} from "@testing-library/react";
+import Greeting from "./Greeting";
+
+test('renders hello world as a text', () => {
+  // Arrange
+  render(<Greeting/>)
+
+  // Act
+  //... nothing to do here
+
+  //Assert
+  const helloWorldElement = screen.getByText('Hello World!')
+  const loginElement = screen.queryByText('Login')
+
+  expect(helloWorldElement).toBeInTheDocument()
+  expect(loginElement).not.toBeInTheDocument()
+})
+````
+
+
+
+
+
+
+
+
+
 
 
 
