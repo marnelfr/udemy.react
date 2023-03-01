@@ -1459,6 +1459,10 @@ More about [Jestjs](https://jestjs.io/docs/getting-started), the
 and the [React hooks testing library](https://react-hooks-testing-library.com/installation)
 
 
+## TypeScript
+Global installation: `sudo npm install -g typescript --save-dev`
+
+
 
 
 
