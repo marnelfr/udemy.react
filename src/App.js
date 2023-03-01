@@ -18,6 +18,6 @@ const router = createBrowserRouter([
   },
 ])
 
-const App = () => <RouterProvider router={router} />
+const FavApp = () => <RouterProvider router={router} />
 
-export default App;
+export default FavApp;

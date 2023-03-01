@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 
 import reportWebVitals from './reportWebVitals';
 import registerServiceWorker from "./registerServiceWorker";
-import App from "./App";
 import {ProductContextProvider} from "./context/products";
 
+import FavApp from "./App";
 // import AnimationApp from "./components/Section24/App";
 // import ExpenseApp from './components/ExpenseApp/App';
 // import DeferredApp from './components/Section20.2/App'
@@ -45,9 +45,7 @@ root.render(
     {/*<RouteApp />*/}
     {/*<DeferredApp />*/}
     {/*<AnimationApp/>*/}
-    <ProductContextProvider>
-      <App />
-    </ProductContextProvider>
+    <ProductContextProvider><FavApp /></ProductContextProvider>
   </React.StrictMode>
 );
 registerServiceWorker();
