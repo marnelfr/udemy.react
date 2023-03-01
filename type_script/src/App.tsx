@@ -1,8 +1,13 @@
 import React from 'react';
-import Todo from "./components/Todo/Todo";
+import Todos from "./components/Todo/Todos";
+import Todo from "./modeles/todo";
 
 function App() {
-  return <Todo  items={['task1', 'task2']}/>;
+  const items = [
+    new Todo('task1'),
+    new Todo('task2')
+  ]
+  return <Todos items={items} />;
 }
 
 export default App;
