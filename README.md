@@ -1461,7 +1461,19 @@ and the [React hooks testing library](https://react-hooks-testing-library.com/in
 
 ## TypeScript
 Global installation: `sudo npm install -g typescript --save-dev`
+````javascript
+// core primitve type
+let age: number = 45
+let username: string = 'marnel'
+let isProgrammer: boolean = true
 
+//More complex type
+let usernames: string[] = ['Marnel', 'Ginola']
+let users: {
+  name: string,
+  age: number
+}[] = [{name: 'Marnel', age: 14}]
+````
 
 
 
