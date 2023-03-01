@@ -8,7 +8,7 @@ import {ProductContextProvider} from "./context/products";
 
 // import AnimationApp from "./components/Section24/App";
 // import ExpenseApp from './components/ExpenseApp/App';
-import DeferredApp from './components/Section20.2/App'
+// import DeferredApp from './components/Section20.2/App'
 // import { Provider } from 'react-redux'
 // import RouteApp from "./components/Section20/App";
 // import FormApp from "./components/Section16/App";
@@ -43,9 +43,11 @@ root.render(
     {/*<Provider store={store}><ReduxCounterApp/></Provider>*/}
     {/*<Provider store={store}><App19 /></Provider>*/}
     {/*<RouteApp />*/}
-    <DeferredApp />
+    {/*<DeferredApp />*/}
     {/*<AnimationApp/>*/}
-    {/*<ProductContextProvider><App /></ProductContextProvider>*/}
+    <ProductContextProvider>
+      <App />
+    </ProductContextProvider>
   </React.StrictMode>
 );
 registerServiceWorker();
