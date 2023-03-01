@@ -1461,7 +1461,7 @@ and the [React hooks testing library](https://react-hooks-testing-library.com/in
 
 ## TypeScript
 Global installation: `sudo npm install -g typescript --save-dev`
-````javascript
+````typescript
 // core primitve type
 let age: number = 45
 let username: string = 'marnel'
@@ -1473,6 +1473,32 @@ let users: {
   name: string,
   age: number
 }[] = [{name: 'Marnel', age: 14}]
+
+// Type inference
+let course = 'React course'
+course = 34 // will brings to an error since the type of course is therefore string.
+
+// Union type
+let car: string|number = 'Avalon'
+car = 555 // won't lead to an error since car is of type string or number
+
+// Type alias
+type Person = {name: string, age: number}
+let customer: Person = {name: 'Marnel', age: 23}
+let accounts: Person[] = [{name: 'Marnel', age: 30}]
+
+// Functions & types
+const add = (a:number, b: number): number => {} // we could omit the return's type here since it could be inferenced
+const print = (val: any): void => console.log(val) // void type for functions that doesn't return a value
+
+//Generics
+const preInsert = <T>(array: T[], num: T) => [num, ...array]
+// the generics type T helps typescript to inference that newArray is of type number[]
+const newArray = preInsert([1, 2, 3], 45)
+const stringArray = preInsert<string>(['a', 'b', 'c'], 'd')
+
+// we can explicitly set a variable type like this:
+let numbers: Array<number> = [1, 2, 3]; 
 ````
 
 
