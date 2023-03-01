@@ -58,10 +58,10 @@ const route = createBrowserRouter([
             loader: eventItemLoader,
             children: [
               { index: true, element: <EventDetailPage />, action: eventItemAction },
-              { path: 'edit', element: <EditEventPage />, action: cruEventAction, loader: checkAuthLoader },
+              { path: 'edit', element: <EditEventPage />, action: cruEventAction, loader: () => import("../../util/Section20.2/auth").then(checkAuthLoader()) },
             ]
           },
-          { path: 'new', element: <NewEventPage />, action: cruEventAction, loader: checkAuthLoader },
+          { path: 'new', element: <NewEventPage />, action: cruEventAction, loader: () => import("../../util/Section20.2/auth").then(checkAuthLoader()) },
         ]
       },
       {
