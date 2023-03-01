@@ -1,8 +1,9 @@
 import {render, screen} from "@testing-library/react";
 import Greeting from "./Greeting";
+import userEvent from "@testing-library/user-event";
 
 describe('Greeting component', () => {
-  test('renders hello world as a text', () => {
+  test('renders "Hello World!" as a text', () => {
     // Arrange
     render(<Greeting/>)
 
@@ -17,10 +18,30 @@ describe('Greeting component', () => {
     expect(loginElement).not.toBeInTheDocument()
   })
 
-  test('renders Here is as a text', () => {
+  test('renders "Happy to see" as a text', () => {
     render(<Greeting />)
 
-    const hereIsText = screen.getByText('Here is', {exact: false})
+    const hereIsText = screen.getByText('Happy to see', {exact: false})
     expect(hereIsText).toBeInTheDocument()
+  })
+
+  test('renders "Changed!" if the button is clicked', () => {
+    render(<Greeting />)
+
+    const btn = screen.getByRole('button')
+    userEvent.click(btn)
+
+    const outputElement = screen.getByText('Changed!')
+    expect(outputElement).toBeInTheDocument()
+  })
+
+  test('does not renders "Happy to see" once the button is clicked', () => {
+    render(<Greeting />)
+
+    const btn = screen.getByRole('button')
+    userEvent.click(btn)
+
+    const happyElement = screen.queryByText('Happy to see', {exact: false})
+    expect(happyElement).not.toBeInTheDocument()
   })
 })
