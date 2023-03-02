@@ -11,6 +11,7 @@ import EditEventPage from "./pages/EditEvent";
 import "./App.css";
 import EventsList from "./components/EventsList/EventsList";
 import { eventItemAction } from "./components/EventItem/EventItem";
+import ErrorPage from "./pages/Error";
 
 // Challenge / Exercise
 
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
       {
