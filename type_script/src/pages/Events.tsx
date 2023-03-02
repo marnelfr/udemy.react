@@ -1,25 +1,37 @@
+import { json, useLoaderData } from "react-router-dom";
+
 import Event from "../modeles/Event";
 import EventsList from "../components/EventsList/EventsList";
 
-const DUMMY_EVENTS = [
-  new Event(
-    'Event test',
-    'https://media.istockphoto.com/id/499517325/photo/a-man-speaking-at-a-business-conference.jpg?s=612x612&w=0&k=20&c=gWTTDs_Hl6AEGOunoQ2LsjrcTJkknf9G8BGqsywyEtE=',
-    'Portez ce vieux whisky au juge blond qui fume',
-    '2022-03-12',
-    null
-  ),
-  new Event(
-    'Event test',
-    'https://cdn.pixabay.com/photo/2017/12/08/11/53/event-party-3005668__340.jpg',
-    'Portez ce vieux whisky au juge blond qui fume',
-    '2022-03-12',
-    null
-  ),
-]
-
-const EventsPage = () => {
-  return <EventsList events={DUMMY_EVENTS} />
+interface EventType {
+  id: string;
+  title: string;
+  image: string;
+  description: string;
+  date: string;
 }
 
-export default EventsPage
+export const EventsLoader = async (): Promise<Response> => {
+  const response = await fetch("http://localhost:8080/events");
+  if (!response.ok) {
+    throw json({ message: "Can not load events data" }, { status: 500 });
+  }
+  const data = await response.json();
+  return data.events.map(
+    (event: EventType) =>
+      new Event(
+        event.title,
+        event.image,
+        event.description,
+        event.date,
+        event.id
+      )
+  );
+};
+
+const EventsPage = () => {
+  const events = useLoaderData() as Event[];
+  return <EventsList events={events} />;
+};
+
+export default EventsPage;

@@ -3,12 +3,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/Layouts/Root";
 import HomePage from "./pages/Home";
 import EventLayout from "./pages/Layouts/Event";
-import EventsPage from "./pages/Events";
+import EventsPage, { EventsLoader } from "./pages/Events";
 import NewEventPage from "./pages/NewEvent";
 import EventDetailPage from "./pages/EventDetail";
 import EditEventPage from "./pages/EditEvent";
 
 import "./App.css";
+import EventsList from "./components/EventsList/EventsList";
 
 // Challenge / Exercise
 
@@ -42,7 +43,11 @@ const router = createBrowserRouter([
         path: "events",
         element: <EventLayout />,
         children: [
-          { index: true, element: <EventsPage /> },
+          {
+            index: true,
+            loader: EventsLoader,
+            element: <EventsPage />,
+          },
           { path: "new", element: <NewEventPage /> },
           {
             path: ":eventId",
