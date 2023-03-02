@@ -1272,7 +1272,7 @@ const [searchParams, setSearchParams] = useSearchParams()
 const isLogin = searchParams.get('mode') === 'login'
 ````
 
-**Important**: ``loader()``s must return null or any other value\
+**Important**: ``loader/action()``s must return null or any other value\
 We should make sure that we do add an extra return null statement in all if statement 
 branches where nothing would be returned otherwise to avoid errors or just add
 an extra ``return null`` at the end of our loader
@@ -1298,9 +1298,11 @@ is because without it, every file used by our app is downloaded while the first
 page of our app is being rendered. But thanks to lazy loading, we shall henceforth 
 load a given file only if we need it.\
 Given this code:
+
 `````javascript
 import EventsPage, {loader as EventLoader} from './pages/Events';
-const route = { index: true, element: <EventsPage />, loader: EventsLoader } 
+
+const route = {index: true, element: <EventsPage/>, loader: eventsLoader} 
 `````
 Applying lazy loading to it will give:
 `````javascript

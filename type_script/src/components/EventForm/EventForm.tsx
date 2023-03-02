@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Form, FormMethod } from "react-router-dom";
 
 import Event from "../../modeles/Event";
 
 import classes from "./EventForm.module.css";
 import { formatDate } from "../../helpers/date";
 
-const EventForm: React.FC<{ method: string; event: Event | undefined }> = ({
+const EventForm: React.FC<{ method: FormMethod; event: Event | undefined }> = ({
   method,
   event,
 }) => {
@@ -17,7 +17,7 @@ const EventForm: React.FC<{ method: string; event: Event | undefined }> = ({
   }
 
   return (
-    <form className={classes.form}>
+    <Form method={method} className={classes.form}>
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -58,7 +58,7 @@ const EventForm: React.FC<{ method: string; event: Event | undefined }> = ({
         </button>
         <button>Save</button>
       </div>
-    </form>
+    </Form>
   );
 };
 

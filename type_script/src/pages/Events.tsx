@@ -11,7 +11,7 @@ export interface EventType {
   date: string;
 }
 
-export const EventsLoader: LoaderFunction = async () => {
+export const eventsLoader: LoaderFunction = async () => {
   const response = await fetch("http://localhost:8080/events");
 
   if (!response.ok) {
