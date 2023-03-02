@@ -1,5 +1,6 @@
 import classes from "./EventItem.module.css";
 import Event from "../../modeles/Event";
+import { Link } from "react-router-dom";
 
 const EventItem: React.FC<{ event: Event }> = ({ event }) => {
   function startDeleteHandler() {
@@ -13,7 +14,7 @@ const EventItem: React.FC<{ event: Event }> = ({ event }) => {
       <time>{event.date.toDateString()}</time>
       <p>{event.description}</p>
       <menu className={classes.actions}>
-        <a href="edit">Edit</a>
+        <Link to="edit">Edit</Link>
         <button onClick={startDeleteHandler}>Delete</button>
       </menu>
     </article>
