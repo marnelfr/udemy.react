@@ -1,9 +1,9 @@
-import {FC, MouseEventHandler} from "react";
+import {FC, MouseEvent} from "react";
 
 import classes from './TodoItem.module.css'
 
 const TodoItem: FC<{ text: string, onClick: () => void }> = (props) => {
-    const clickHandler: MouseEventHandler<HTMLLIElement> = (event) => {
+    const clickHandler = (event: MouseEvent) => {
         event.preventDefault()
         props.onClick()
     }
