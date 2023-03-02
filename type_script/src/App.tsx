@@ -1,11 +1,14 @@
-import './App.css'
-import HomePage from "./pages/Home";
-import EventsPage from "./pages/Events";
-import EventDetailPage from "./pages/EventDetail";
-import NewEventPage from "./pages/NewEvent";
-import EditEventPage from "./pages/EditEvent";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import RootLayout from "./pages/Layouts/Root";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import HomePage from "./pages/Home";
+import EventLayout from "./pages/Layouts/Event";
+import EventsPage from "./pages/Events";
+import NewEventPage from "./pages/NewEvent";
+import EventDetailPage from "./pages/EventDetail";
+import EditEventPage from "./pages/EditEvent";
+
+import "./App.css";
 
 // Challenge / Exercise
 
@@ -31,20 +34,31 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <RootLayout />,
     children: [
-      {index: true, element: <HomePage/>},
-      {path: 'events', element: <EventsPage />},
-      {path: 'events/:eventId', element: <EventDetailPage />},
-      {path: 'events/new', element: <NewEventPage />},
-      {path: 'events/:eventId/edit', element: <EditEventPage />}
-    ]
+      { index: true, element: <HomePage /> },
+      {
+        path: "events",
+        element: <EventLayout />,
+        children: [
+          { index: true, element: <EventsPage /> },
+          { path: "new", element: <NewEventPage /> },
+          {
+            path: ":eventId",
+            children: [
+              { index: true, element: <EventDetailPage /> },
+              { path: "edit", element: <EditEventPage /> },
+            ],
+          },
+        ],
+      },
+    ],
   },
-])
+]);
 
 const App = () => {
-  return <RouterProvider router={router} />
-}
+  return <RouterProvider router={router} />;
+};
 
 export default App;
