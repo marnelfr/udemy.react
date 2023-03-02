@@ -6,12 +6,13 @@ import EventLayout from "./pages/Layouts/Event";
 import EventsPage, { eventsLoader } from "./pages/Events";
 import NewEventPage from "./pages/NewEvent";
 import EventDetailPage, { eventDetailLoader } from "./pages/EventDetail";
-import EditEventPage, { editEventAction } from "./pages/EditEvent";
+import EditEventPage from "./pages/EditEvent";
 
 import "./App.css";
 import EventsList from "./components/EventsList/EventsList";
 import { eventItemAction } from "./components/EventItem/EventItem";
 import ErrorPage from "./pages/Error";
+import { cruEventAction } from "./components/EventForm/EventForm";
 
 // Challenge / Exercise
 
@@ -51,7 +52,8 @@ const router = createBrowserRouter([
             element: <EventsPage />,
             loader: eventsLoader,
           },
-          { path: "new", element: <NewEventPage /> },
+          //https://cdn.pixabay.com/photo/2017/12/08/11/53/event-party-3005668__340.jpg
+          { path: "new", element: <NewEventPage />, action: cruEventAction },
           {
             path: ":eventId",
             id: "event-detail",
@@ -65,7 +67,7 @@ const router = createBrowserRouter([
               {
                 path: "edit",
                 element: <EditEventPage />,
-                action: editEventAction,
+                action: cruEventAction,
               },
             ],
           },

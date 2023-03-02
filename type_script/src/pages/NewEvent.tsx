@@ -1,7 +1,8 @@
-const NewEventPage = () => {
-  return (
-    <h1>New Event Page</h1>
-  )
-}
+import EventForm from "../components/EventForm/EventForm";
+import { ActionFunction } from "react-router-dom";
 
-export default NewEventPage
+const NewEventPage = () => {
+  return <EventForm method="post" />;
+};
+
+export default NewEventPage;

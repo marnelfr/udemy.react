@@ -1,11 +1,45 @@
-import { useNavigate, Form, FormMethod } from "react-router-dom";
+import {
+  useNavigate,
+  Form,
+  FormMethod,
+  ActionFunction,
+  json,
+  redirect,
+} from "react-router-dom";
 
 import Event from "../../modeles/Event";
 
 import classes from "./EventForm.module.css";
 import { formatDate } from "../../helpers/date";
 
-const EventForm: React.FC<{ method: FormMethod; event: Event | undefined }> = ({
+export const cruEventAction: ActionFunction = async ({ request, params }) => {
+  const data = await request.formData();
+  const event = {
+    title: data.get("title"),
+    image: data.get("image"),
+    description: data.get("description"),
+    date: data.get("date"),
+  };
+
+  const response = await fetch(
+    "http://localhost:8080/events/" + params.eventId,
+    {
+      method: request.method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(event),
+    }
+  );
+
+  if (!response.ok) {
+    throw json({ message: "Can not update event!" }, { status: 500 });
+  }
+
+  return redirect("/events");
+};
+
+const EventForm: React.FC<{ method: FormMethod; event?: Event }> = ({
   method,
   event,
 }) => {
