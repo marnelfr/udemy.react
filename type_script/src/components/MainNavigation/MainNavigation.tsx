@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import {useCallback} from "react";
 
 function MainNavigation() {
-  const isActiveHandler = useCallback(({isActive}) => isActive ? classes.active : undefined, [])
+  const isActiveHandler = useCallback((state: {isActive: boolean}) => state.isActive ? classes.active : undefined, [])
 
   return (
     <header className={classes.header}>

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
-function EventForm({ method, event }) {
+const EventForm: React.FC<{method: string, event: {}}> = ({method, event}) => {
   const navigate = useNavigate();
   function cancelHandler() {
     navigate('..');
@@ -24,7 +24,7 @@ function EventForm({ method, event }) {
       </p>
       <p>
         <label htmlFor="description">Description</label>
-        <textarea id="description" name="description" rows="5" required />
+        <textarea id="description" name="description" rows={5} required />
       </p>
       <div className={classes.actions}>
         <button type="button" onClick={cancelHandler}>
