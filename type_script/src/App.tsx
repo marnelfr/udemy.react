@@ -5,11 +5,12 @@ import HomePage from "./pages/Home";
 import EventLayout from "./pages/Layouts/Event";
 import EventsPage, { EventsLoader } from "./pages/Events";
 import NewEventPage from "./pages/NewEvent";
-import EventDetailPage, { EventDetailLoader } from "./pages/EventDetail";
+import EventDetailPage, { eventDetailLoader } from "./pages/EventDetail";
 import EditEventPage from "./pages/EditEvent";
 
 import "./App.css";
 import EventsList from "./components/EventsList/EventsList";
+import { eventItemAction } from "./components/EventItem/EventItem";
 
 // Challenge / Exercise
 
@@ -52,11 +53,12 @@ const router = createBrowserRouter([
           {
             path: ":eventId",
             id: "event-detail",
-            loader: EventDetailLoader,
+            loader: eventDetailLoader,
             children: [
               {
                 index: true,
                 element: <EventDetailPage />,
+                action: eventItemAction,
               },
               { path: "edit", element: <EditEventPage /> },
             ],

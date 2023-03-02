@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { EventType } from "./Events";
 
-export const EventDetailLoader: LoaderFunction = async ({ params }) => {
+export const eventDetailLoader: LoaderFunction = async ({ params }) => {
   const url = "http://localhost:8080/events/" + params.eventId;
   const response = await fetch(url);
 
