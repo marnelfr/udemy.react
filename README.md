@@ -32,8 +32,10 @@ class Human {
   }
 }
 ````
-
-## [Array doc](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+<details>
+<summary>
+<h2 style="display: inline"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array doc</a></h2>
+</summary>
 
 Particularly important in this course are:
 
@@ -53,8 +55,8 @@ Particularly important in this course are:
   => [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
 * splice()
   => [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
+</details>
 
-\
 The simple rule which react apply is that
 
 - Lower case elements are built in html elements

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Todos from "./components/Todo/Todos";
 import Todo from "./modeles/todo";
 import NewTodo from "./components/NewTodo/NewTodo";
+import {TodoContextProvider} from "./store/todo-context";
 
 function App() {
     const [todoList, setTodoList] = useState<Todo[]>([])
@@ -18,10 +19,10 @@ function App() {
     }
 
     return (
-        <>
-            <NewTodo onNewTodo={newTodoHandler}/>
-            <Todos onRemoveTodo={removeTodoHandler} items={todoList}/>
-        </>
+        <TodoContextProvider>
+            <NewTodo />
+            <Todos />
+        </TodoContextProvider>
     )
 }
 
