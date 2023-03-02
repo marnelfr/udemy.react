@@ -1,9 +1,9 @@
-import { json, useLoaderData } from "react-router-dom";
+import { json, LoaderFunction, useLoaderData } from "react-router-dom";
 
 import Event from "../modeles/Event";
 import EventsList from "../components/EventsList/EventsList";
 
-interface EventType {
+export interface EventType {
   id: string;
   title: string;
   image: string;
@@ -11,11 +11,13 @@ interface EventType {
   date: string;
 }
 
-export const EventsLoader = async (): Promise<Response> => {
+export const EventsLoader: LoaderFunction = async () => {
   const response = await fetch("http://localhost:8080/events");
+
   if (!response.ok) {
     throw json({ message: "Can not load events data" }, { status: 500 });
   }
+
   const data = await response.json();
   return data.events.map(
     (event: EventType) =>

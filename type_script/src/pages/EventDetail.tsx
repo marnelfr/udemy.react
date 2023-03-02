@@ -1,16 +1,30 @@
 import EventItem from "../components/EventItem/EventItem";
-import { useParams } from "react-router-dom";
 import Event from "../modeles/Event";
+import { useLoaderData, LoaderFunction, json } from "react-router-dom";
+import { EventType } from "./Events";
+
+export const EventDetailLoader: LoaderFunction = async ({ params }) => {
+  const url = "http://localhost:8080/events/" + params.eventId;
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw json({ message: "Can not load event data" }, { status: 500 });
+  }
+
+  const data = await response.json();
+  const event = data.event as EventType;
+
+  return new Event(
+    event.title,
+    event.image,
+    event.description,
+    event.date,
+    event.id
+  );
+};
 
 const EventDetailPage = () => {
-  // const params = useParams()
-  const event = new Event(
-    "Event test",
-    "https://media.istockphoto.com/id/499517325/photo/a-man-speaking-at-a-business-conference.jpg?s=612x612&w=0&k=20&c=gWTTDs_Hl6AEGOunoQ2LsjrcTJkknf9G8BGqsywyEtE=",
-    "Portez ce vieux whisky au juge blond qui fume",
-    "2022-03-12",
-    null
-  );
+  const event = useLoaderData() as Event;
   return <EventItem event={event} />;
 };
 
