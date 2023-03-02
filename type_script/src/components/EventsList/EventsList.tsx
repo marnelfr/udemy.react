@@ -1,21 +1,22 @@
 import classes from './EventsList.module.css';
+import Event from '../../modeles/Event';
+import {Link} from "react-router-dom";
 
-const EventsList: React.FC<{events: []}> = ({ events }) => {
+const EventsList: React.FC<{events: Event[]}> = ({ events }) => {
   return (
     <div className={classes.events}>
       <h1>All Events</h1>
       <ul className={classes.list}>
         {events.map((event) => (
-          <li></li>
-          /*<li key={event.id} className={classes.item}>
-            <a href="...">
+          <li key={event.id} className={classes.item}>
+            <Link to={event.id}>
               <img src={event.image} alt={event.title} />
               <div className={classes.content}>
                 <h2>{event.title}</h2>
-                <time>{event.date}</time>
+                <time>{event.date.toDateString()}</time>
               </div>
-            </a>
-          </li>*/
+            </Link>
+          </li>
         ))}
       </ul>
     </div>
