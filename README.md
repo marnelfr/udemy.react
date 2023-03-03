@@ -1505,7 +1505,7 @@ const stringArray = preInsert<string>(['a', 'b', 'c'], 'd')
 let numbers: Array<number> = [1, 2, 3]; 
 ````
 
-
+### [Typescript && Redux](https://react-redux.js.org/using-react-redux/usage-with-typescript#define-root-state-and-dispatch-types)
 
 
 

@@ -7,7 +7,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../store/auth";
+import { authActions } from "../../redux/auth";
 import { useEffect } from "react";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 

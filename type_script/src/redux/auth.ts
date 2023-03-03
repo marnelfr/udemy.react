@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+export interface AuthStateType {
+  isLoggedIn: boolean;
+  token: string;
+  expiration: string;
+}
+
+const initialState: AuthStateType = {
   isLoggedIn: false,
   token: "",
   expiration: "",
@@ -18,6 +24,9 @@ const authSlice = createSlice({
 
       expiration.setHours(expiration.getHours() + 1);
       state.expiration = expiration.toISOString();
+    },
+    logout(state) {
+      state = initialState;
     },
   },
 });
