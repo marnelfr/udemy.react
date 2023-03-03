@@ -28,7 +28,7 @@ function MainNavigation() {
             <NavLink to="/newsletter">Newsletter</NavLink>
           </li>
           <li>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/auth">Login</NavLink>
           </li>
         </ul>
       </nav>

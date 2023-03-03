@@ -14,7 +14,7 @@ import { eventItemAction } from "./components/EventItem/EventItem";
 import ErrorPage from "./pages/Error";
 import { cruEventAction } from "./components/EventForm/EventForm";
 import NewsletterPage, { newsletterAction } from "./pages/Newsletter";
-import Authentication from "./pages/Authentication";
+import Authentication, { authAction } from "./pages/Authentication";
 
 // Challenge / Exercise
 
@@ -80,7 +80,7 @@ const router = createBrowserRouter([
         element: <NewsletterPage />,
         action: newsletterAction,
       },
-      { path: "login", element: <Authentication /> },
+      { path: "auth", element: <Authentication />, action: authAction },
     ],
   },
 ]);

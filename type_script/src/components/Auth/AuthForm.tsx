@@ -1,12 +1,29 @@
 import classes from "./AuthForm.module.css";
-import { useState } from "react";
+import { Form, Link, useActionData, useSearchParams } from "react-router-dom";
+
+interface ErrorType {
+  message: string;
+  errors: string[];
+}
 
 function AuthForm() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [searchParams] = useSearchParams();
+  const errorData = useActionData() as ErrorType;
+  const isLogin = searchParams.get("mode") === "login";
 
   return (
     <>
-      <form method="post" className={classes.form}>
+      {errorData && errorData.message && (
+        <p style={{ textAlign: "center" }}>{errorData.message}</p>
+      )}
+      {errorData && errorData.errors && (
+        <ul style={{ textAlign: "center" }}>
+          {Object.values(errorData.errors).map((error) => (
+            <li>{error}</li>
+          ))}
+        </ul>
+      )}
+      <Form method="post" className={classes.form}>
         <h1>{isLogin ? "Log in" : "Create a new user"}</h1>
         <p>
           <label htmlFor="email">Email</label>
@@ -17,12 +34,12 @@ function AuthForm() {
           <input id="password" type="password" name="password" required />
         </p>
         <div className={classes.actions}>
-          <button onClick={() => setIsLogin((isLogin) => !isLogin)}>
-            {isLogin ? "Create new user" : "Login"}
-          </button>
+          <Link to={`/auth?mode=${isLogin ? "signup" : "login"}`}>
+            {isLogin ? "Signup" : "Login"}
+          </Link>
           <button>{`${isLogin ? "Login" : "Save"}`}</button>
         </div>
-      </form>
+      </Form>
     </>
   );
 }
