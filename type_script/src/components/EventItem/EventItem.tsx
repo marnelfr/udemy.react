@@ -7,6 +7,7 @@ import {
   redirect,
   useSubmit,
 } from "react-router-dom";
+import { useAppSelector } from "../../redux/hooks";
 
 export const eventItemAction: ActionFunction = async ({ params, request }) => {
   const response = await fetch(
@@ -22,6 +23,7 @@ export const eventItemAction: ActionFunction = async ({ params, request }) => {
 };
 
 const EventItem: React.FC<{ event: Event }> = ({ event }) => {
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   const submit = useSubmit();
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure ?");
@@ -36,10 +38,12 @@ const EventItem: React.FC<{ event: Event }> = ({ event }) => {
       <h1>{event.title}</h1>
       <time>{event.date.toDateString()}</time>
       <p>{event.description}</p>
-      <menu className={classes.actions}>
-        <Link to="edit">Edit</Link>
-        <button onClick={startDeleteHandler}>Delete</button>
-      </menu>
+      {isLoggedIn && (
+        <menu className={classes.actions}>
+          <Link to="edit">Edit</Link>
+          <button onClick={startDeleteHandler}>Delete</button>
+        </menu>
+      )}
     </article>
   );
 };

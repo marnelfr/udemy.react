@@ -1,8 +1,11 @@
 import classes from "./EventsNavigation.module.css";
 import { NavLink } from "react-router-dom";
 import { useCallback } from "react";
+import { useAppSelector } from "../../redux/hooks";
 
 function EventsNavigation() {
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+
   const isActiveHandler = useCallback(
     (state: { isActive: boolean }) =>
       state.isActive ? classes.active : undefined,
@@ -17,11 +20,13 @@ function EventsNavigation() {
               All Events
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/events/new" className={isActiveHandler}>
-              New Event
-            </NavLink>
-          </li>
+          {isLoggedIn && (
+            <li>
+              <NavLink to="/events/new" className={isActiveHandler}>
+                New Event
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
