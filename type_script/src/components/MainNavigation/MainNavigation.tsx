@@ -2,8 +2,11 @@ import classes from "./MainNavigation.module.css";
 import { NavLink } from "react-router-dom";
 import { useCallback } from "react";
 import NewsletterSignup from "../Newsletter/NewsletterSignup";
+import { useAppSelector } from "../../redux/hooks";
 
 function MainNavigation() {
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+
   const isActiveHandler = useCallback(
     (state: { isActive: boolean }) =>
       state.isActive ? classes.active : undefined,
@@ -27,9 +30,13 @@ function MainNavigation() {
           <li>
             <NavLink to="/newsletter">Newsletter</NavLink>
           </li>
-          <li>
-            <NavLink to="/auth?mode=login">Login</NavLink>
-          </li>
+          {isLoggedIn ? (
+            <button>Logout</button>
+          ) : (
+            <li>
+              <NavLink to="/auth?mode=login">Login</NavLink>
+            </li>
+          )}
         </ul>
       </nav>
       <NewsletterSignup />
