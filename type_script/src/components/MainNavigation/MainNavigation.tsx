@@ -27,6 +27,9 @@ function MainNavigation() {
           <li>
             <NavLink to="/newsletter">Newsletter</NavLink>
           </li>
+          <li>
+            <NavLink to="/login">Login</NavLink>
+          </li>
         </ul>
       </nav>
       <NewsletterSignup />
