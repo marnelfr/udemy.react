@@ -13,6 +13,7 @@ import EventsList from "./components/EventsList/EventsList";
 import { eventItemAction } from "./components/EventItem/EventItem";
 import ErrorPage from "./pages/Error";
 import { cruEventAction } from "./components/EventForm/EventForm";
+import NewsletterPage, { newsletterAction } from "./pages/Newsletter";
 
 // Challenge / Exercise
 
@@ -72,6 +73,11 @@ const router = createBrowserRouter([
             ],
           },
         ],
+      },
+      {
+        path: "newsletter",
+        element: <NewsletterPage />,
+        action: newsletterAction,
       },
     ],
   },
