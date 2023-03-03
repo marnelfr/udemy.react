@@ -24,9 +24,7 @@ export const authAction: ActionFunction = async ({ request, params }) => {
     throw json({ message: "Can not login" }, { status: 500 });
   }
 
-  const data = await response.json();
-  console.log(data);
-  return null;
+  return await response.json();
 };
 
 function AuthenticationPage() {

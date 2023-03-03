@@ -1,27 +1,45 @@
 import classes from "./AuthForm.module.css";
-import { Form, Link, useActionData, useSearchParams } from "react-router-dom";
+import {
+  Form,
+  Link,
+  useActionData,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/auth";
+import { useEffect } from "react";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
-interface ErrorType {
+export interface ErrorType {
   message: string;
   errors: string[];
 }
 
+interface SuccessType {
+  message: string;
+  user: {};
+  token: string;
+}
+
 function AuthForm() {
   const [searchParams] = useSearchParams();
-  const errorData = useActionData() as ErrorType;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const actionData = useActionData() as ErrorType | SuccessType;
   const isLogin = searchParams.get("mode") === "login";
+
+  useEffect(() => {
+    if (actionData && "token" in actionData) {
+      dispatch(authActions.setToken(actionData.token));
+      navigate("/events");
+    }
+  }, [dispatch, navigate, actionData]);
 
   return (
     <>
-      {errorData && errorData.message && (
-        <p style={{ textAlign: "center" }}>{errorData.message}</p>
-      )}
-      {errorData && errorData.errors && (
-        <ul style={{ textAlign: "center" }}>
-          {Object.values(errorData.errors).map((error) => (
-            <li>{error}</li>
-          ))}
-        </ul>
+      {actionData && "errors" in actionData && (
+        <ErrorMessage data={actionData} />
       )}
       <Form method="post" className={classes.form}>
         <h1>{isLogin ? "Log in" : "Create a new user"}</h1>
