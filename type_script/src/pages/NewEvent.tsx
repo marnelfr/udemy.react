@@ -8,6 +8,7 @@ const NewEventPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(isLoggedIn);
     if (!isLoggedIn) {
       navigate("/auth?mode=login");
     }

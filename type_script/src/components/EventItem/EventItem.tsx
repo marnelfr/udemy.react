@@ -10,10 +10,18 @@ import {
 import { useAppSelector } from "../../redux/hooks";
 
 export const eventItemAction: ActionFunction = async ({ params, request }) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw json({ message: "Unauthorized" });
+  }
   const response = await fetch(
     "http://localhost:8080/events/" + params.eventId,
     {
       method: request.method,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
     }
   );
   if (!response.ok) {

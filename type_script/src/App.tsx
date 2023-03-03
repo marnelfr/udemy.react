@@ -57,7 +57,6 @@ const router = createBrowserRouter([
             element: <EventsPage />,
             loader: eventsLoader,
           },
-          //https://cdn.pixabay.com/photo/2017/12/08/11/53/event-party-3005668__340.jpg
           { path: "new", element: <NewEventPage />, action: cruEventAction },
           {
             path: ":eventId",

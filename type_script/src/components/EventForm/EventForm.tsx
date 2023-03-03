@@ -21,16 +21,24 @@ export const cruEventAction: ActionFunction = async ({ request, params }) => {
     date: data.get("date"),
   };
 
-  const response = await fetch(
-    "http://localhost:8080/events/" + params.eventId,
-    {
-      method: request.method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(event),
-    }
-  );
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw json({ message: "Unauthorized" });
+  }
+
+  let url = "http://localhost:8080/events";
+  if (request.method !== "POST") {
+    url += "/" + params.eventId;
+  }
+
+  const response = await fetch(url, {
+    method: request.method,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify(event),
+  });
 
   if (!response.ok) {
     throw json({ message: "Can not update event!" }, { status: 500 });
