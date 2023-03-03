@@ -7,9 +7,11 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../redux/auth";
+import { authActions } from "../../redux/auth/auth-slice";
 import { useEffect } from "react";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { useAppDispatch } from "../../redux/hooks";
+import { logUserIn } from "../../redux/auth/auth-actions";
 
 export interface ErrorType {
   message: string;
@@ -24,7 +26,7 @@ interface SuccessType {
 
 function AuthForm() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
   const actionData = useActionData() as ErrorType | SuccessType;
 
@@ -32,7 +34,7 @@ function AuthForm() {
 
   useEffect(() => {
     if (actionData && "token" in actionData) {
-      dispatch(authActions.setToken(actionData.token));
+      dispatch(logUserIn(actionData.token));
       navigate("/events");
     }
   }, [dispatch, navigate, actionData]);

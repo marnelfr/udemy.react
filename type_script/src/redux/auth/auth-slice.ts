@@ -17,13 +17,9 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setToken(state, action) {
-      const expiration = new Date();
-
-      state.token = action.payload;
+      state.token = action.payload.token;
       state.isLoggedIn = true;
-
-      expiration.setHours(expiration.getHours() + 1);
-      state.expiration = expiration.toISOString();
+      state.expiration = action.payload.expiration;
     },
     logout(state) {
       state = initialState;

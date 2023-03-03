@@ -9,12 +9,14 @@ import EventDetailPage, { eventDetailLoader } from "./pages/EventDetail";
 import EditEventPage from "./pages/EditEvent";
 
 import "./App.css";
-import EventsList from "./components/EventsList/EventsList";
 import { eventItemAction } from "./components/EventItem/EventItem";
 import ErrorPage from "./pages/Error";
 import { cruEventAction } from "./components/EventForm/EventForm";
 import NewsletterPage, { newsletterAction } from "./pages/Newsletter";
 import Authentication, { authAction } from "./pages/Authentication";
+import { useEffect } from "react";
+import { useAppDispatch } from "./redux/hooks";
+import { loadAuthFromLocalStorage } from "./redux/auth/auth-actions";
 
 // Challenge / Exercise
 
@@ -86,6 +88,12 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(loadAuthFromLocalStorage());
+  });
+
   return <RouterProvider router={router} />;
 };
 
