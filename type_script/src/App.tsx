@@ -17,6 +17,7 @@ import Authentication, { authAction } from "./pages/Authentication";
 import { useEffect } from "react";
 import { useAppDispatch } from "./redux/hooks";
 import { loadAuthFromLocalStorage } from "./redux/auth/auth-actions";
+import { logoutAction } from "./pages/Logout";
 
 // Challenge / Exercise
 
@@ -83,6 +84,7 @@ const router = createBrowserRouter([
         action: newsletterAction,
       },
       { path: "auth", element: <Authentication />, action: authAction },
+      { path: "logout", action: logoutAction },
     ],
   },
 ]);

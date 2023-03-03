@@ -1,10 +1,13 @@
 import classes from "./MainNavigation.module.css";
-import { NavLink } from "react-router-dom";
-import { useCallback } from "react";
+import { Form, NavLink, useNavigate } from "react-router-dom";
+import { MouseEventHandler, useCallback } from "react";
 import NewsletterSignup from "../Newsletter/NewsletterSignup";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { logUserOut } from "../../redux/auth/auth-actions";
 
 function MainNavigation() {
+  const dispatch = useAppDispatch();
+  const navigation = useNavigate();
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
 
   const isActiveHandler = useCallback(
@@ -31,7 +34,9 @@ function MainNavigation() {
             <NavLink to="/newsletter">Newsletter</NavLink>
           </li>
           {isLoggedIn ? (
-            <button>Logout</button>
+            <Form action="/logout" method="post">
+              <button type="submit">Logout</button>
+            </Form>
           ) : (
             <li>
               <NavLink to="/auth?mode=login">Login</NavLink>

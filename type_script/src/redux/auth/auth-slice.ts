@@ -22,7 +22,7 @@ const authSlice = createSlice({
       state.expiration = action.payload.expiration;
     },
     logout(state) {
-      state = initialState;
+      state = { ...initialState };
     },
   },
 });

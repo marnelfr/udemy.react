@@ -32,3 +32,16 @@ export const logUserIn = (
     dispatch(authActions.setToken({ token, expiration: expirationString }));
   };
 };
+
+export const logUserOut = (): ThunkAction<
+  void,
+  RootState,
+  unknown,
+  AnyAction
+> => {
+  return (dispatch) => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("expiration");
+    dispatch(authActions.logout());
+  };
+};
