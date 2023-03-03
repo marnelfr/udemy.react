@@ -3,12 +3,17 @@ import { ActionFunction, json } from "react-router-dom";
 
 export const authAction: ActionFunction = async ({ request, params }) => {
   const formData = await request.formData();
+
+  const url = new URL(request.url);
+  const searchParams = url.searchParams;
+  const api = searchParams.get("mode") === "login" ? "login" : "signup";
+
   const loginInfo = {
     email: formData.get("email"),
     password: formData.get("password"),
   };
 
-  const response = await fetch("http://localhost:8080/signup", {
+  const response = await fetch("http://localhost:8080/" + api, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,7 +21,7 @@ export const authAction: ActionFunction = async ({ request, params }) => {
     body: JSON.stringify(loginInfo),
   });
 
-  if (response.status === 422) {
+  if (response.status === 422 || response.status === 401) {
     return response;
   }
 

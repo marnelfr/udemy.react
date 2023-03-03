@@ -9,7 +9,7 @@ const ErrorMessage: React.FC<{ data: ErrorType }> = ({ data }) => {
       {data && (
         <ul style={{ textAlign: "center" }}>
           {Object.values(data.errors).map((error) => (
-            <li>{error}</li>
+            <li key={error}>{error}</li>
           ))}
         </ul>
       )}

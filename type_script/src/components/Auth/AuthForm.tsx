@@ -23,10 +23,11 @@ interface SuccessType {
 }
 
 function AuthForm() {
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
   const actionData = useActionData() as ErrorType | SuccessType;
+
   const isLogin = searchParams.get("mode") === "login";
 
   useEffect(() => {
