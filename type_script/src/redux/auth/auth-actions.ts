@@ -14,6 +14,8 @@ export const loadAuthFromLocalStorage = (): ThunkAction<
     if (token) {
       const expiration = localStorage.getItem("expiration");
       dispatch(authActions.setToken({ token, expiration }));
+    } else {
+      dispatch(authActions.logout());
     }
   };
 };

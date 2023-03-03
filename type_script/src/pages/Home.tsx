@@ -1,7 +1,14 @@
-const HomePage = () => {
-  return (
-    <h1>Home page</h1>
-  )
-}
+import { useEffect } from "react";
+import { useAppDispatch } from "../redux/hooks";
+import { authActions } from "../redux/auth/auth-slice";
 
-export default HomePage
+const HomePage = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(authActions.logout());
+  }, [dispatch]);
+
+  return <h1>Home page</h1>;
+};
+
+export default HomePage;
