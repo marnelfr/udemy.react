@@ -338,7 +338,7 @@ That's where the ``useEffect()`` hook comes in. It's called with two arguments:
 - a function that should be executed **AFTER** every component evaluation **IF** the specified dependencies changed
 - an array of dependencies of this effect
 
-While all state variables and functions used in the effect function should be added as a dependencies,
+While all state/props variables and functions used in the effect function should be added as a dependencies,
 we've got few exceptions such as:
 - state updating functions,
 - "built-in" APIs or functions
@@ -676,7 +676,7 @@ we can use both in the same application.
 **So why should we use Redux instead of React Context ?** Here are some React context potential
 disadvantages:
 - We can have a complex setup, and managing state with React context can become quite complex because
-  in very large application, using context, we can end up with code like this:
+  in very large application, using context, we can end up with codes like this:
 `````javascript
 return (
   <AuthContextProvider>
@@ -694,13 +694,13 @@ return (
   but this may become quite complicate to maintain.
 - We can have **performance issue** while using context because it's not recommended for high
   frequency changes state management: **it's not ready for flux like state management while Redux do.**
-- Once only one property of the state managed by a context change, every component that subscribed to it
-  are reloaded even if they don't use that particular property, so not directly affected by that change.
+- **Once only one property of the state managed by a context change, every component that subscribed to it
+  are reloaded even if they don't use that particular property, so not directly affected by that change.**
 
 
 ### How Redux works?
-Redux only has one **Central Data Store (State)** and components subscribe to that state.
-However, they can't change that state directly. Instead, they can **dispatch** actions.
+Redux only has one **Central Data Store (State)** and components subscribe to a given part of that state.
+However, they can't change that state directly. Instead, they can **dispatch** actions.\
 **An action** is just a really javascript object which describes the kind of operation that
 the reducer function that manipulate the Redux state should perform.\
 Once the Redux state is updated, components that subscribed to it are re-rendered.
@@ -856,7 +856,7 @@ memory without making redux aware of it.
 - and when it comes to **async code or code with side effects**, we should **prefer** action
   creators or components and **NEVER use** reducers.
 
-### Action creator function
+### Action creator function: Thunks
 We can add custom action creator function to create so-called **Thunk**.\
 A thunk is a function that delays an action until later, until something finish.
 
@@ -868,7 +868,7 @@ The advantage here is that
 - thanks to the dispatcher it receives, we can dispatch as many actions as we want
 - we can dispatch them as other action creator using the dispatch function.
 `````javascript
-// in the cart-slice.js
+// in the cart-slice.js or in cart-actions.js if we want
 export const sendCartData = (data) => {
   return async (dispatch) => {
     const sendRequest = async () => {
@@ -886,7 +886,7 @@ export const sendCartData = (data) => {
   }
 }
 
-// can be dispatched this way
+// can be dispatched this way in our components
 const dispatch = useDispatch()
 dispatch(sendCartData(items))
 `````
@@ -953,7 +953,7 @@ On every route we add, we can define the ``errorElement`` that will be shown if 
 It supposed to be a page element nicely styled 😅
 
 ### NavLink
-Instead of using **Link** in our navigation, we should use **NavLink** which provides such advantages:
+Instead of using **Link** in our navigation, we should consider using **NavLink** which provides such advantages:
 1. [x] className: here it's a function which receives ``({isActive})``. isActive is true is the route
    represented by the NavLink is active.
 2. [x] the ``end`` props on it let us say if the route should be considered active if other including its path are.
@@ -1025,7 +1025,7 @@ navigation.state === 'loading' // the needed data is being fetching
 The ``useNavigation()`` hook can be used from any component currently visible on the screen.
 
 Instead of putting the loader function code in the router definition, we may consider exporting
-it from the ``EventsPage`` component.
+it from the ``EventsPage`` component file.
 
 ``loader()s`` support ``Response``type object. This means we can even do something like:
 ````javascript
@@ -1049,7 +1049,7 @@ const eventLoader = async () => {
 ````
 In case, we throw something, react-router will render the closest error page to our component.
 in the error page, we can access the error thanks to the ``useRouteError()`` hook.\
-In case we return an object, we shall get that object. Otherwise, we could take advantage of the
+In case we throw an object, we shall get that object. Otherwise, we could take advantage of the
 status code provided by the ``Response`` object.
 ````javascript
 //in our Error component
@@ -1101,7 +1101,7 @@ React router help us to handle our forms' submission. For that, we need to
 - define the ``action`` property on our component route. It value is a function that should be exported from
   our component file. The function receive automatically the ``({request, params})``
 - On ``request``, we can await the ``request.formData()`` and ``get('input-name')`` our input data using their name
-- Once we've done handling/saving our data, we can ``redirect(path)`` our users to where ever we want.
+- Once we've done handling/saving our data, we can ``return redirect(path)`` our users to where ever we want.
 ``````javascript
 export const newEventAction = async ({request}) => {
   const data = await request.formData()
@@ -1326,16 +1326,16 @@ we need to create a project on our firebase console. Once done, we can click on 
 on ``Hosting`` and then click on ``Get started`` and follow instructions.
 
 ## Animating ReactApp
-We can do this by using build in CSS property or take advantage from the [React-Transition-Group](https://reactcommunity.org/react-transition-group/)
+We can do this by using build in CSS properties or take advantage from the [React-Transition-Group](https://reactcommunity.org/react-transition-group/)
 package offered by the React community.\
-Installation: ``npm install react-transition-group --save``\
+Installation: ``npm install react-transition-group --save``
 
 ### Transition component
 It got:
-- four state (entering, entered, exiting, exited) that we can use to adjust our css for animating
-- in props that receive the state related to the display of our component
-- mountOnEnter/unmountOnExit props that can be added if we want to remove completely the element from the dom on ``exited``
-- timeout props which defined the transition time. It can receive an object defining the ``enter`` and ``exit`` timing.
+- `state` which can have four values (entering, entered, exiting, exited) that we can use to adjust our css for animating
+- `in` props that receive the state related to the display of our component
+- `mountOnEnter/unmountOnExit` props that can be added if we want to remove completely the element from the dom on ``state === exited``
+- `timeout` props which defined the transition time in ms. It can also receive an object defining the ``enter`` and ``exit`` timing.
 ````javascript
 <button onClick={() => setShowDiv(showDiv => !showDiv)} className="Button">Toggle</button>
 <Transition in={showDiv} mountOnEnter unmountOnExit timeout={400}>
@@ -1381,7 +1381,7 @@ enter, enterActive, exit, exitActive, appear, appearActive
 
 ### TransitionGroup
 Can be used to render a list of element. By default, it renders a div element, but
-we can change this thanks to the ``component`` props.\
+we can change this thanks to its ``component`` props.\
 Its children should be wrapped with ``Transition`` or `CSSTransition` element.
 
 ### Other animation packages
@@ -1394,7 +1394,7 @@ When writing our test, we can use the `test` function available globally.\
 It takes 2 arguments:
 - A description of what we're testing
 - An anonymous function which will contains the testing code that we should write
-  by using the three **A**s: arrange, act, and assert.
+  by using the three `A`s: arrange, act, and assert.
 
 ### Arrange
 Here, we set up the test data, test condition and test environment.
@@ -1493,7 +1493,7 @@ let accounts: Person[] = [{name: 'Marnel', age: 30}]
 
 // Functions & types
 const add = (a:number, b: number): number => {} // we could omit the return's type here since it could be inferenced
-const print = (val: any): void => console.log(val) // void type for functions that doesn't return a value
+const print = (val: any): void => console.log(val) // void return's type for functions that doesn't return a value
 
 //Generics
 const preInsert = <T>(array: T[], num: T) => [num, ...array]
