@@ -5,7 +5,7 @@ import * as bundled from 'utility.js';
 `````
 
 - Numbers, strings, and boolean are primitive types. When they are reassigned to another variable, their value is completely copied
-to the new variable.
+  to the new variable.
 - Arrays and objects are references type though. This means an array variable is just a pointer to the memory place
   allocated to store the array. When the variable is reassigned to another, only the pointer value is copied but the new
   variable still points to the same array.
@@ -22,7 +22,7 @@ class Human {
     return args.sort()
   }
 
-  timesTwo = (data = [1, 2, 3]) => { 
+  timesTwo = (data = [1, 2, 3]) => {
     return data.map((num) => num * 2) // data is not modified. It’s a new array which is is returned
   }
 
@@ -129,14 +129,14 @@ component from inside a child component.
 const num = '-1992' //works for positive num as well
 console.log(+num) //print -1992 as digit, not string
 ````
-- The ```bind()``` function called on a function's pointer allow us to set a value to ``this`` 
-inside it and predefine the value of arguments it should be called with
+- The ```bind()``` function called on a function's pointer allow us to set a value to ``this``
+  inside it and predefine the value of arguments it should be called with
 `````javascript
 //inside a component:
 const clickHandler = (id) => {/*...*/}
 return (
   /*the function will be called with id=5*/
-  <button onClick={clickHandler.bind(null, 5)}>Click me, please ((</button> 
+  <button onClick={clickHandler.bind(null, 5)}>Click me, please ((</button>
 )
 `````
 
@@ -183,7 +183,7 @@ export default CourseInput;
 Instead of using **styled-components**, we can use **CSS Modules** which is directly available in our
 React projects.\
 To use it, we simply need to name our css files with the extension ``.module.css``.
-So ```button.css``` becomes ```button.module.css```and then we have to import it 
+So ```button.css``` becomes ```button.module.css```and then we have to import it
 in our component
 
 `````javascript
@@ -208,8 +208,8 @@ In the dev tools of Chrome browser, we have the Source tab that contains most of
 written code under the ```Users/username/.../project-dir``` directory. We can then add some breakpoint
 there to try to understand our bug using actions such as:
 
-- Step into next function call: jump to the next function call even if it's a function called 
-from the current file or another one.
+- Step into next function call: jump to the next function call even if it's a function called
+  from the current file or another one.
 - Step over next function call: jump to the next line in the same file
 - Resume script execution
 
@@ -240,7 +240,7 @@ const Wrapper = props => {
 export default Wrapper
 `````
 Using this to wrap our components can make us avoid useless html tags in our final DOM code.
-And this is where React Fragments comes in because we don't need to create the ```Wrapper``` 
+And this is where React Fragments comes in because we don't need to create the ```Wrapper```
 component ourselves. It's already provided by React and can be used with the tags
 ```<React.Fragment></React.Fragment>``` or simply ```<></>```.
 
@@ -270,7 +270,7 @@ const Modal = ({message, onClose}) => {
 Using all of this certainly make us look more like a developer who knows what he's doing 😎😎😎
 
 ## React Refs
-Should be used rarely but let us access the DOM elements using then **uncontrolled components** 
+Should be used rarely but let us access the DOM elements using then **uncontrolled components**
 instead of **controlled** ones where their state is managed by React thanks to **useState/value/onChange**.\
 We use it thanks to ``useRef()`` hook like this:
 `````javascript
@@ -320,7 +320,7 @@ Above, ``ref`` is a forwarded one. So in the parent component, we could do somet
 The main job of the React library is to:
 - Evaluate, and render UI
 - Manage state and props
-- React to users' events and input, 
+- React to users' events and input,
 - Re-evaluate component upon state and props changes
 
 Therefore, **side effects** are everything else that happen in the application such as
@@ -328,11 +328,11 @@ Therefore, **side effects** are everything else that happen in the application s
 - storing data in the browser local storage
 - timers and intervals management,...
 
-But also any action that should be executed in response to some other actions: 
+But also any action that should be executed in response to some other actions:
 they are then our dependencies here.
 
 Side effects may lead to rendering the UI but not directly, and we may not want to execute such of effect
-everytime React evaluate and render the UI. We then need to explicitly indicate they dependencies: 
+everytime React evaluate and render the UI. We then need to explicitly indicate they dependencies:
 what changes their execution should depend on.\
 That's where the ``useEffect()`` hook comes in. It's called with two arguments:
 - a function that should be executed **AFTER** every component evaluation **IF** the specified dependencies changed
@@ -344,7 +344,7 @@ we've got few exceptions such as:
 - "built-in" APIs or functions
 - variables or functions defined OUTSIDE components
 
-**All "things" used in the effect function must be added if those "things" could 
+**All "things" used in the effect function must be added if those "things" could
 change because the component (or some parent component) re-rendered.**
 
 **It's also very important to pass specific properties instead of an entire object as a dependency because this may
@@ -374,10 +374,10 @@ we could declare a variable outside our component that could be ``let initialExe
 and set it to ``false`` when it's truthy and ``return`` inside our useEffect in order to not pursue.
 
 ## useReducer hook
-We shouldn't update a state based on the value of another state. 
-It may not work correctly sometimes when the other state update doesn't processed in time 
+We shouldn't update a state based on the value of another state.
+It may not work correctly sometimes when the other state update doesn't processed in time
 resulting then in an outdated value usage.\
-When we need to update a state which depends on another state, we should consider combining them in only 
+When we need to update a state which depends on another state, we should consider combining them in only
 one state managing an object as value or think about using the hook **useReducer**.
 
 ## React Context API
@@ -393,7 +393,7 @@ const AuthContext = React.createContext({
 
 export default AuthContext
 `````
-In the parent that have children components which need the defined context, 
+In the parent that have children components which need the defined context,
 we need to provide it:
 `````javascript
 ///src/App.js
@@ -447,11 +447,11 @@ const Navigation = (props) => {
 };
 `````
 
-**Now, while it's possible to consume a context in a component not having a parent providing 
-it (we shall then end up having a context with its default values), having a parent provider is 
+**Now, while it's possible to consume a context in a component not having a parent providing
+it (we shall then end up having a context with its default values), having a parent provider is
 always a good idea because it helps us to make our context dynamic.**
 
-While defining our context, we can also define a contextProvider that will directly manage 
+While defining our context, we can also define a contextProvider that will directly manage
 the state define by the context:
 `````javascript
 import React, {useEffect, useState} from "react";
@@ -490,7 +490,7 @@ export const AuthContextProvider = props => {
 
 export default AuthContext
 `````
-Now, we can surround our ``App`` (which won't manage anything about authentication anymore) 
+Now, we can surround our ``App`` (which won't manage anything about authentication anymore)
 component with our ``AuthContextProvider`` directly in ``index.js``:
 `````javascript
 import React from 'react';
@@ -512,26 +512,26 @@ root.render(
 **React Context is **NOT** optimized for high frequency changes**\
 We should then avoid using it to manage state which may change multiple time per second for example.
 
-### Avoid too custom components 
+### Avoid too custom components
 We shouldn't lose the north because of all of these possibilities:
 - contexts should only be used to state management across the app
 - props for components configuration.
 
 React Context shouldn't be used to replace ALL component communications and props.
 We shouldn't end up using it in a giving (let's say...) UI component.\
-For example, instead of using our ``AuthContext`` in a ``Button`` component, 
-we may have beside another component using our ``Button`` component and the ``AuthContext``. 
+For example, instead of using our ``AuthContext`` in a ``Button`` component,
+we may have beside another component using our ``Button`` component and the ``AuthContext``.
 An ``AuthButton`` then if we really need it in many places.\
-But we shouldn't use the ``AuthContext`` in ``Button`` 
+But we shouldn't use the ``AuthContext`` in ``Button``
 component which can be used in many other places for other purposes.
 
 ## Rules of Hooks
 - Only call React Hooks in React Functions
-  - React Component Functions
-  - Custom Hooks
+    - React Component Functions
+    - Custom Hooks
 - Only call React Hooks at the Top Level
-  - Don’t call them in nested functions
-  - Don’t call them in any block statements
+    - Don’t call them in nested functions
+    - Don’t call them in any block statements
 
 
 ## Bug in useReducer's reducer function
@@ -558,12 +558,12 @@ So our reducer function should be pure function.
 If we have a component which is going to change or its props values are going to change
 with pretty much every re-evaluation of the parent component anyway, then it
 doesn't make a lot of sense to use ``memo`` because its result is that the component will re-render anyway,
-then we can also save that extra comparison of the props values. That then just brings some 
+then we can also save that extra comparison of the props values. That then just brings some
 overhead cost, which is not worth it.
 
-For larger apps where we can cut off entire branches of unnecessary re-evaluations, it might 
+For larger apps where we can cut off entire branches of unnecessary re-evaluations, it might
 very well be worth it. We just don't want to wrap every component with ```React.memo```, instead
-we want to pick some key parts in our component tree which allows us to cut off an entire branch 
+we want to pick some key parts in our component tree which allows us to cut off an entire branch
 of child components. That's way more effective than doing this on every child component.
 
 Using ```React.memo``` be like:
@@ -579,33 +579,33 @@ export default React.memo(MyComponent)
 
 However, using ```React.memo``` doesn't change anything for components that receive reference type
 variables as props such as arrays, objects, functions. Those props always change event if their value doesn't.
-And this is because they are pointers, not value. 
-- In order solve this problem about components that receive function as props, 
-we can use another hook, the ``useCallback()``.
+And this is because they are pointers, not value.
+- In order solve this problem about components that receive function as props,
+  we can use another hook, the ``useCallback()``.
 - To solve this problem about components that receive arrays, objects as props,
-we can use another hook, the ``useMemo()``.
+  we can use another hook, the ``useMemo()``.
 
 
 ## Deeper look
-States (from useState or useReducer) are only updated (the default value is no longer used) after the first initialisation unless 
+States (from useState or useReducer) are only updated (the default value is no longer used) after the first initialisation unless
 the component was unmounted in meantime.\
-When we call a useState setter, it doesn't set the new value instantly but schedule that change. 
-It may then come that we have multiple state change scheduled at the same time maybe because 
+When we call a useState setter, it doesn't set the new value instantly but schedule that change.
+It may then come that we have multiple state change scheduled at the same time maybe because
 React is busy by another intensive work such as listening to a controlled input (ahoooo 😅).\
 Because multiple updates of the state can be scheduled at the same time, it important to
 change our states value using the previous one if the new value depends on it.
 
-Otherwise, you might just get the latest state when the component function was executed last, 
+Otherwise, you might just get the latest state when the component function was executed last,
 which is not necessarily the same state as if the state changes are executed in order.
-Because if you have multiple outstanding state changes, they all come from the same last 
+Because if you have multiple outstanding state changes, they all come from the same last
 re-render cycle of that app component. They all come from the last component snapshot, but of course
-if they were processed, the component would re-render in between but since they're all already scheduled, 
+if they were processed, the component would re-render in between but since they're all already scheduled,
 all outstanding states changes don't take that new in-between component result into account.
-That's why this function form is helpful because there React will actually ensure that for every 
-outstanding state change, it looks into the latest state and gives you that and doesn't use the latest 
-state value from the last time the component was re-rendered. That's an important difference between when the 
-component was re-rendered and when a state change was scheduled. You can have multiple outstanding state 
-changes from one and the same component re-evaluation. That's the key takeaway here and that's why the function 
+That's why this function form is helpful because there React will actually ensure that for every
+outstanding state change, it looks into the latest state and gives you that and doesn't use the latest
+state value from the last time the component was re-rendered. That's an important difference between when the
+component was re-rendered and when a state change was scheduled. You can have multiple outstanding state
+changes from one and the same component re-evaluation. That's the key takeaway here and that's why the function
 update form matters. 👇
 
 ### Explanation 👇
@@ -614,9 +614,9 @@ Given the following state:
 const [count, setCount] = useState(0)
 const updateState = () => setCount(count +1)
 `````
-With this mechanism of scheduling state change, we may end up with this code having ``count === 5`` when 
-actually, we should have ``count === 10`` just because we may have 5 outstanding state changes and our 
-``updateState`` function will register a ``setCount(4+1)`` because at the time ``updateState`` was run, the 
+With this mechanism of scheduling state change, we may end up with this code having ``count === 5`` when
+actually, we should have ``count === 10`` just because we may have 5 outstanding state changes and our
+``updateState`` function will register a ``setCount(4+1)`` because at the time ``updateState`` was run, the
 value of ```count``` was ``4`` but with 5 outstanding state changes.\
 And with those outstanding state changes take in account, the value of ```count``` would actually be ``9``.
 
@@ -630,8 +630,8 @@ everytime its dependencies changes.
 
 
 ## States batching
-In case we have 2 state updates in the same synchronous code snippet after each other. 
-So not in a promise in different blocks but in the same function, for example, where nothing in 
+In case we have 2 state updates in the same synchronous code snippet after each other.
+So not in a promise in different blocks but in the same function, for example, where nothing in
 between would cause a time delay or anything like that, React will batch those state updates together.
 
 In one long synchronous process, so for example, in one function that executes start to end without
@@ -695,7 +695,7 @@ return (
 - We can have **performance issue** while using context because it's not recommended for high
   frequency changes state management: **it's not ready for flux like state management while Redux do.**
 - Once only one property of the state managed by a context change, every component that subscribed to it
-are reloaded even if they don't use that particular property, so not directly affected by that change.
+  are reloaded even if they don't use that particular property, so not directly affected by that change.
 
 
 ### How Redux works?
@@ -755,8 +755,8 @@ root.render(
 `````
 
 Then using the hooks ``useStore()`` from **react-redux**, we can access our whole store (state)
-value or a part of it thanks to the ``useSelector()`` hook. It receives a function that return from 
-the ``state``, the part of it that we want to use and then subscribe our component to that part of the 
+value or a part of it thanks to the ``useSelector()`` hook. It receives a function that return from
+the ``state``, the part of it that we want to use and then subscribe our component to that part of the
 store for us.\
 When our component is removed from the DOM, **react-redux also automatically clear the subscription**.\
 The hook ``useDispatch()`` let us access to the ``dispatcher``.
@@ -798,11 +798,11 @@ const counterSlice = createSlice({
 })
 `````
 - **In slices' reducers, we are allow to mutate the state** because redux
-toolkit internally uses the package [immerjs/immer](https://github.com/immerjs/immer)
-which detect mutation and automatically create a new object from the one we mutated.
+  toolkit internally uses the package [immerjs/immer](https://github.com/immerjs/immer)
+  which detect mutation and automatically create a new object from the one we mutated.
 - **createSlice** automatically create unique action identifiers for our different
-reducers. They can be accessed through ``counterSlice.actions`` which has keys that
-matches our different reducer's function defined in the slice. 
+  reducers. They can be accessed through ``counterSlice.actions`` which has keys that
+  matches our different reducer's function defined in the slice.
 - **I don't know if it's a bug from my side but overriding the state here seems to not work 🤒**
 
 Once the slice is defined, we can export its reducer that will be used to config our store:
@@ -842,19 +842,19 @@ dispatch(counterActions.increment(5))
 **Reducers must be pure, side effect free, synchronous functions**: we should never perform
 side effect inside our reducers no matter it's sync or async side effect! And even never write
 async code in reducers in general!!\
-So such side effects can be added 
+So such side effects can be added
 - inside our components (thanks to **useEffect** for example), ignoring then redux at this point,
 - inside **action creators** that allow us to write async codes or side effects code generally.
 
 **NEVER MUTATE REDUX STATE OUTSIDE THE REDUCERS**\
-This will be firstly, a very bad code and will change the object represented by the redux state in 
-memory without making redux aware of it. 
+This will be firstly, a very bad code and will change the object represented by the redux state in
+memory without making redux aware of it.
 
 ### Where should our logic (code) go?
-- When talking about **synchronous, side effect free code (i.e. data transformations)**, 
-we should **prefer** reducers and **avoid** action creators or components.
+- When talking about **synchronous, side effect free code (i.e. data transformations)**,
+  we should **prefer** reducers and **avoid** action creators or components.
 - and when it comes to **async code or code with side effects**, we should **prefer** action
-creators or components and **NEVER use** reducers.
+  creators or components and **NEVER use** reducers.
 
 ### Action creator function
 We can add custom action creator function to create so-called **Thunk**.\
@@ -862,7 +862,7 @@ A thunk is a function that delays an action until later, until something finish.
 
 They are functions (that can receive parameters)
 that return another function that receive the dispatcher as parameter.\
-The advantage here is that 
+The advantage here is that
 - we can perform side effect inside our custom action creator function
 - we can make the function they return ``async``
 - thanks to the dispatcher it receives, we can dispatch as many actions as we want
@@ -897,8 +897,8 @@ installation: ``npm install react-router-dom``
 Adding routing to our app is a multistep process:
 1. we must define the routes (urls) we want to support and which components should be loaded to these paths.
 2. we have to activate the router and load the routes definition defined in the first step.
-3. we want to make sure that we have all these components we want to load and provide some means of navigating 
-between those pages to allow our users to move smoothly between pages.
+3. we want to make sure that we have all these components we want to load and provide some means of navigating
+   between those pages to allow our users to move smoothly between pages.
 ````javascript
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 
@@ -945,7 +945,7 @@ const router = createBrowserRouter([
 ])
 `````
 Our ``RoutLayout`` here will wrap our page component which will then replace the ``Outlet``
-component inside our **RoutLayout**. We can then place in our RoutLayout, our navigation bar or things 
+component inside our **RoutLayout**. We can then place in our RoutLayout, our navigation bar or things
 like that.
 
 ### errorElement
@@ -954,8 +954,8 @@ It supposed to be a page element nicely styled 😅
 
 ### NavLink
 Instead of using **Link** in our navigation, we should use **NavLink** which provides such advantages:
-1. [x] className: here it's a function which receives ``({isActive})``. isActive is true is the route 
-represented by the NavLink is active.
+1. [x] className: here it's a function which receives ``({isActive})``. isActive is true is the route
+   represented by the NavLink is active.
 2. [x] the ``end`` props on it let us say if the route should be considered active if other including its path are.
 `````javascript
 const isActiveHandler = useCallback(({isActive}) => isActive ? classes.active : undefined, [])
@@ -1014,7 +1014,7 @@ const route = { index: true, element: <EventsPage />, loader: async () => {} }
 `````
 The ``loader`` function can be used to fetch data we may need in our ``EventsPage``.
 The data loaded is returned and then is available in the component page thanks to the
-``useLoaderData()`` hook. The hook can be used in the current component that load the 
+``useLoaderData()`` hook. The hook can be used in the current component that load the
 data or in any of its child components ; and the router always wait for the data to finish
 being fetched before loading the component.\
 We've also got the ``useNavigation()`` hook that can help us to reflect the current navigation state.
@@ -1024,7 +1024,7 @@ navigation.state === 'loading' // the needed data is being fetching
 `````
 The ``useNavigation()`` hook can be used from any component currently visible on the screen.
 
-Instead of putting the loader function code in the router definition, we may consider exporting 
+Instead of putting the loader function code in the router definition, we may consider exporting
 it from the ``EventsPage`` component.
 
 ``loader()s`` support ``Response``type object. This means we can even do something like:
@@ -1035,7 +1035,7 @@ const eventLoader = async () => {
     // We can return an object that indicate that an 
     // error occured and then handle it in our component
     return {isError: true, message: 'some message'}
-    
+
     // OR
     // throw and object as error
     throw {message: 'Some error message'}
@@ -1049,7 +1049,7 @@ const eventLoader = async () => {
 ````
 In case, we throw something, react-router will render the closest error page to our component.
 in the error page, we can access the error thanks to the ``useRouteError()`` hook.\
-In case we return an object, we shall get that object. Otherwise, we could take advantage of the 
+In case we return an object, we shall get that object. Otherwise, we could take advantage of the
 status code provided by the ``Response`` object.
 ````javascript
 //in our Error component
@@ -1067,18 +1067,18 @@ if(response.status === 400) {
 ````
 
 **Instead of throwing ``new Response``, we can ``throw json({message: ''}, {status: 500})``**. Using
-the ```json()``` method from react-router-dom, we don't need to stringify our data and then no need to 
+the ```json()``` method from react-router-dom, we don't need to stringify our data and then no need to
 ``JSON.parse`` it in our Error component.
 
 **Since loaders are not components or hooks, we can't use hooks inside them**
 
 ### Loader with dynamic routes
-Our loaders functions receive automatically some data from which we can destruct ``({request, params})``. 
+Our loaders functions receive automatically some data from which we can destruct ``({request, params})``.
 - From ``request`` we can access the url from for example or await formData() from,
 - From the ``params`` we can access every parameter in the route
 
 ### The useRouteLoaderData hook
-We could have such of defined route: 
+We could have such of defined route:
 `````javascript
 const route = {
   path: ':eventId',
@@ -1090,16 +1090,16 @@ const route = {
   ]
 }
 `````
-This allows us to get access to the ```eventItemLoader``` in both ```EventDetailPage``` and 
+This allows us to get access to the ```eventItemLoader``` in both ```EventDetailPage``` and
 ```EditEventPage``` components.
 For that, we shall use the ``useRouteLoaderData('event-detail')`` that receive the route id as parameter.
 
 ### Form from react-router
 React router help us to handle our forms' submission. For that, we need to
 - use the ``Form`` component from 'react-router-dom' package and then specify the correct method among
-get, post, patch, put and delete
+  get, post, patch, put and delete
 - define the ``action`` property on our component route. It value is a function that should be exported from
-our component file. The function receive automatically the ``({request, params})``
+  our component file. The function receive automatically the ``({request, params})``
 - On ``request``, we can await the ``request.formData()`` and ``get('input-name')`` our input data using their name
 - Once we've done handling/saving our data, we can ``redirect(path)`` our users to where ever we want.
 ``````javascript
@@ -1132,7 +1132,7 @@ return (
 `````
 
 ### Form error handling
-In case we've got some error in the backend, we can return the response in our action and then access 
+In case we've got some error in the backend, we can return the response in our action and then access
 its data thanks to the ``useActionData()`` hook:
 `````javascript
 // in our action:
@@ -1166,7 +1166,7 @@ submit(null, {action: "/logout", method: "post"})
 `````
 
 ### useFetcher hook
-The useFetcher hook (without 's' at its end) is the tool we should use if we want to trigger a 
+The useFetcher hook (without 's' at its end) is the tool we should use if we want to trigger a
 loader/action without actually loading the page/route to which this loader/action belongs to.
 Perfect then to do some work behind-the-scenes.\
 It brings a particular ``Form`` component that we should use if we want to work with it.
@@ -1199,12 +1199,12 @@ const NewsletterSignup = () => {
 Here, we're using it to submit a newsletter form which is a shared component (may appear in multiple part
 of our app) without actually loading the route it's action for.
 - ``data`` contains the data returns by the loader/action used
-- ``state`` here tell us whether the fetcher behind-the-scene, completed its loader/action that was triggered. 
+- ``state`` here tell us whether the fetcher behind-the-scene, completed its loader/action that was triggered.
 
 ### Deferring data fetching with defer()
 We may end up with some component which need data that take time to load.
 We can and should then defer those data fetching.\
-Important to notice that while using ``defer()``, we shouldn't therefore return a response 
+Important to notice that while using ``defer()``, we shouldn't therefore return a response
 after loading our data.
 
 ````javascript
@@ -1231,7 +1231,7 @@ export const eventLoader = () => {
 
 function EventsPage() {
   const { events } = useLoaderData() // we get here the object gave to defer() in eventLoader()
-  
+
   // We must wrap Await by Suspense 
   // Supsense here, is used to show a fallback while the data needed is been loading
   return <Suspense fallback={<p>Loading...</p>}>
@@ -1258,7 +1258,7 @@ export const eventItemLoader = async ({params}) => {
 Here, we are deferring the load of ``eventItem`` and ``events``. However, since we
 made async the ``eventItemLoader``, we could await the loading of the ``eventItem``.
 Then, event detail will be loaded before the page rendering.\
-For every single deferred data usage, we have to use the ``Suspense`` component. We could wrap 
+For every single deferred data usage, we have to use the ``Suspense`` component. We could wrap
 all of their component rendering in one ``Suspense`` component but it will lead to a single fallback
 showing.
 
@@ -1272,8 +1272,8 @@ const [searchParams, setSearchParams] = useSearchParams()
 const isLogin = searchParams.get('mode') === 'login'
 ````
 
-**Important**: ``loader()``s must return null or any other value\
-We should make sure that we do add an extra return null statement in all if statement 
+**Important**: ``loader/action()``s must return null or any other value\
+We should make sure that we do add an extra return null statement in all if statement
 branches where nothing would be returned otherwise to avoid errors or just add
 an extra ``return null`` at the end of our loader
 ````javascript
@@ -1293,14 +1293,16 @@ const searchParams = url.searchParams
 
 ## Deploying
 ### Lazy loading - Code optimization
-It's important to implement lazy loading in our app before sending it to prod. This 
+It's important to implement lazy loading in our app before sending it to prod. This
 is because without it, every file used by our app is downloaded while the first
-page of our app is being rendered. But thanks to lazy loading, we shall henceforth 
+page of our app is being rendered. But thanks to lazy loading, we shall henceforth
 load a given file only if we need it.\
 Given this code:
+
 `````javascript
 import EventsPage, {loader as EventLoader} from './pages/Events';
-const route = { index: true, element: <EventsPage />, loader: EventsLoader } 
+
+const route = {index: true, element: <EventsPage/>, loader: eventsLoader} 
 `````
 Applying lazy loading to it will give:
 `````javascript
@@ -1321,7 +1323,7 @@ Once the command end executing, our code ready for production is placed in the `
 folder.\
 Our app can then be uploaded to production using for example Firebase hosting. To do that,
 we need to create a project on our firebase console. Once done, we can click on ``Build`` then
-on ``Hosting`` and then click on ``Get started`` and follow instructions. 
+on ``Hosting`` and then click on ``Get started`` and follow instructions.
 
 ## Animating ReactApp
 We can do this by using build in CSS property or take advantage from the [React-Transition-Group](https://reactcommunity.org/react-transition-group/)
@@ -1352,7 +1354,7 @@ It got:
 - onEnter/onEntering/onEntered/onExit/onExiting/onExited event that can be used to execute what ever function we need to execute.
 
 ### CSSTransition
-Can be used in place of the **Transition** component. It doesn't receive a function as children but 
+Can be used in place of the **Transition** component. It doesn't receive a function as children but
 a ``classNames`` props that will be used to add CSS classes dynamically to our component based on the ``state``.
 So `modal-class` will give us
 - `modal-class-enter` when `state === 'enter'`
@@ -1389,26 +1391,26 @@ Its children should be wrapped with ``Transition`` or `CSSTransition` element.
 
 ## Testing 🤓
 When writing our test, we can use the `test` function available globally.\
-It takes 2 arguments: 
+It takes 2 arguments:
 - A description of what we're testing
-- An anonymous function which will contains the testing code that we should write 
-by using the three **A**s: arrange, act, and assert.
+- An anonymous function which will contains the testing code that we should write
+  by using the three **A**s: arrange, act, and assert.
 
 ### Arrange
-Here, we set up the test data, test condition and test environment. 
+Here, we set up the test data, test condition and test environment.
 For example, we may render the component that we want to test. To do that, we may need to
 - import the component we want to test
 - render it thanks to the `render()` function from the testing-library that receive a JSX code
 - ...
 
 ### Act
-We do the thing we want to test, run logic that should be tested such 
-as a function execution or a button click simulation. 
+We do the thing we want to test, run logic that should be tested such
+as a function execution or a button click simulation.
 
 ### Assert the result
-We compare then the execution results (the output on the screen for example) with the 
+We compare then the execution results (the output on the screen for example) with the
 expected results. This can be done thanks to `screen` which give us access to the virtual dom rendered.
-It gives us 
+It gives us
 - `query` functions which can be used to get an element in the vDOM
 - `find` functions which returns a promise.
 - `get` functions which throw error if the requested element in the vDOM is not found
@@ -1440,7 +1442,7 @@ describe('Greeting component', () => {
 ````
 
 Our test function can be async, and we can mock external function or api used by our components in order
-to mack sure our tests won't fail because of them. 
+to mack sure our tests won't fail because of them.
 ````javascript
 test('renders listitem as expected', async () => {
   // Arrange
@@ -1456,7 +1458,7 @@ test('renders listitem as expected', async () => {
 })
 ````
 
-More about [Jestjs](https://jestjs.io/docs/getting-started), the 
+More about [Jestjs](https://jestjs.io/docs/getting-started), the
 [React testing library](https://testing-library.com/docs/react-testing-library/intro/),
 and the [React hooks testing library](https://react-hooks-testing-library.com/installation)
 
@@ -1503,8 +1505,8 @@ const stringArray = preInsert<string>(['a', 'b', 'c'], 'd')
 let numbers: Array<number> = [1, 2, 3]; 
 ````
 
-
-
+### [Typescript && Redux](https://react-redux.js.org/using-react-redux/usage-with-typescript#define-root-state-and-dispatch-types)
+### [Type Checking Redux Thunks](https://redux.js.org/usage/usage-with-typescript#type-checking-redux-thunks)
 
 
 
