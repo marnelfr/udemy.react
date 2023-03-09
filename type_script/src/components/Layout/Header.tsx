@@ -1,8 +1,8 @@
-import mealsImage from '../../../assets/img.png'
-import styles from './Header.module.css'
+import mealsImage from "../../assets/img.png";
+import styles from "./Header.module.css";
 import HeaderCartButton from "./HeaderCartButton";
 
-const Header = props => {
+const Header: React.FC = (props) => {
   return (
     <>
       <header className={styles.header}>
@@ -10,10 +10,10 @@ const Header = props => {
         <HeaderCartButton />
       </header>
       <div className={styles.mainImage}>
-        <img src={mealsImage} alt="A table full of delicious food !"/>
+        <img src={mealsImage} alt="A table full of delicious food !" />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

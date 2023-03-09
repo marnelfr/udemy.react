@@ -1,8 +1,9 @@
-import styles from './CartItem.module.css'
+import styles from "./CartItem.module.css";
+import React from "react";
 
-const CartItem = props => {
+const CartItem: React.FC = (props) => {
   return (
-    <li className={styles['cart-item']}>
+    <li className={styles["cart-item"]}>
       <div>
         <h2>Sushi</h2>
         <div className={styles.summary}>
@@ -15,7 +16,7 @@ const CartItem = props => {
         <button>+</button>
       </div>
     </li>
-  )
-}
+  );
+};
 
-export default CartItem
+export default CartItem;

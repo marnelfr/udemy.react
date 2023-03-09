@@ -1,7 +1,7 @@
-import styles from './MealItem.module.css'
+import styles from "./MealItem.module.css";
 import MealItemForm from "./MealItemForm";
 
-const MealItem = props => {
+const MealItem: React.FC = (props) => {
   return (
     <li className={styles.meal}>
       <div>
@@ -10,10 +10,10 @@ const MealItem = props => {
         <div className={styles.price}>15,25</div>
       </div>
       <div>
-        <MealItemForm/>
+        <MealItemForm />
       </div>
     </li>
-  )
-}
+  );
+};
 
-export default MealItem
+export default MealItem;

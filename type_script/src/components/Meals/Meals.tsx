@@ -1,13 +1,13 @@
 import MealsSummary from "./MealsSummary";
 import AvailableMeals from "./AvailableMeals";
 
-const Meals = props => {
+const Meals: React.FC = (props) => {
   return (
     <>
-      <MealsSummary/>
-      <AvailableMeals/>
+      <MealsSummary />
+      <AvailableMeals />
     </>
-  )
-}
+  );
+};
 
-export default Meals
+export default Meals;

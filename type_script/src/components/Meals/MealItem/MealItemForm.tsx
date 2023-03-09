@@ -1,6 +1,6 @@
-import styles from './MealItemFrom.module.css'
+import styles from "./MealItemFrom.module.css";
 
-const MealItemForm = props => {
+const MealItemForm: React.FC = (props) => {
   return (
     <form className={styles.form}>
       <div className={styles.input}>
@@ -10,7 +10,7 @@ const MealItemForm = props => {
       <button>+ Add</button>
       <p>Please enter a valid amount.</p>
     </form>
-  )
-}
+  );
+};
 
-export default MealItemForm
+export default MealItemForm;

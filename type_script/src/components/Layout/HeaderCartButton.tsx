@@ -1,7 +1,7 @@
-import CartIcon from '../Cart/CartIcon';
-import styles from './HeaderCartButton.module.css';
+import CartIcon from "../Cart/CartIcon";
+import styles from "./HeaderCartButton.module.css";
 
-const HeaderCartButton = props => {
+const HeaderCartButton: React.FC = (props) => {
   return (
     <button className={`${styles.button} ${styles.bump}`}>
       <span className={styles.icon}>
