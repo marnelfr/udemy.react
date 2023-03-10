@@ -38,3 +38,7 @@
     font: inherit;
     padding-left: 0.5rem;
 }
+
+.error {
+    color: red;
+}

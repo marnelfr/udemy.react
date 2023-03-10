@@ -1,7 +1,13 @@
 import styles from "./Checkout.module.css";
-import React from "react";
+import React, { MouseEventHandler, useCallback } from "react";
 
-const Checkout: React.FC = (props) => {
+const Checkout: React.FC<{ onCancel: MouseEventHandler }> = ({ onCancel }) => {
+  const clickHandler: MouseEventHandler = useCallback(
+    (event) => {
+      onCancel(event);
+    },
+    [onCancel]
+  );
   return (
     <form>
       <div className={styles["control-group"]}>
@@ -26,7 +32,9 @@ const Checkout: React.FC = (props) => {
         </div>
       </div>
       <div className={styles.actions}>
-        <button className={styles["button--alt"]}>Cancel</button>
+        <button onClick={clickHandler} className={styles["button--alt"]}>
+          Cancel
+        </button>
         <button>Submit</button>
       </div>
     </form>

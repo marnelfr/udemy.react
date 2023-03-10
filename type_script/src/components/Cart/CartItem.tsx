@@ -1,12 +1,29 @@
 import styles from "./CartItem.module.css";
-import React from "react";
+import React, { MouseEventHandler, useCallback } from "react";
 import Meal from "../../modeles/meal";
+import { useAppDispatch } from "../../redux/hooks";
+import { cartActions } from "../../redux/cart";
 
 const CartItem: React.FC<{ meal: Meal; amount: number }> = ({
   meal,
   amount,
 }) => {
+  const dispatch = useAppDispatch();
   const price = meal.price.toFixed(2);
+
+  const removeItemHandler: MouseEventHandler = useCallback(
+    (event) => {
+      event.preventDefault();
+      dispatch(cartActions.remove(meal.id));
+    },
+    [dispatch]
+  );
+
+  const addItemHandler: MouseEventHandler = useCallback((event) => {
+    event.preventDefault();
+    dispatch(cartActions.add({ meal, amount: 1 }));
+  }, []);
+
   return (
     <li className={styles["cart-item"]}>
       <div>
@@ -17,8 +34,8 @@ const CartItem: React.FC<{ meal: Meal; amount: number }> = ({
         </div>
       </div>
       <div className={styles.actions}>
-        <button>−</button>
-        <button>+</button>
+        <button onClick={removeItemHandler}>−</button>
+        <button onClick={addItemHandler}>+</button>
       </div>
     </li>
   );

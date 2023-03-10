@@ -23,25 +23,39 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     add(state, action) {
+      const newItem = action.payload;
+      newItem.amount = newItem.amount > 5 ? 5 : newItem.amount;
       const existingItem = state.items.find(
-        (item) => item.meal.id === action.payload.meal.id
+        (item) => item.meal.id === newItem.meal.id
       );
 
       if (existingItem) {
-        existingItem.amount += action.payload.amount;
+        existingItem.amount += newItem.amount;
+        existingItem.amount = existingItem.amount > 5 ? 5 : existingItem.amount;
       } else {
-        state.items.push(action.payload);
+        state.items.push(newItem);
       }
 
-      state.totalItem += action.payload.amount;
-      state.totalPrice += action.payload.meal.price;
+      state.totalItem += newItem.amount;
+      state.totalPrice += newItem.meal.price * newItem.amount;
     },
-    remove(state, action) {},
+    remove(state, action) {
+      const exitingItem = state.items.find(
+        (item) => item.meal.id === action.payload
+      );
+      if (exitingItem) {
+        exitingItem.amount--;
+        state.totalItem--;
+        state.totalPrice -= exitingItem.meal.price;
+      }
+    },
     reset(state) {},
   },
 });
 
 export const cartActions = cartSlice.actions;
+
+export const MAX_ITEM_PER_MEAL = 5;
 
 const cartReducer = cartSlice.reducer;
 export default cartReducer;

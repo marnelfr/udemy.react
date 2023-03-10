@@ -1,12 +1,17 @@
 import styles from "./MealItem.module.css";
 import MealItemForm from "./MealItemForm";
 import Meal from "../../../modeles/meal";
-import { useAppDispatch } from "../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { cartActions } from "../../../redux/cart";
+import { MAX_ITEM_PER_MEAL } from "../../../redux/cart";
 
 const MealItem: React.FC<{ meal: Meal }> = ({ meal }) => {
+  const items = useAppSelector((state) => state.cart.items);
+  const item = items.find((item) => item.meal.id === meal.id);
   const price = meal.price.toFixed(2);
   const dispatch = useAppDispatch();
+
+  const isPushable = item ? item.amount < MAX_ITEM_PER_MEAL : true;
 
   const addItemHandler = (amount: number) => {
     dispatch(cartActions.add({ meal, amount }));
@@ -20,7 +25,7 @@ const MealItem: React.FC<{ meal: Meal }> = ({ meal }) => {
         <div className={styles.price}>${price}</div>
       </div>
       <div>
-        <MealItemForm onAddItem={addItemHandler} />
+        <MealItemForm isPushable={isPushable} onAddItem={addItemHandler} />
       </div>
     </li>
   );
