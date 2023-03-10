@@ -20,7 +20,19 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    add(state, action) {},
+    add(state, action) {
+      const existingItem = state.items.find(
+        (item) => item.meal.id === action.payload.meal.id
+      );
+
+      if (existingItem) {
+        existingItem.amount += action.payload.amount;
+      } else {
+        state.items.push(action.payload);
+      }
+
+      state.total += action.payload.amount;
+    },
     remove(state, action) {},
     reset(state) {},
   },

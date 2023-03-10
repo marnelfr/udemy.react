@@ -1,11 +1,21 @@
 import styles from "./MealItemFrom.module.css";
+import { FormEventHandler, MouseEventHandler, useRef } from "react";
 
-const MealItemForm: React.FC = (props) => {
+const MealItemForm: React.FC<{ onAddItem: (amount: number) => void }> = (
+  props
+) => {
+  const ref = useRef<HTMLInputElement>(null);
+
+  const submitHandler: FormEventHandler = (event) => {
+    event.preventDefault();
+    props.onAddItem(+ref.current!.value);
+  };
+
   return (
-    <form className={styles.form}>
+    <form onSubmit={submitHandler} className={styles.form}>
       <div className={styles.input}>
         <label htmlFor="meal">Amount</label>
-        <input type="number" defaultValue="1" />
+        <input ref={ref} type="number" defaultValue="1" min="1" />
       </div>
       <button>+ Add</button>
       {/*<p>Please enter a valid amount.</p>*/}
