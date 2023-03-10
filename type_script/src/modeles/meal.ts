@@ -1,15 +1,8 @@
-import { randomInt } from "crypto";
-
-export default class Meal {
+type Meal = {
   id: number;
   name: string;
   description: string;
   price: number;
+};
 
-  constructor(name: string, description: string, price: number, id?: number) {
-    this.name = name;
-    this.description = description;
-    this.price = price;
-    this.id = id || new Date().getTime();
-  }
-}
+export default Meal;
