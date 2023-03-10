@@ -7,6 +7,10 @@ const Header: React.FC = (props) => {
     <>
       <header className={styles.header}>
         <h1>ReactMeals</h1>
+        <a href="">Home</a>
+        <a href="">Our Store</a>
+        <a href="">About us</a>
+        <a href="">Login</a>
         <HeaderCartButton />
       </header>
       <div className={styles.mainImage}>
