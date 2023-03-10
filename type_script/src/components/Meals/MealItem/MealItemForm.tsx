@@ -8,7 +8,7 @@ const MealItemForm: React.FC = (props) => {
         <input type="number" defaultValue="1" />
       </div>
       <button>+ Add</button>
-      <p>Please enter a valid amount.</p>
+      {/*<p>Please enter a valid amount.</p>*/}
     </form>
   );
 };

@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modalReducer from "./modal";
+import cartReducer from "./cart";
+import stockReducer from "./stock";
 
 const store = configureStore({
   reducer: {
     modal: modalReducer,
+    stock: stockReducer,
+    cart: cartReducer,
   },
 });
 
