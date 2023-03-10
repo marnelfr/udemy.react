@@ -8,12 +8,14 @@ type StateItemType = {
 
 type InitialStateType = {
   items: StateItemType[];
-  total: number;
+  totalItem: number;
+  totalPrice: number;
 };
 
 const initialState: InitialStateType = {
   items: [],
-  total: 0,
+  totalItem: 0,
+  totalPrice: 0,
 };
 
 const cartSlice = createSlice({
@@ -31,7 +33,8 @@ const cartSlice = createSlice({
         state.items.push(action.payload);
       }
 
-      state.total += action.payload.amount;
+      state.totalItem += action.payload.amount;
+      state.totalPrice += action.payload.meal.price;
     },
     remove(state, action) {},
     reset(state) {},

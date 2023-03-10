@@ -16,6 +16,16 @@
 
 .header a {
     text-decoration: none;
+    color: white;
+    margin: 0 15px;
+}
+
+.header a:hover {
+    color: #ccc;
+}
+
+.header a.active {
+    text-decoration: underline;
 }
 
 .mainImage {

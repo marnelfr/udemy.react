@@ -6,7 +6,7 @@ import { modalActions } from "../../redux/modal";
 
 const HeaderCartButton: React.FC = (props) => {
   const dispatch = useAppDispatch();
-  const totalItems = useAppSelector((state) => state.cart.total);
+  const totalItems = useAppSelector((state) => state.cart.totalItem);
 
   const clickHandler: MouseEventHandler = (event) => {
     event.preventDefault();
