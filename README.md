@@ -1508,7 +1508,11 @@ let numbers: Array<number> = [1, 2, 3];
 ### [Typescript && Redux](https://react-redux.js.org/using-react-redux/usage-with-typescript#define-root-state-and-dispatch-types)
 ### [Type Checking Redux Thunks](https://redux.js.org/usage/usage-with-typescript#type-checking-redux-thunks)
 
-
+### Should not use Model Classes
+Yes. [We've always told Redux users they should not put non-serializable values in the store.](https://redux.js.org/style-guide/style-guide#do-not-put-non-serializable-values-in-state-or-actions)\
+Redux Toolkit was specifically designed to help provide good defaults when setting up a Redux store, and as part of that, it includes checks to make sure you're not accidentally mutating your data and that you're not including non-serializable values.
+Class instances are by definition not fully serializable, so it's correctly flagging those instances as a problem. Please rewrite your logic to not pass those in to the store.
+In general, React and Redux apps should be written using only plain JS objects and arrays as data. You don't need "model classes".
 
 
 
