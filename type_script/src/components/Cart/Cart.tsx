@@ -1,12 +1,23 @@
-import styles from "./Cart.module.css";
+import React, { MouseEventHandler } from "react";
 
 import CartItem from "./CartItem";
 import Checkout from "./Checkout/Checkout";
-import React from "react";
+import Modal from "../UI/Modal/Modal";
+
+import styles from "./Cart.module.css";
+import { useAppDispatch } from "../../redux/hooks";
+import { modalActions } from "../../redux/modal";
 
 const Cart: React.FC = (props) => {
+  const dispatch = useAppDispatch();
+
+  const closeHandler: MouseEventHandler = (event) => {
+    event.preventDefault();
+    dispatch(modalActions.hideModal());
+  };
+
   return (
-    <div>
+    <Modal>
       <CartItem />
       <div className={styles.total}>
         <span>Total Amount</span>
@@ -21,9 +32,11 @@ const Cart: React.FC = (props) => {
       <p>Your order has been submitted successfully</p>
       <small>Please, check your email</small>
       <div className={styles.actions}>
-        <button className={styles["button--alt"]}>Close</button>
+        <button onClick={closeHandler} className={styles["button--alt"]}>
+          Close
+        </button>
       </div>
-    </div>
+    </Modal>
   );
 };
 
