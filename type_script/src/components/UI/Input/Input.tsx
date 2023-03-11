@@ -1,7 +1,9 @@
 import styles from "./Input.module.css";
 import React, { ChangeEventHandler, FocusEventHandler } from "react";
+import { ucWord } from "../../../helpers/util";
 
 const Input: React.FC<{
+  name: string;
   value: string;
   hasError: boolean;
   changeHandler: ChangeEventHandler;
@@ -13,13 +15,13 @@ const Input: React.FC<{
         props.hasError ? styles.invalid : undefined
       }`}
     >
-      <label htmlFor="name">Your name</label>
+      <label htmlFor="name">{ucWord(props.name)}</label>
       <input
         value={props.value}
         onChange={props.changeHandler}
         onBlur={props.blurHandler}
         type="text"
-        id="name"
+        id={props.name.toLowerCase()}
       />
       {props.hasError && (
         <p className={styles["error-text"]}>Please enter a valid value</p>
