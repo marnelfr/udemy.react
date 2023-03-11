@@ -1,6 +1,7 @@
 import Input from "../UI/Input/Input";
 import useInput from "../../hooks/use-input";
 import styles from "./Auth.module.css";
+import { Form } from "react-router-dom";
 
 const Auth = () => {
   const {
@@ -17,7 +18,7 @@ const Auth = () => {
   } = useInput((val) => val.includes("@") && val.length > 5);
 
   return (
-    <form className={styles.form}>
+    <Form className={styles.form}>
       <Input
         name="Email"
         value={emailValue}
@@ -35,7 +36,7 @@ const Auth = () => {
       <div className={styles.action}>
         <button type="submit">Login</button>
       </div>
-    </form>
+    </Form>
   );
 };
 
