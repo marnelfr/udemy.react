@@ -8,6 +8,7 @@ import React, {
   useState,
 } from "react";
 import useInput from "../../../hooks/use-input";
+import Input from "../../UI/Input/Input";
 
 const Checkout: React.FC<{ onCancel: MouseEventHandler }> = ({ onCancel }) => {
   const {
@@ -27,32 +28,16 @@ const Checkout: React.FC<{ onCancel: MouseEventHandler }> = ({ onCancel }) => {
   return (
     <form>
       <div className={styles["control-group"]}>
-        <div
-          className={`${styles["form-control"]} ${
-            nameHasError ? styles.invalid : undefined
-          }`}
-        >
-          <label htmlFor="name">Your name</label>
-          <input
-            value={nameValue}
-            onChange={nameChangeHandler}
-            onBlur={nameBlurHandler}
-            type="text"
-            id="name"
-          />
-          {nameHasError && (
-            <p className={styles["error-text"]}>Please enter a valid value</p>
-          )}
-        </div>
+        <Input
+          value={nameValue}
+          hasError={nameHasError}
+          changeHandler={nameChangeHandler}
+          blurHandler={nameBlurHandler}
+        />
         <div className={styles["form-control"]}>
           <label htmlFor="name">Street</label>
           <input type="text" id="street" />
         </div>
-        {/*<div className={styles["form-control"] + " " + styles.invalid}>
-          <label htmlFor="name">Street</label>
-          <input type="text" id="name" />
-          <p className={styles["error-text"]}>Please enter a valid value</p>
-        </div>*/}
       </div>
       <div className={styles["control-group"]}>
         <div className={styles["form-control"]}>
