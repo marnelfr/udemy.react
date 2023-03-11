@@ -15,11 +15,15 @@ const Checkout: React.FC<{ onCancel: MouseEventHandler }> = ({ onCancel }) => {
           <label htmlFor="name">Your name</label>
           <input type="text" id="name" />
         </div>
-        <div className={styles["form-control"] + " " + styles.invalid}>
+        <div className={styles["form-control"]}>
+          <label htmlFor="name">Street</label>
+          <input type="text" id="street" />
+        </div>
+        {/*<div className={styles["form-control"] + " " + styles.invalid}>
           <label htmlFor="name">Street</label>
           <input type="text" id="name" />
           <p className={styles["error-text"]}>Please enter a valid value</p>
-        </div>
+        </div>*/}
       </div>
       <div className={styles["control-group"]}>
         <div className={styles["form-control"]}>

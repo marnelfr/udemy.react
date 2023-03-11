@@ -10,6 +10,7 @@ import { modalActions } from "../../redux/modal";
 
 const Cart: React.FC = (props) => {
   const dispatch = useAppDispatch();
+  const totalItem = useAppSelector((state) => state.cart.totalItem);
   const [showCheckout, setShowCheckout] = useState(false);
   const { items, totalPrice } = useAppSelector((state) => state.cart);
 
@@ -47,9 +48,11 @@ const Cart: React.FC = (props) => {
           <button onClick={closeHandler} className={styles["button--alt"]}>
             Close
           </button>
-          <button onClick={displayCheckoutHandler} className={styles.button}>
-            Order
-          </button>
+          {totalItem !== 0 && (
+            <button onClick={displayCheckoutHandler} className={styles.button}>
+              Order
+            </button>
+          )}
         </div>
       )}
 
