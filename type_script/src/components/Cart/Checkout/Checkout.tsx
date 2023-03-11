@@ -1,19 +1,48 @@
 import styles from "./Checkout.module.css";
-import React, { MouseEventHandler, useCallback } from "react";
+import React, {
+  ChangeEvent,
+  ChangeEventHandler,
+  FocusEventHandler,
+  MouseEventHandler,
+  useCallback,
+  useState,
+} from "react";
+import useInput from "../../../hooks/use-input";
 
 const Checkout: React.FC<{ onCancel: MouseEventHandler }> = ({ onCancel }) => {
+  const {
+    value: nameValue,
+    hasError: nameHasError,
+    changeHandler: nameChangeHandler,
+    blurHandler: nameBlurHandler,
+  } = useInput((val) => val.trim() !== "");
+
   const clickHandler: MouseEventHandler = useCallback(
     (event) => {
       onCancel(event);
     },
     [onCancel]
   );
+
   return (
     <form>
       <div className={styles["control-group"]}>
-        <div className={styles["form-control"]}>
+        <div
+          className={`${styles["form-control"]} ${
+            nameHasError ? styles.invalid : undefined
+          }`}
+        >
           <label htmlFor="name">Your name</label>
-          <input type="text" id="name" />
+          <input
+            value={nameValue}
+            onChange={nameChangeHandler}
+            onBlur={nameBlurHandler}
+            type="text"
+            id="name"
+          />
+          {nameHasError && (
+            <p className={styles["error-text"]}>Please enter a valid value</p>
+          )}
         </div>
         <div className={styles["form-control"]}>
           <label htmlFor="name">Street</label>

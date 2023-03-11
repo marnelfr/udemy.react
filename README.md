@@ -1502,7 +1502,11 @@ const newArray = preInsert([1, 2, 3], 45)
 const stringArray = preInsert<string>(['a', 'b', 'c'], 'd')
 
 // we can explicitly set a variable type like this:
-let numbers: Array<number> = [1, 2, 3]; 
+let numbers: Array<number> = [1, 2, 3];
+
+const changeHandler: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  setValue(event.currentTarget.value);
+};
 ````
 
 ### [Typescript && Redux](https://react-redux.js.org/using-react-redux/usage-with-typescript#define-root-state-and-dispatch-types)
