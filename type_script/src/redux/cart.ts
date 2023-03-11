@@ -49,7 +49,11 @@ const cartSlice = createSlice({
         state.totalPrice -= exitingItem.meal.price;
       }
     },
-    reset(state) {},
+    reset(state) {
+      state.items = [];
+      state.totalPrice = 0;
+      state.totalItem = 0;
+    },
   },
 });
 

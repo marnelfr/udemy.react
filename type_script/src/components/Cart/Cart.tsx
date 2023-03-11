@@ -8,11 +8,13 @@ import styles from "./Cart.module.css";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { modalActions } from "../../redux/modal";
 import OrderInfo from "../../modeles/order";
+import { cartActions } from "../../redux/cart";
 
 const Cart: React.FC = (props) => {
   const dispatch = useAppDispatch();
   const totalItem = useAppSelector((state) => state.cart.totalItem);
   const [showCheckout, setShowCheckout] = useState(false);
+  const [ordered, setOrdered] = useState(false);
   const { items, totalPrice } = useAppSelector((state) => state.cart);
 
   const CartItemList = items.map((item) => (
@@ -23,6 +25,7 @@ const Cart: React.FC = (props) => {
     (event) => {
       event.preventDefault();
       dispatch(modalActions.hideModal());
+      setOrdered(false);
     },
     [dispatch]
   );
@@ -44,10 +47,12 @@ const Cart: React.FC = (props) => {
     };
     // todo: We'll send it to a backend
     console.log(order);
+    setOrdered(true);
+    dispatch(cartActions.reset());
   }, []);
 
-  return (
-    <Modal>
+  let content = (
+    <>
       {CartItemList}
       <div className={styles.total}>
         <span>Total Amount</span>
@@ -69,16 +74,24 @@ const Cart: React.FC = (props) => {
       {showCheckout && (
         <Checkout onOrder={orderHandler} onCancel={cancelHandler} />
       )}
-
-      {/*<p>Your order has been submitted successfully</p>
-      <small>Please, check your email</small>
-      <div className={styles.actions}>
-        <button onClick={closeHandler} className={styles["button--alt"]}>
-          Close
-        </button>
-      </div>*/}
-    </Modal>
+    </>
   );
+
+  if (ordered) {
+    content = (
+      <>
+        <p>Your order has been submitted successfully</p>
+        <small>Please, check your email</small>
+        <div className={styles.actions}>
+          <button onClick={closeHandler} className={styles["button--alt"]}>
+            Close
+          </button>
+        </div>
+      </>
+    );
+  }
+
+  return <Modal>{content}</Modal>;
 };
 
 export default Cart;
