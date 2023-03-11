@@ -10,8 +10,12 @@ import React, {
 } from "react";
 import useInput from "../../../hooks/use-input";
 import Input from "../../UI/Input/Input";
+import OrderInfo from "../../../modeles/order";
 
-const Checkout: React.FC<{ onCancel: MouseEventHandler }> = ({ onCancel }) => {
+const Checkout: React.FC<{
+  onCancel: MouseEventHandler;
+  onOrder: (order: OrderInfo) => void;
+}> = ({ onCancel, onOrder }) => {
   const {
     value: nameValue,
     isValid: nameIsValid,
@@ -20,6 +24,7 @@ const Checkout: React.FC<{ onCancel: MouseEventHandler }> = ({ onCancel }) => {
     blurHandler: nameBlurHandler,
     hasBeenTouched: nameHasBeenTouched,
   } = useInput((val) => val.trim() !== "");
+
   const {
     value: streetValue,
     isValid: streetIsValid,
@@ -28,6 +33,7 @@ const Checkout: React.FC<{ onCancel: MouseEventHandler }> = ({ onCancel }) => {
     blurHandler: streetBlurHandler,
     hasBeenTouched: streetHasBeenTouched,
   } = useInput((val) => val.trim() !== "");
+
   const {
     value: cityValue,
     isValid: cityIsValid,
@@ -36,6 +42,7 @@ const Checkout: React.FC<{ onCancel: MouseEventHandler }> = ({ onCancel }) => {
     blurHandler: cityBlurHandler,
     hasBeenTouched: cityHasBeenTouched,
   } = useInput((val) => val.trim() !== "");
+
   const {
     value: emailValue,
     isValid: emailIsValid,
@@ -43,7 +50,7 @@ const Checkout: React.FC<{ onCancel: MouseEventHandler }> = ({ onCancel }) => {
     changeHandler: emailChangeHandler,
     blurHandler: emailBlurHandler,
     hasBeenTouched: emailHasBeenTouched,
-  } = useInput((val) => val.trim() !== "");
+  } = useInput((val) => val.includes("@") && val.length > 5);
 
   const clickHandler: MouseEventHandler = useCallback(
     (event) => {
@@ -61,9 +68,16 @@ const Checkout: React.FC<{ onCancel: MouseEventHandler }> = ({ onCancel }) => {
     emailHasBeenTouched();
 
     if (nameIsValid && streetIsValid && cityIsValid && emailIsValid) {
-      console.log("okook");
+      const order = {
+        name: nameValue,
+        street: streetValue,
+        city: cityValue,
+        email: emailValue,
+      };
+      onOrder(order);
     } else {
-      console.log("error");
+      // todo: use the modal here to display the message
+      window.alert("Please fill in the form");
     }
   };
 

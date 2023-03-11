@@ -7,6 +7,7 @@ import Modal from "../UI/Modal/Modal";
 import styles from "./Cart.module.css";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { modalActions } from "../../redux/modal";
+import OrderInfo from "../../modeles/order";
 
 const Cart: React.FC = (props) => {
   const dispatch = useAppDispatch();
@@ -36,6 +37,15 @@ const Cart: React.FC = (props) => {
     setShowCheckout(false);
   }, []);
 
+  const orderHandler = useCallback((orderInfo: OrderInfo) => {
+    const order = {
+      ...orderInfo,
+      items: items.slice(),
+    };
+    // todo: We'll send it to a backend
+    console.log(order);
+  }, []);
+
   return (
     <Modal>
       {CartItemList}
@@ -56,7 +66,9 @@ const Cart: React.FC = (props) => {
         </div>
       )}
 
-      {showCheckout && <Checkout onCancel={cancelHandler} />}
+      {showCheckout && (
+        <Checkout onOrder={orderHandler} onCancel={cancelHandler} />
+      )}
 
       {/*<p>Your order has been submitted successfully</p>
       <small>Please, check your email</small>
