@@ -26,6 +26,7 @@ export const loginAction: ActionFunction = async ({ request, params }) => {
 
   const data = await response.json();
   //data.token
+  // which backend I'm gonna use?
 };
 
 const LoginPage = () => (
