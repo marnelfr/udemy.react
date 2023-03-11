@@ -39,6 +39,7 @@ const cartSlice = createSlice({
       state.totalItem += newItem.amount;
       state.totalPrice += newItem.meal.price * newItem.amount;
     },
+
     remove(state, action) {
       const exitingItem = state.items.find(
         (item) => item.meal.id === action.payload
@@ -49,6 +50,7 @@ const cartSlice = createSlice({
         state.totalPrice -= exitingItem.meal.price;
       }
     },
+
     reset(state) {
       state.items = [];
       state.totalPrice = 0;
