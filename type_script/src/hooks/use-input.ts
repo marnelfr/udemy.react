@@ -10,7 +10,8 @@ const useInput = (callback: (val: string) => boolean) => {
   const [value, setValue] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
-  const hasError = isTouched && !callback(value);
+  const isValid = callback(value);
+  const hasError = isTouched && !isValid;
 
   const changeHandler: ChangeEventHandler = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +25,16 @@ const useInput = (callback: (val: string) => boolean) => {
     setIsTouched(true);
   }, []);
 
-  return { value, hasError, changeHandler, blurHandler };
+  const hasBeenTouched = () => setIsTouched(true);
+
+  return {
+    value,
+    isValid,
+    hasError,
+    changeHandler,
+    blurHandler,
+    hasBeenTouched,
+  };
 };
 
 export default useInput;

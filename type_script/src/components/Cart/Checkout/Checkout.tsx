@@ -3,6 +3,7 @@ import React, {
   ChangeEvent,
   ChangeEventHandler,
   FocusEventHandler,
+  FormEventHandler,
   MouseEventHandler,
   useCallback,
   useState,
@@ -13,27 +14,35 @@ import Input from "../../UI/Input/Input";
 const Checkout: React.FC<{ onCancel: MouseEventHandler }> = ({ onCancel }) => {
   const {
     value: nameValue,
+    isValid: nameIsValid,
     hasError: nameHasError,
     changeHandler: nameChangeHandler,
     blurHandler: nameBlurHandler,
+    hasBeenTouched: nameHasBeenTouched,
   } = useInput((val) => val.trim() !== "");
   const {
     value: streetValue,
+    isValid: streetIsValid,
     hasError: streetHasError,
     changeHandler: streetChangeHandler,
     blurHandler: streetBlurHandler,
+    hasBeenTouched: streetHasBeenTouched,
   } = useInput((val) => val.trim() !== "");
   const {
     value: cityValue,
+    isValid: cityIsValid,
     hasError: cityHasError,
     changeHandler: cityChangeHandler,
     blurHandler: cityBlurHandler,
+    hasBeenTouched: cityHasBeenTouched,
   } = useInput((val) => val.trim() !== "");
   const {
     value: emailValue,
+    isValid: emailIsValid,
     hasError: emailHasError,
     changeHandler: emailChangeHandler,
     blurHandler: emailBlurHandler,
+    hasBeenTouched: emailHasBeenTouched,
   } = useInput((val) => val.trim() !== "");
 
   const clickHandler: MouseEventHandler = useCallback(
@@ -43,8 +52,23 @@ const Checkout: React.FC<{ onCancel: MouseEventHandler }> = ({ onCancel }) => {
     [onCancel]
   );
 
+  const submitHandler: FormEventHandler = (event) => {
+    event.preventDefault();
+
+    nameHasBeenTouched();
+    streetHasBeenTouched();
+    cityHasBeenTouched();
+    emailHasBeenTouched();
+
+    if (nameIsValid && streetIsValid && cityIsValid && emailIsValid) {
+      console.log("okook");
+    } else {
+      console.log("error");
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className={styles["control-group"]}>
         <Input
           name="Your name"
