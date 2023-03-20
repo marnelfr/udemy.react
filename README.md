@@ -1519,8 +1519,34 @@ Class instances are by definition not fully serializable, so it's correctly flag
 In general, React and Redux apps should be written using only plain JS objects and arrays as data. You don't need "model classes".
 
 
+## [Adding Custom Environment Variables](https://create-react-app.dev/docs/adding-custom-environment-variables/)
+We can add an `.env` file to our project in which we can declare custom env variables that will be used in our app.
+However, we shouldn't store any secrets (such as private API keys) in it because they are embedded into the build, 
+meaning anyone can view them by inspecting our app's files.
 
+Custom environment variables must with ``REACT_APP_``. Any other variables except NODE_ENV will be ignored to avoid
+accidentally exposing a private key on the machine.
 
+**Changing any environment variables will require you to restart the development server if it is running.**\
+These environment variables are accessible through `process.env`. 
+````typescript
+///src/utils/config.ts
+const config = {
+  backendURL: process.env.REACT_APP_BACKEND_URL,
+};
+
+export default config;
+````
+
+There is also a built-in environment variable called `NODE_ENV`. It can't be overridden. 
+We can read it from `process.env.NODE_ENV`. 
+When we run `npm start`, it is always equal to '`development`', when we run `npm test` it is always equal 
+to '`test`', and when we run `npm run build` to make a production bundle, it is always equal to '`production`'.
+
+Files on the left have more priority than files on the right:
+- **npm start**: .env.development.local, .env.local, .env.development, .env
+- **npm run build**: .env.production.local, .env.local, .env.production, .env
+- **npm test**: .env.test.local, .env.test, .env (note .env.local is missing)
 
 
 
