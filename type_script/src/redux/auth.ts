@@ -1,13 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Auth } from "../modeles/auth";
 
 type initialStateType = {
-  email: "";
-  name: "";
-  token: "";
-  refreshToken: "";
+  isLoggedIn: boolean;
+  email: string;
+  name: string;
+  token: string;
+  refreshToken: string;
 };
 
 const initialState: initialStateType = {
+  isLoggedIn: false,
   email: "",
   name: "",
   token: "",
@@ -19,13 +22,15 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login(state, action) {
-      const payload = action.payload;
-      state.email = payload.email;
-      state.name = payload.name;
+      const payload: Auth = action.payload;
+      state.isLoggedIn = true;
+      state.email = payload.data.email;
+      state.name = payload.data.name;
       state.token = payload.token;
-      state.refreshToken = payload.refreshToken;
+      state.refreshToken = payload.refresh_token;
     },
-    logout(state, action) {
+    logout(state) {
+      state.isLoggedIn = false;
       state.email = "";
       state.name = "";
       state.token = "";

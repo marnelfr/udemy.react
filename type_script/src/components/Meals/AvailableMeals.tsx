@@ -8,7 +8,7 @@ import config from "../../utils/config";
 const AvailableMeals: React.FC = () => {
   const meals = useAppSelector((state) => state.stock.meals);
   const mealList = meals.map((meal) => <MealItem meal={meal} key={meal.id} />);
-  console.log(config.backendURL);
+  console.log(config.BACKEND_URL);
   return (
     <section className={styles.meals}>
       <Card>{mealList}</Card>
