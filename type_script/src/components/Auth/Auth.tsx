@@ -3,7 +3,7 @@ import useInput from "../../hooks/use-input";
 import styles from "./Auth.module.css";
 import { FormEventHandler, MouseEventHandler, useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { loginUser } from "../../thunks/auth";
+import { loginUser, logoutUser } from "../../thunks/auth";
 
 const Auth = () => {
   const dispatch = useAppDispatch();
@@ -34,6 +34,14 @@ const Auth = () => {
     [dispatch, passwordValue, emailValue, passwordIsValid, emailIsValid]
   );
 
+  const logoutHandler: MouseEventHandler = useCallback(
+    (event) => {
+      event.preventDefault();
+      dispatch(logoutUser());
+    },
+    [dispatch]
+  );
+
   if (auth.isLoggedIn) {
     return (
       <>
@@ -43,7 +51,7 @@ const Auth = () => {
           <small>{auth.email}</small>
         </div>
         <div className={styles.logout}>
-          <button>Logout</button>
+          <button onClick={logoutHandler}>Logout</button>
         </div>
       </>
     );

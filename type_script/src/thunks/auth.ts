@@ -9,7 +9,7 @@ export const loginUser = (
   email: string,
   password: string
 ): ThunkAction<void, RootState, unknown, AnyAction> => {
-  return async (dispath) => {
+  return async (dispatch) => {
     const response = await fetch(config.BACKEND_URL + "login", {
       method: "POST",
       headers: {
@@ -36,6 +36,18 @@ export const loginUser = (
 
     localStorage.setItem("auth", JSON.stringify(auth));
 
-    dispath(authActions.login(auth));
+    dispatch(authActions.login(auth));
+  };
+};
+
+export const logoutUser = (): ThunkAction<
+  void,
+  RootState,
+  unknown,
+  AnyAction
+> => {
+  return (dispatch) => {
+    localStorage.removeItem("auth");
+    dispatch(authActions.logout());
   };
 };
