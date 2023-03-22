@@ -18,6 +18,10 @@ export const loginUser = (
       body: JSON.stringify({ email, password }),
     });
 
+    if (response.status === 401) {
+      dispatch(authActions.loginFailed());
+    }
+
     if (!response.ok) {
       throw new Response(JSON.stringify({ message: "Can log the user in" }), {
         status: 500,

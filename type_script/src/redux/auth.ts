@@ -6,6 +6,7 @@ type StateType = {
   email: string;
   token: string;
   refreshToken: string;
+  loginError: boolean;
 };
 
 const initialState: StateType = {
@@ -14,6 +15,7 @@ const initialState: StateType = {
   email: "",
   token: "",
   refreshToken: "",
+  loginError: false,
 };
 
 const authSlice = createSlice({
@@ -27,6 +29,10 @@ const authSlice = createSlice({
       state.email = payload.email;
       state.token = payload.token;
       state.refreshToken = payload.refreshToken;
+      state.loginError = false;
+    },
+    loginFailed(state) {
+      state.loginError = true;
     },
     logout(state) {
       state.isLoggedIn = false;
@@ -34,6 +40,7 @@ const authSlice = createSlice({
       state.email = "";
       state.token = "";
       state.refreshToken = "";
+      state.loginError = false;
     },
   },
 });

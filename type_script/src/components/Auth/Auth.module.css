@@ -11,3 +11,8 @@
 .logout {
     margin-top: 2em;
 }
+
+.errorMessage {
+    text-align: center;
+    color: rgba(255, 0, 0, 0.6);
+}

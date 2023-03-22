@@ -59,6 +59,11 @@ const Auth = () => {
 
   return (
     <form onSubmit={submitHandler} className={styles.form}>
+      {auth.loginError && (
+        <div className={styles.errorMessage}>
+          <p>Invalid credentials</p>
+        </div>
+      )}
       <Input
         name="Email"
         value={emailValue}
