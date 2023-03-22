@@ -7,6 +7,7 @@ import OurStorePage from "./pages/our-store";
 import AboutUsPage from "./pages/about-us";
 import AdminLayout from "./pages/Layout/Admin";
 import DashboardPage from "./pages/Admin/Dashboard";
+import LogoutPage from "./pages/logout";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
       { path: "login", element: <LoginPage />, action: loginAction },
       { path: "our-store", element: <OurStorePage /> },
       { path: "about-us", element: <AboutUsPage /> },
+      { path: "logout", element: <LogoutPage /> },
     ],
   },
   {
