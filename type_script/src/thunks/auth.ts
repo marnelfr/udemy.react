@@ -33,6 +33,9 @@ export const loginUser = (
       roles: data.data.roles,
       token: data.token,
     };
+
+    localStorage.setItem("auth", JSON.stringify(auth));
+
     dispath(authActions.login(auth));
   };
 };
