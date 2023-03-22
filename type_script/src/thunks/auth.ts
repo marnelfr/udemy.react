@@ -55,3 +55,17 @@ export const logoutUser = (): ThunkAction<
     dispatch(authActions.logout());
   };
 };
+
+export const checkUserLoggedIn = (): ThunkAction<
+  void,
+  RootState,
+  unknown,
+  AnyAction
+> => {
+  return (dispatch) => {
+    const auth = localStorage.getItem("auth");
+    if (auth) {
+      dispatch(authActions.login(JSON.parse(auth)));
+    }
+  };
+};
