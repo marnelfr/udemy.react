@@ -1,13 +1,22 @@
 import Input from "../UI/Input/Input";
 import useInput from "../../hooks/use-input";
 import styles from "./Auth.module.css";
-import { FormEventHandler, MouseEventHandler, useCallback } from "react";
+import {
+  FormEventHandler,
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+} from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { loginUser, logoutUser } from "../../thunks/auth";
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const auth = useAppSelector((state) => state.auth);
+  const { isLoggedIn, loginError, email, name } = useAppSelector(
+    (state) => state.auth
+  );
 
   const {
     value: emailValue,
@@ -42,13 +51,19 @@ const Auth = () => {
     [dispatch]
   );
 
-  if (auth.isLoggedIn) {
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/admin");
+    }
+  }, [isLoggedIn]);
+
+  if (isLoggedIn) {
     return (
       <>
         <div>
           <h2>You are logged in as</h2>
-          <p>{auth.name}</p>
-          <small>{auth.email}</small>
+          <p>{name}</p>
+          <small>{email}</small>
         </div>
         <div className={styles.logout}>
           <button onClick={logoutHandler}>Logout</button>
@@ -59,7 +74,7 @@ const Auth = () => {
 
   return (
     <form onSubmit={submitHandler} className={styles.form}>
-      {auth.loginError && (
+      {loginError && (
         <div className={styles.errorMessage}>
           <p>Invalid credentials</p>
         </div>
