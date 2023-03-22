@@ -1465,6 +1465,10 @@ and the [React hooks testing library](https://react-hooks-testing-library.com/in
 
 ## [TypeScript](https://www.typescriptlang.org/docs/handbook/intro.html)
 Global installation: `sudo npm install -g typescript --save-dev`
+To add a project using the typescript template, 
+we can use the command: `npx create-react-app project_name --template typescript`
+
+
 ````typescript
 // core primitve type
 let age: number = 45
