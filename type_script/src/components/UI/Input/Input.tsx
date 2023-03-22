@@ -5,6 +5,7 @@ import { ucWord } from "../../../helpers/util";
 const Input: React.FC<{
   name: string;
   value: string;
+  type: string;
   hasError: boolean;
   changeHandler: ChangeEventHandler;
   blurHandler: FocusEventHandler;
@@ -20,7 +21,7 @@ const Input: React.FC<{
         value={props.value}
         onChange={props.changeHandler}
         onBlur={props.blurHandler}
-        type="text"
+        type={props.type}
         id={props.name.toLowerCase()}
       />
       {props.hasError && (

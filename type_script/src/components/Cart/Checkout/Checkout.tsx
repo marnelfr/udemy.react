@@ -87,6 +87,7 @@ const Checkout: React.FC<{
         <Input
           name="Your name"
           value={nameValue}
+          type="text"
           hasError={nameHasError}
           changeHandler={nameChangeHandler}
           blurHandler={nameBlurHandler}
@@ -94,6 +95,7 @@ const Checkout: React.FC<{
         <Input
           name="Street"
           value={streetValue}
+          type="text"
           hasError={streetHasError}
           changeHandler={streetChangeHandler}
           blurHandler={streetBlurHandler}
@@ -103,6 +105,7 @@ const Checkout: React.FC<{
         <Input
           name="City"
           value={cityValue}
+          type="text"
           hasError={cityHasError}
           changeHandler={cityChangeHandler}
           blurHandler={cityBlurHandler}
@@ -110,6 +113,7 @@ const Checkout: React.FC<{
         <Input
           name="Email"
           value={emailValue}
+          type="email"
           hasError={emailHasError}
           changeHandler={emailChangeHandler}
           blurHandler={emailBlurHandler}

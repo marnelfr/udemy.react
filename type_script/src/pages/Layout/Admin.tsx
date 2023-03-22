@@ -7,6 +7,8 @@ const AdminLayout: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // check if the user is already logged in
+
     if (!isLoggedIn) {
       navigate("/login");
     }

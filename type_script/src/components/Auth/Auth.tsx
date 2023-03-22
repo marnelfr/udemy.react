@@ -81,12 +81,14 @@ const Auth = () => {
       )}
       <Input
         name="Email"
+        type="email"
         value={emailValue}
         hasError={emailHasError}
         changeHandler={emailChangeHandler}
         blurHandler={emailBlurHandler}
       />
       <Input
+        type="password"
         name="Password"
         value={passwordValue}
         hasError={passwordHasError}
