@@ -58,3 +58,12 @@ Redux Toolkit was specifically designed to help provide good defaults when setti
 Class instances are by definition not fully serializable, so it's correctly flagging those instances as a problem. Please rewrite your logic to not pass those in to the store.
 In general, React and Redux apps should be written using only plain JS objects and arrays as data. You don't need "model classes".
 
+
+
+
+
+
+
+
+## Bonus
+I've got some bonus by [here](https://github.com/marnelfr/udemy.react/blob/main/BONUS.md)

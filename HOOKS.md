@@ -398,3 +398,11 @@ errors about invalid inputs.
 
 **Never trust client side validation: always validate users input on server side as well**
 
+
+
+
+
+
+
+## Redux
+Let's continue with Redux [here](https://github.com/marnelfr/udemy.react/blob/main/REDUX.md)

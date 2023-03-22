@@ -371,3 +371,10 @@ For every single deferred data usage, we have to use the ``Suspense`` component.
 all of their component rendering in one ``Suspense`` component but it will lead to a single fallback
 showing.
 
+
+
+
+
+
+## TypeScript
+Let's continue with TypeScript [here](https://github.com/marnelfr/udemy.react/blob/main/TYPESCRIPT.md)

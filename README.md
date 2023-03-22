@@ -268,3 +268,13 @@ const Modal = ({message, onClose}) => {
 }
 `````
 Using all of this certainly make us look more like a developer who knows what he's doing 😎😎😎
+
+
+
+
+
+
+
+
+## React Hooks
+Let's continue with Hooks [here](https://github.com/marnelfr/udemy.react/blob/main/HOOKS.md)
