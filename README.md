@@ -77,15 +77,15 @@ JSX under the hood:
 import Expenses from './Expenses'
 
 return (
-  <div>
-    <Expenses items={expenses}/>
-  </div>
+        <div>
+          <Expenses items={expenses}/>
+        </div>
 )
 // stand for:
 return React.createElement(
-  'div',
-  {},
-  React.createElement(Expenses, {items: expenses})
+        'div',
+        {},
+        React.createElement(Expenses, {items: expenses})
 )
 ````
 
@@ -135,8 +135,8 @@ console.log(+num) //print -1992 as digit, not string
 //inside a component:
 const clickHandler = (id) => {/*...*/}
 return (
-  /*the function will be called with id=5*/
-  <button onClick={clickHandler.bind(null, 5)}>Click me, please ((</button>
+        /*the function will be called with id=5*/
+        <button onClick={clickHandler.bind(null, 5)}>Click me, please ((</button>
 )
 `````
 
@@ -168,10 +168,10 @@ const FormControl = styled.div`
 
 const CourseInput = props => {
   return (
-    <FormControl invalid={!isValid}>
-      <label>Course Goal</label>
-      <input type="text" value={enteredValue} onChange={goalInputChangeHandler}/>
-    </FormControl>
+          <FormControl invalid={!isValid}>
+            <label>Course Goal</label>
+            <input type="text" value={enteredValue} onChange={goalInputChangeHandler}/>
+          </FormControl>
   );
 };
 
@@ -191,9 +191,9 @@ import styles from './Button.module.css'
 
 const Button = props => {
   return (
-    <button type={props.type} className={styles.button} onClick={props.onClick}>
-      {props.children}
-    </button>
+          <button type={props.type} className={styles.button} onClick={props.onClick}>
+            {props.children}
+          </button>
   );
 };
 
@@ -221,20 +221,20 @@ our components with a div and this can lead to such thing in a very big app:
 
 `````html
 <div>
+  <div>
     <div>
-        <div>
-            <div>
-                <div>Only one real content rendered</div>
-            </div>
-        </div>
+      <div>
+        <div>Only one real content rendered</div>
+      </div>
     </div>
+  </div>
 </div>
 `````
 To avoid this and write semantic more correct html code, we may use such of component:
 `````javascript
 const Wrapper = props => {
   return (
-    props.children
+          props.children
   )
 }
 export default Wrapper
@@ -253,9 +253,9 @@ import ReactDOM from "react-dom"; //we don't import from "react-dom/client" but 
 
 const ModalOverlay = props => {
   return (
-    <div className={styles.modal}>
-      ...
-    </div>
+          <div className={styles.modal}>
+            ...
+          </div>
   )
 }
 
@@ -286,13 +286,13 @@ const From = props => {
   }
 
   return (
-    <form className={styles.form} onSubmit={formHandler}>
-      <div className={styles['form-control']}>
-        <label>Age (Years)</label>
-        <input type="number" ref={yearInpRef}/>
-      </div>
-      <Button type="submit">Add User</Button>
-    </form>
+          <form className={styles.form} onSubmit={formHandler}>
+            <div className={styles['form-control']}>
+              <label>Age (Years)</label>
+              <input type="number" ref={yearInpRef}/>
+            </div>
+            <Button type="submit">Add User</Button>
+          </form>
   )
 }
 `````
@@ -361,7 +361,7 @@ With an empty array as dependencies, the **function B** only run when the compon
 `````javascript
 useEffect(() => {
   const timeOutID = setTimeout(() => setFormIsValid(
-    enteredEmail.includes('@') && enteredPassword.trim().length > 6
+          enteredEmail.includes('@') && enteredPassword.trim().length > 6
   ), 1000)
 
   return () => clearTimeout(timeOutID)
@@ -400,9 +400,9 @@ we need to provide it:
 const isAuthenticatedUser = true
 const logoutHandler = () => {/*...*/}
 return (
-  <AuthContext.Provider value={{isLoggedIn: isAuthenticatedUser, onLogout: logoutHandler}}>
-    /*our component jsx code*/
-  </AuthContext.Provider>
+        <AuthContext.Provider value={{isLoggedIn: isAuthenticatedUser, onLogout: logoutHandler}}>
+          /*our component jsx code*/
+        </AuthContext.Provider>
 )
 `````
 While providing our context, we can also set a value to the state as bellow.\
@@ -410,21 +410,21 @@ Then everywhere we need to consume it, we can do:
 `````javascript
 const Navigation = props => {
   return (
-    <AuthContext.Consumer>
-      {(ctx) => {
-        return (
-          <nav className={classes.nav}>
-            <ul>
-              {ctx.isLoggedIn && (
-                <li>
-                  <button onClick={ctx.onLogout}>Logout</button>
-                </li>
-              )}
-            </ul>
-          </nav>
-        )
-      }}
-    </AuthContext.Consumer>
+          <AuthContext.Consumer>
+            {(ctx) => {
+              return (
+                      <nav className={classes.nav}>
+                        <ul>
+                          {ctx.isLoggedIn && (
+                                  <li>
+                                    <button onClick={ctx.onLogout}>Logout</button>
+                                  </li>
+                          )}
+                        </ul>
+                      </nav>
+              )
+            }}
+          </AuthContext.Consumer>
   )
 }
 `````
@@ -434,15 +434,15 @@ const Navigation = (props) => {
   const ctx = useContext(AuthContext)
 
   return (
-    <nav className={classes.nav}>
-      <ul>
-        {ctx.isLoggedIn && (
-          <li>
-            <button onClick={ctx.onLogout}>Logout</button>
-          </li>
-        )}
-      </ul>
-    </nav>
+          <nav className={classes.nav}>
+            <ul>
+              {ctx.isLoggedIn && (
+                      <li>
+                        <button onClick={ctx.onLogout}>Logout</button>
+                      </li>
+              )}
+            </ul>
+          </nav>
   )
 };
 `````
@@ -500,11 +500,11 @@ import {AuthContextProvider} from "./store/auth-context";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <AuthContextProvider>
-      <App />
-    </AuthContextProvider>
-  </React.StrictMode>
+        <React.StrictMode>
+          <AuthContextProvider>
+            <App />
+          </AuthContextProvider>
+        </React.StrictMode>
 );
 `````
 
@@ -1465,6 +1465,10 @@ and the [React hooks testing library](https://react-hooks-testing-library.com/in
 
 ## [TypeScript](https://www.typescriptlang.org/docs/handbook/intro.html)
 Global installation: `sudo npm install -g typescript --save-dev`
+To add a project using the typescript template,
+we can use the command: `npx create-react-app project_name --template typescript`
+
+
 ````typescript
 // core primitve type
 let age: number = 45
