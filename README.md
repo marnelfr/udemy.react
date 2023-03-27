@@ -77,15 +77,15 @@ JSX under the hood:
 import Expenses from './Expenses'
 
 return (
-        <div>
-          <Expenses items={expenses}/>
-        </div>
+  <div>
+    <Expenses items={expenses}/>
+  </div>
 )
 // stand for:
 return React.createElement(
-        'div',
-        {},
-        React.createElement(Expenses, {items: expenses})
+  'div',
+  {},
+  React.createElement(Expenses, {items: expenses})
 )
 ````
 
@@ -135,8 +135,8 @@ console.log(+num) //print -1992 as digit, not string
 //inside a component:
 const clickHandler = (id) => {/*...*/}
 return (
-        /*the function will be called with id=5*/
-        <button onClick={clickHandler.bind(null, 5)}>Click me, please ((</button>
+  /*the function will be called with id=5*/
+  <button onClick={clickHandler.bind(null, 5)}>Click me, please ((</button>
 )
 `````
 
@@ -168,10 +168,10 @@ const FormControl = styled.div`
 
 const CourseInput = props => {
   return (
-          <FormControl invalid={!isValid}>
-            <label>Course Goal</label>
-            <input type="text" value={enteredValue} onChange={goalInputChangeHandler}/>
-          </FormControl>
+    <FormControl invalid={!isValid}>
+      <label>Course Goal</label>
+      <input type="text" value={enteredValue} onChange={goalInputChangeHandler}/>
+    </FormControl>
   );
 };
 
@@ -191,9 +191,9 @@ import styles from './Button.module.css'
 
 const Button = props => {
   return (
-          <button type={props.type} className={styles.button} onClick={props.onClick}>
-            {props.children}
-          </button>
+    <button type={props.type} className={styles.button} onClick={props.onClick}>
+      {props.children}
+    </button>
   );
 };
 
@@ -234,13 +234,13 @@ To avoid this and write semantic more correct html code, we may use such of comp
 `````javascript
 const Wrapper = props => {
   return (
-          props.children
+    props.children
   )
 }
 export default Wrapper
 `````
 Using this to wrap our components can make us avoid useless html tags in our final DOM code.
-And this is where React Fragments comes in because we don't need to create the ```Wrapper```
+And this is where React Fragment comes in because we don't need to create the ```Wrapper```
 component ourselves. It's already provided by React and can be used with the tags
 ```<React.Fragment></React.Fragment>``` or simply ```<></>```.
 
@@ -253,9 +253,9 @@ import ReactDOM from "react-dom"; //we don't import from "react-dom/client" but 
 
 const ModalOverlay = props => {
   return (
-          <div className={styles.modal}>
-            ...
-          </div>
+    <div className={styles.modal}>
+      ...
+    </div>
   )
 }
 
