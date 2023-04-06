@@ -228,3 +228,7 @@ Files on the left have more priority than files on the right:
 - **npm run build**: .env.production.local, .env.local, .env.production, .env
 - **npm test**: .env.test.local, .env.test, .env (note .env.local is missing)
 
+
+## Fontawesome
+To use font awesome on the web, we can just access to the [font awesome page related to react](https://fontawesome.com/docs/web/use-with/react/)
+or just search about **Use Font Awesome on the Web** and then search the page about the stack react
